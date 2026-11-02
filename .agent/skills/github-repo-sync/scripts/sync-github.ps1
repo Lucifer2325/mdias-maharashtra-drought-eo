@@ -22,7 +22,7 @@ if ($status) {
     git commit -m $Message
     Write-Host "Committed changes: $Message" -ForegroundColor Green
 } else {
-    Write-Host "Working tree clean — no new local commit needed." -ForegroundColor Yellow
+    Write-Host "Working tree clean -- no new local commit needed." -ForegroundColor Yellow
 }
 
 # 4. Push to origin main

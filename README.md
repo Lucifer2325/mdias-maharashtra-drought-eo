@@ -12,6 +12,30 @@
 
 ---
 
+## 📸 Official Command Portal UI Showcase (Verified Telemetry & EO Views)
+
+### 1. Executive Situation Room Overview (`/dashboard`)
+Real-time ECMWF ERA5-Land volumetric soil moisture (`0–28 cm`), 60-day precipitation vs. FAO `ET0` water-balance deficit, 5-division scarcity breakdown, active Mantralaya/SEOC field directives, and the 35-District Survey of India GeoJSON & 11-Riverbed risk map.
+
+![Executive Situation Room Overview](./docs/screenshots/01-executive-situation-room.png)
+
+### 2. Multi-Sensor Optical Satellite & Riverbed EO Map (`/dashboard/map`)
+Interactive MapLibre GL Earth Observation workbench with 5 switchable satellite sensors (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Dark Topo**, **35-District GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Dry Bed` & sand-mining alerts, a **1-Click Ground Zoom Bar** (`14x–15x` auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & GeoTIFF links.
+
+![Multi-Sensor Optical Satellite & Riverbed EO Map](./docs/screenshots/02-satellite-riverbed-eo-map.png)
+
+### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife`)
+Surveillance across **12 Protected Areas & Eco-Sensitive Zones (ESZs)** tracking **199 illegal riverbed sand-dredging & basalt/laterite hill-excavation hotspots**, dry forest waterholes, solar borewell pumps, and NGT enforcement directives.
+
+![Protected Forest, Wildlife & Eco-Sensitive Threat Zones](./docs/screenshots/03-forest-wildlife-esz-threats.png)
+
+### 4. Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Engineering Command (`/dashboard/interventions`)
+SRTM 30m D8 flow-accumulation and Strahler stream-order siting for check dams, percolation tanks, farm ponds, and recharge shafts, complete with *Paisewari (Annewari)* sub-basin metrics and Government Resolution (`GR`) sanction codes.
+
+![Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Engineering Command](./docs/screenshots/04-jalyukt-shivar-analytics.png)
+
+---
+
 ## 📌 Executive Overview
 
 The **Maharashtra Drought Intelligence & Early Warning System (MDIAS)** is a full-stack geospatial and Earth Observation (EO) command platform engineered to monitor, forecast, and mitigate hydro-meteorological scarcity and ecological threats across all **35 districts of Maharashtra**—with specialized focus on **Marathwada**, **Vidarbha**, and the **Western Rain-Shadow belt**.
