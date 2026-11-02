@@ -19,9 +19,11 @@ import {
   Radio,
   Sun,
   Moon,
+  Languages,
 } from "lucide-react";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { useAppLang } from "@/lib/i18n";
 
 interface NavItem {
   label: string;
@@ -102,6 +104,7 @@ export function Sidebar() {
   const { user } = useUser();
   const [collapsed, setCollapsed] = useState(false);
   const [themeMode, setThemeMode] = useState<"dark" | "light">("dark");
+  const { lang, toggleLang } = useAppLang();
 
   useEffect(() => {
     const saved =
@@ -232,10 +235,29 @@ export function Sidebar() {
         </div>
       )}
 
-      {/* Theme Switcher + Collapse Toggle */}
+      {/* Language + Theme Switcher + Collapse Toggle */}
       <div className="px-2.5 pb-2 space-y-1">
         <button
+          onClick={toggleLang}
+          data-no-i18n="true"
+          className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-[#18181B] text-[#FAFAFA] hover:bg-[#27272A] border border-[#A855F7]/50 hover:border-[#A855F7] text-xs font-semibold transition-colors"
+          title={
+            lang === "en"
+              ? "मराठी भाषेत बदला (Switch UI to Marathi)"
+              : "Switch UI to English"
+          }
+        >
+          <Languages className="w-3.5 h-3.5 text-[#A855F7]" />
+          {!collapsed && (
+            <span data-no-i18n="true" className="text-[11px] font-mono font-bold">
+              {lang === "en" ? "भाषा: मराठी ⇄ English" : "Lang: English ⇄ मराठी"}
+            </span>
+          )}
+        </button>
+
+        <button
           onClick={toggleTheme}
+          data-no-i18n="true"
           className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-[#18181B] text-[#FAFAFA] hover:bg-[#27272A] border border-[#3F3F46] hover:border-[#A855F7] text-xs font-semibold transition-colors"
           title="Switch between Palette 3 (Purple Dark) and Palette 4 (High-Trust Light)"
         >
@@ -243,7 +265,7 @@ export function Sidebar() {
             <>
               <Moon className="w-3.5 h-3.5 text-[#A855F7]" />
               {!collapsed && (
-                <span className="text-[11px] font-mono">
+                <span data-no-i18n="true" className="text-[11px] font-mono">
                   Theme: Dark (Palette 3)
                 </span>
               )}
@@ -252,7 +274,7 @@ export function Sidebar() {
             <>
               <Sun className="w-3.5 h-3.5 text-[#C7A84B]" />
               {!collapsed && (
-                <span className="text-[11px] font-mono">
+                <span data-no-i18n="true" className="text-[11px] font-mono">
                   Theme: Light (Palette 4)
                 </span>
               )}

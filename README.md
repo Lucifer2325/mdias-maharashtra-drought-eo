@@ -38,12 +38,12 @@ SRTM 30m D8 flow-accumulation and Strahler stream-order siting model for check d
 
 ![Watershed Siting & Sub-Basin Hydrology Model — Palette 3 Dark](./docs/screenshots/04-jalyukt-shivar-analytics.png)
 
-### 5. Light Mode Toggle View — Palette 4 High-Trust Light (`☀️ Light • P4`)
-Instant 1-click toggle to **Palette 4 (`#F8FAFC` / `#EFF6FF` / `#0A2540` / `#635BFF`)** for sunlit rooms and projector presentations:
+### 5. Bilingual Marathi (`मराठी • MR` ⇄ `English • EN`) & Light/Dark Theme Switchers
+Instant 1-click toggle between **English** and **मराठी (Marathi)** (`🌐 मराठी • MR` / `🌐 English • EN`) as well as **Palette 3 Dark (`🌙 Dark • P3`)** and **Palette 4 High-Trust Light (`☀️ Light • P4`)**:
 
-| Platform Overview (`☀️ Light • P4`) | Satellite & Riverbed EO Map (`☀️ Light • P4`) |
+| Marathi (`मराठी`) Bilingual Interface (`🌐 मराठी • MR`) | Palette 4 High-Trust Light View (`☀️ Light • P4`) |
 | :---: | :---: |
-| ![Palette 4 Light Overview](./docs/screenshots/palette4-light-overview.png) | ![Palette 4 Light Map](./docs/screenshots/palette4-light-map.png) |
+| ![Marathi Bilingual View](./docs/screenshots/05-marathi-bilingual-view.png) | ![Palette 4 Light Overview](./docs/screenshots/palette4-light-overview.png) |
 
 ---
 

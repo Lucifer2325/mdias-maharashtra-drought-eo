@@ -13,9 +13,12 @@ import {
   MapPin,
   Sun,
   Moon,
+  Languages,
 } from "lucide-react";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { useAppLang } from "@/lib/i18n";
+import { MarathiDomTranslator } from "./marathi-translator";
 
 const REGIONS = {
   "All Maharashtra (6 Regions)": {
@@ -147,6 +150,7 @@ export function Header() {
   const [dateRange, setDateRange] = useState<string>("30d");
   const [istClock, setIstClock] = useState<string>("IST LIVE");
   const [themeMode, setThemeMode] = useState<"dark" | "light">("dark");
+  const { lang, toggleLang } = useAppLang();
 
   const [stateOpen, setStateOpen] = useState(false);
   const [districtOpen, setDistrictOpen] = useState(false);
@@ -420,9 +424,27 @@ export function Header() {
           )}
         </div>
 
+        {/* English <-> Marathi (मराठी) Language Toggle */}
+        <button
+          onClick={toggleLang}
+          data-no-i18n="true"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#18181B] border border-[#A855F7]/50 hover:border-[#A855F7] text-xs font-semibold text-[#FAFAFA] transition-colors shrink-0"
+          title={
+            lang === "en"
+              ? "मराठी भाषेत बदला (Switch UI to Marathi)"
+              : "Switch UI to English"
+          }
+        >
+          <Languages className="w-3.5 h-3.5 text-[#A855F7]" />
+          <span data-no-i18n="true" className="font-mono text-[11px] font-bold">
+            {lang === "en" ? "मराठी • MR" : "English • EN"}
+          </span>
+        </button>
+
         {/* Dual-Palette Theme Toggle (Palette 3 Purple Dark <-> Palette 4 High-Trust Light) */}
         <button
           onClick={toggleTheme}
+          data-no-i18n="true"
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#18181B] border border-[#3F3F46] hover:border-[#A855F7] text-xs font-semibold text-[#FAFAFA] transition-colors shrink-0"
           title={
             themeMode === "dark"
@@ -433,19 +455,20 @@ export function Header() {
           {themeMode === "dark" ? (
             <>
               <Moon className="w-3.5 h-3.5 text-[#A855F7]" />
-              <span className="hidden xl:inline font-mono text-[11px]">
+              <span data-no-i18n="true" className="hidden xl:inline font-mono text-[11px]">
                 Dark • P3
               </span>
             </>
           ) : (
             <>
               <Sun className="w-3.5 h-3.5 text-[#C7A84B]" />
-              <span className="hidden xl:inline font-mono text-[11px]">
+              <span data-no-i18n="true" className="hidden xl:inline font-mono text-[11px]">
                 Light • P4
               </span>
             </>
           )}
         </button>
+        <MarathiDomTranslator />
 
         {/* Notification bell */}
         <div className="relative shrink-0">
