@@ -1,80 +1,106 @@
-# 🇮🇳 MDIAS — Maharashtra Drought Intelligence, Riverbed Hydrology & Earth Observation Command System
+<div align="center">
 
-[![Next.js 15](https://img.shields.io/badge/Next.js-15.1-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![MapLibre GL](https://img.shields.io/badge/MapLibre_GL-4.7-396CB2?logo=maplibre)](https://maplibre.org/)
-[![Copernicus Sentinel-2](https://img.shields.io/badge/Copernicus-Sentinel--2_L2A_STAC-005596)](https://earth-search.aws.element84.com/v1)
-[![ECMWF ERA5-Land](https://img.shields.io/badge/ECMWF-ERA5--Land_Live-10b981)](https://open-meteo.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Python_3.12-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
+# 🛰️ MDIAS — Maharashtra Drought, Riverbed Hydrology & Earth Observation Intelligence Platform
 
-> **Independent Geospatial & Earth Observation Decision-Support Prototype**  
-> Designed as a research and decision-support platform to present to water-resource engineers, agricultural planners, environmental researchers, and district administrators across all **35 districts of Maharashtra**. *(Note: This is an independent technical prototype and not an official government portal.)*
+**Multi-Sensor Satellite Earth Observation, Hydro-Meteorological Telemetry & Watershed Decision-Support Prototype across All 6 Regions and 36 Districts of Maharashtra**
+
+[![Release v1.0.0](https://img.shields.io/badge/Release-v1.0.0-A855F7?style=for-the-badge&logo=github)](https://github.com/Lucifer2325/mdias-maharashtra-drought-eo/releases/tag/v1.0.0)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15.1-09090B?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![MapLibre GL](https://img.shields.io/badge/MapLibre_GL-4.7-396CB2?style=for-the-badge&logo=maplibre&logoColor=white)](https://maplibre.org/)
+[![Copernicus Sentinel-2](https://img.shields.io/badge/Sentinel--2_L2A-AWS_STAC_v1-6366F1?style=for-the-badge)](https://earth-search.aws.element84.com/v1)
+[![ECMWF ERA5-Land](https://img.shields.io/badge/ECMWF-ERA5--Land_Live-10B981?style=for-the-badge)](https://open-meteo.com/)
+[![Bilingual EN / मराठी](https://img.shields.io/badge/Language-English_%E2%87%84_%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%A0%E0%A5%80-F59E0B?style=for-the-badge)](#%EF%B8%8F-bilingual-marathi-%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%A0%E0%A5%80--dual-theme-architecture)
+
+<br />
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-Support_This_Research-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/Lucifer2325)
+[![GitHub Sponsors](https://img.shields.io/badge/GitHub_Sponsors-Sponsor_Project-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/Lucifer2325)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Donate-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/Lucifer2325)
+
+</div>
 
 ---
 
-## 📸 Platform UI Showcase — Dual-Theme Architecture (Palette 3 Purple-Accent Dark ⇄ Palette 4 High-Trust Light)
+> **📌 Independent Geospatial & Earth Observation Decision-Support Prototype**  
+> **MDIAS** is an open-architecture research and decision-support prototype built for water-resource engineers, agricultural planners, environmental researchers, and regional administrators across **all 6 Revenue Divisions and 36 Districts of Maharashtra**. *(Note: This is an independent technical research prototype and is not an official government portal.)*
 
-The platform features a built-in **1-Click Light/Dark Theme Toggle** (`🌙 Dark • P3` ⇄ `☀️ Light • P4`) in the header and sidebar, persisted in `localStorage` (`mdias-theme`):
-- **Dark Mode — Palette 3 (AI / Innovation Purple-Accent Dark)**: `#09090B` main canvas, `#18181B` cards, `#27272A` hover/tertiary surfaces, `#FAFAFA` primary typography (`19.1:1 AAA`), `#A855F7` primary purple interactive CTAs, `#6366F1` secondary indigo tags, and `#3F3F46` hairlines.
-- **Light Mode — Palette 4 (High-Trust Light)**: `#F8FAFC` warm-cool slate canvas, `#FFFFFF` / `#EFF6FF` cards, `#0A2540` primary typography (`16.7:1 AAA`), `#635BFF` interactive CTAs, and `#C7A84B` accent indicators.
+---
 
-### 1. Platform Overview — Statewide Risk & Hydro-Meteorological Matrix (`/dashboard` • Palette 3 Dark)
-Real-time ECMWF ERA5-Land volumetric soil moisture (`0–28 cm`), 60-day precipitation vs. FAO `ET0` water-balance deficit, 5-region scarcity breakdown, recommended mitigation scenarios (`SIM-...`), and the 35-District Survey GeoJSON & 11-Riverbed risk map.
+## 📸 Platform Visual Showcase
 
-![Platform Overview — Palette 3 Dark](./docs/screenshots/01-executive-situation-room.png)
+### 1. Platform Overview — 6-Region Hydro-Meteorological Matrix & Live Risk Map (`/dashboard`)
+Displays real-time **Open-Meteo ECMWF ERA5-Land** volumetric soil moisture (`0–28 cm`), 60-day cumulative precipitation vs. FAO Penman-Monteith evapotranspiration (`ET0`), interactive **6-Region Summary Cards**, **35-District Survey GeoJSON & 11-Riverbed Composite Risk Map**, and **6 Regional Mitigation Simulations (`SIM-...`)**.
 
-### 2. Multi-Sensor Optical Satellite & Riverbed EO Map (`/dashboard/map` • Palette 3 Dark)
-Interactive MapLibre GL Earth Observation workbench with 5 switchable satellite sensors (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Topo Reference**, **35-District GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Dry Bed` & sand-dredging alerts, a **1-Click Ground Zoom Bar** (`14x–15x` auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & GeoTIFF links.
+![Platform Overview — Palette 3 Purple-Accent Dark](./docs/screenshots/01-executive-situation-room.png)
 
-![Multi-Sensor Optical Satellite & Riverbed EO Map — Palette 3 Dark](./docs/screenshots/02-satellite-riverbed-eo-map.png)
+---
 
-### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife` • Palette 3 Dark)
-Monitoring across **12 Protected Areas & Eco-Sensitive Zones (ESZs)** tracking **199 unauthorized riverbed sand-dredging & basalt/laterite hill-excavation hotspots**, dry forest waterholes, solar borewell pumps, and ecological restoration recommendations.
+### 2. Multi-Sensor Optical Satellite & Riverbed EO Workbench (`/dashboard/map`)
+Interactive **MapLibre GL** Earth Observation workbench featuring **5 switchable satellite sensors** (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Topo Reference**, **35-District Survey GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Exposed Dry Bed`, a **1-Click Ground Zoom Bar** (`14x–15x` with auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & Cloud-Optimized GeoTIFF links.
 
-![Protected Forest, Wildlife & Eco-Sensitive Threat Zones — Palette 3 Dark](./docs/screenshots/03-forest-wildlife-esz-threats.png)
+![Multi-Sensor Optical Satellite & Riverbed EO Map](./docs/screenshots/02-satellite-riverbed-eo-map.png)
 
-### 4. Watershed Siting & Sub-Basin Hydrology Model (`/dashboard/interventions` • Palette 3 Dark)
-SRTM 30m D8 flow-accumulation and Strahler stream-order siting model for check dams, percolation tanks, farm ponds, and recharge shafts, complete with *Paisewari* sub-basin metrics and simulation reference codes (`SIM-WCD-...`).
+---
 
-![Watershed Siting & Sub-Basin Hydrology Model — Palette 3 Dark](./docs/screenshots/04-jalyukt-shivar-analytics.png)
+### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife`)
+Monitors **12 Protected Areas & Eco-Sensitive Zones (ESZs)** across Maharashtra, tracking **199 riverbed sand-dredging & basalt/laterite hill-excavation hotspots**, dry wildlife waterholes, solar borewell pumps, and ecological buffer restoration priorities.
 
-### 5. Bilingual Marathi (`मराठी • MR` ⇄ `English • EN`) & Light/Dark Theme Switchers
-Instant 1-click toggle between **English** and **मराठी (Marathi)** (`🌐 मराठी • MR` / `🌐 English • EN`) as well as **Palette 3 Dark (`🌙 Dark • P3`)** and **Palette 4 High-Trust Light (`☀️ Light • P4`)**:
+![Protected Forest, Wildlife & Eco-Sensitive Threat Zones](./docs/screenshots/03-forest-wildlife-esz-threats.png)
 
-| Marathi (`मराठी`) Bilingual Interface (`🌐 मराठी • MR`) | Palette 4 High-Trust Light View (`☀️ Light • P4`) |
+---
+
+### 4. AI-Prioritised Watershed Siting & Sub-Basin Hydrology Model (`/dashboard/interventions`)
+SRTM 30m DEM **D8 flow-accumulation** and **Strahler stream-order** siting model for **check dams**, **percolation tanks**, **farm ponds**, **nala bunds**, **recharge shafts**, **Malguzari tanks**, and **Konkan Vasant Bandharas** across all 6 Maharashtra regions.
+
+![Watershed Siting & Sub-Basin Hydrology Model](./docs/screenshots/04-jalyukt-shivar-analytics.png)
+
+---
+
+### 5. 🗣️ Bilingual Marathi (`मराठी • MR` ⇄ `English • EN`) & Dual-Theme (`🌙 Dark • P3` ⇄ `☀️ Light • P4`) Switchers
+One-click toggles in both the **Header** and **Sidebar** allow instant switching between **English** and **मराठी (Marathi)** as well as **Palette 3 (AI / Innovation Purple-Accent Dark)** and **Palette 4 (High-Trust Light)**:
+
+| 🌐 Marathi (`मराठी • MR`) Bilingual View | ☀️ Palette 4 High-Trust Light Mode (`Light • P4`) |
 | :---: | :---: |
-| ![Marathi Bilingual View](./docs/screenshots/05-marathi-bilingual-view.png) | ![Palette 4 Light Overview](./docs/screenshots/palette4-light-overview.png) |
+| ![Marathi Bilingual View](./docs/screenshots/05-marathi-bilingual-view.png) | ![Palette 4 Light Mode View](./docs/screenshots/palette4-light-overview.png) |
 
 ---
 
-## 📌 Executive Overview
+## 🗺️ Complete Coverage: All 6 Regions & 36 Districts of Maharashtra
 
-The **Maharashtra Drought Intelligence & Early Warning System (MDIAS)** is a full-stack geospatial and Earth Observation (EO) command platform engineered to monitor, forecast, and mitigate hydro-meteorological scarcity and ecological threats across all **35 districts of Maharashtra**—with specialized focus on **Marathwada**, **Vidarbha**, and the **Western Rain-Shadow belt**.
+MDIAS covers every administrative revenue division, district, and major river basin in Maharashtra:
 
-### Core Capabilities
+| # | Maharashtra Region / Division | Districts Covered (36 Total) | Primary River Basins & Hydro-Climatic Focus |
+| :-: | :--- | :--- | :--- |
+| **1** | **Marathwada** *(Chh. Sambhajinagar Div.)* | **Latur**, **Dharashiv (Osmanabad)**, **Beed**, **Chh. Sambhajinagar**, **Jalna**, **Parbhani**, **Hingoli**, **Nanded** *(8)* | **Godavari**, **Manjara**, **Sina**, **Purna–Dudhana**, **Penganga** — Acute root-zone soil moisture deficit, Jayakwadi/Dhanegaon storage, GPS tanker routing |
+| **2** | **Vidarbha — Amravati** *(West Vidarbha Div.)* | **Yavatmal**, **Amravati**, **Akola**, **Buldhana**, **Washim** *(5)* | **Penganga**, **Purna (Tapi)**, **Upper Wardha** — Non-irrigated cotton/soybean dry-spell stress, Purna inland salinity belt, Melghat & Tipeshwar corridors |
+| **3** | **Vidarbha — Nagpur** *(East Vidarbha Div.)* | **Nagpur**, **Wardha**, **Chandrapur**, **Gadchiroli**, **Bhandara**, **Gondia** *(6)* | **Wainganga**, **Wardha**, **Pranhita**, **Erai** — Historical *Malguzari* tank storage, Tadoba-Andhari / Pench / Navegaon-Nagzira tiger corridors & open-cast quarry monitoring |
+| **4** | **Pune / Desh** *(Western Maharashtra Div.)* | **Solapur**, **Pune**, **Satara**, **Sangli**, **Kolhapur** *(5)* | **Bhima**, **Sina**, **Nira**, **Man**, **Krishna–Koyna** — Severe eastern rain-shadow scarcity (Sangola, Baramati, Indapur, Man-Khatav, Jath, Atpadi) & Ujjani tailwater |
+| **5** | **Nashik / Khandesh** *(North Maharashtra Div.)* | **Ahilyanagar (Ahmednagar)**, **Nashik**, **Jalgaon**, **Dhule**, **Nandurbar** *(5)* | **Upper Godavari**, **Pravara–Mula**, **Tapi**, **Girna**, **Panzara** — Deep alluvial aquifer drawdown in banana/cotton belts & rain-shadow scarcity in Parner/Sangamner/Malegaon |
+| **6** | **Konkan & Western Ghats** *(Coastal Div.)* | **Palghar**, **Thane**, **Raigad**, **Ratnagiri**, **Sindhudurg**, **Mumbai Suburban**, **Mumbai City** *(7)* | **Vaitarna**, **Ulhas**, **Savitri**, **Vashishti**, **Tillari** — Post-monsoon runoff loss & March–May drinking-water stress on steep lateritic tribal plateaus (Jawhar, Mokhada, Poladpur) |
 
-1. **🛰️ Multi-Sensor Satellite & Earth Observation Map (`/dashboard/map`)**
-   - **5 Switchable Earth Observation Base Sensors**:
-     - **Maxar / Esri World Imagery (0.5m Optical)** — Zoom down to `15x–18x` to inspect exposed riverbeds, sand-mining pits, check dams, and quarry benches.
-     - **Copernicus Sentinel-2 L2A Cloudless (10m EOX Mosaic)** — European Space Agency 10m optical mosaic.
-     - **NASA EOSDIS GIBS VIIRS False-Color SWIR/NIR (Bands M11-I2-I1)** — Highlights surface water in deep navy/black, vegetation in bright green, and dry bare soil/quarries in crimson-orange.
-     - **Esri Dark Gray Canvas + Reference Boundaries** — High-contrast vector topography.
-     - **35-District Survey GeoJSON Vector Grid** — Instant statewide schematic view.
-   - **Live NASA GIBS Spectral Raster Overlays**: Toggle real-time **MODIS Terra 8-Day NDVI** and **MODIS Daytime Land Surface Temperature (LST)** rasters.
-   - **Smart Zoom-Adaptive Choropleth**: Statewide district color overlays automatically fade to transparent as you zoom past `11x` so officials can inspect unobstructed optical satellite imagery of the ground.
+---
 
-2. **🌊 Maharashtra Riverbeds & Sand-Mining Surveillance**
-   - Interactive GeoJSON and SVG hydrography for **11 major drought-critical rivers**: **Godavari**, **Manjara**, **Sina**, **Bhima**, **Nira**, **Purna–Dudhana**, **Penganga**, **Wardha**, **Wainganga**, **Tapi–Purna**, and **Krishna–Koyna**.
-   - Tracks `% Exposed Dry Riverbed`, `% Baseflow vs. Normal`, major dam storage (**Jayakwadi**, **Ujjani**, **Dhanegaon**, **Sina Kolegaon**, **Upper Wardha**, **Gosekhurd**), and **illegal mechanized riverbed sand-dredging alerts**.
-   - Includes a **1-Click Ground Zoom Bar** to fly the satellite camera directly to exposed riverbeds, sand ghats, open-cast coal/basalt quarries, and Lonar Crater Lake.
+## ✨ Key Capabilities & Modules
 
-3. **🌳 Forest, Wildlife & Eco-Sensitive Threat Zones (ESZ) (`/dashboard/wildlife`)**
-   - Monitors **12 Protected Areas & Eco-Sensitive Threat Zones (ESZs)** across Maharashtra, including **Tadoba-Andhari**, **Melghat**, **Pench**, **Navegaon-Nagzira**, **Sahyadri**, **Tipeshwar**, **Great Indian Bustard Sanctuary (Nannaj)**, **Yedshi Ramling Ghat**, **Jaikwadi**, **Lonar Crater**, and the **Balaghat–Manjara / Western Ghats Laterite ESZs**.
-   - Tracks **illegal excavation sites (sand dredging, basalt/laterite hill cutting, murum stripping)**, dry wildlife waterholes, solar pump status, and forest fire risk.
+1. **🛰️ Zero-API-Key Multi-Sensor Earth Observation Map (`/dashboard/map`)**
+   - **Maxar / Esri World Imagery (0.5m Optical)** — Zoom down to `15x–18x` to inspect exposed riverbeds, check dams, sand ghats, and quarry benches with zero API key required.
+   - **Copernicus Sentinel-2 L2A Cloudless (10m EOX WMTS)** — European Space Agency 10m optical mosaic.
+   - **NASA EOSDIS GIBS VIIRS False-Color SWIR/NIR (Bands M11-I2-I1)** — Highlights surface water in deep navy/black, vegetation in bright green, and bare soil/quarries in crimson-orange.
+   - **Live NASA GIBS Spectral Raster Overlays** — Real-time **MODIS Terra 8-Day NDVI** and **MODIS Daytime Land Surface Temperature (LST)**.
+   - **Live Element84 AWS Earth Search STAC v1 Inspector (`/api/eo/stac`)** — Click anywhere in Maharashtra to query live **Copernicus Sentinel-2 L2A** satellite passes, cloud cover `%`, MGRS tile IDs, 10m RGB thumbnails, and direct links to Cloud-Optimized GeoTIFFs (**RGB Visual**, **NIR B08**, **SWIR B11**).
 
-4. **📡 Live Telemetry & Copernicus Sentinel-2 STAC API**
-   - **Live ERA5-Land Weather & Soil Telemetry (`/api/telemetry/live`)**: Queries Open-Meteo's ECMWF ERA5-Land model in real time for all 35 district centroids (`0–28 cm` volumetric soil moisture, surface/air temperature, 60-day cumulative precipitation vs. FAO `ET0` evapotranspiration, and SPI-3M).
-   - **Live Copernicus Sentinel-2 L2A STAC Catalog (`/api/eo/stac`)**: Queries the **Element84 AWS Earth Search STAC v1 API** (`sentinel-2-l2a`) for any clicked coordinate in Maharashtra, returning recent satellite passes, cloud cover `%`, MGRS tile IDs, live 10m RGB thumbnails, and direct links to Cloud-Optimized GeoTIFFs (**RGB Visual**, **NIR Band B08**, **SWIR Band B11**).
+2. **🌊 11 Maharashtra Riverbeds & Sand-Dredging Surveillance**
+   - Tracks `% Exposed Dry Riverbed`, `% Baseflow vs. Normal`, dam live storage (**Jayakwadi**, **Ujjani**, **Dhanegaon**, **Sina Kolegaon**, **Upper Wardha**, **Gosekhurd**, **Hatnur**, **Girna**), and anomalous riverbed sand-excavation hotspots across **Godavari, Manjara, Sina, Bhima, Nira, Purna–Dudhana, Penganga, Wardha, Wainganga, Tapi–Purna, and Krishna–Koyna**.
+
+3. **🔔 Interactive Notification Center & Early-Warning Engine (`/dashboard/alerts` & `/dashboard/settings`)**
+   - Stateful Notification Center in the header with `All`, `Unread`, and `Critical` filters, 1-click deep-linking, mark-all-read, dismiss, and reset actions.
+   - Configurable threshold rules (`SPI_3M`, `NDVI_ANOMALY`, `RESERVOIR_FILL`, `GROUNDWATER_DEPTH`, `RISK_SCORE`) across all 6 regions and 36 districts with Email, SMS, and JSON Webhook channels.
+
+4. **🎨 Dual-Theme Architecture & Bilingual (`EN ⇄ मराठी`) Engine**
+   - **Palette 3 (AI / Innovation Purple-Accent Dark)**: `#09090B` main zinc-obsidian canvas, `#18181B` cards, `#27272A` tertiary hover states, `#FAFAFA` primary text (`19.1:1 AAA`), `#A855F7` purple CTAs, and `#6366F1` indigo accents.
+   - **Palette 4 (High-Trust Light)**: `#F8FAFC` main canvas, `#FFFFFF` / `#EFF6FF` cards, `#0A2540` primary text (`16.7:1 AAA`), and `#635BFF` interactive accents.
+   - **Instant Reversible Marathi (`मराठी`) Translation**: 350+ exact and phrase-level translations for all 36 Maharashtra districts, 6 regions, 11 rivers, drought classifications, and hydrological terms.
 
 ---
 
@@ -82,16 +108,16 @@ The **Maharashtra Drought Intelligence & Early Warning System (MDIAS)** is a ful
 
 ```mermaid
 flowchart TB
-    subgraph EO["External Satellite & Hydro-Meteorological Feeds"]
-        ERA5["Open-Meteo ECMWF ERA5-Land API<br/>(Soil Moisture 0-28cm, LST, 60d Rain & ET0)"]
+    subgraph EO["Open Satellite & Hydro-Meteorological Feeds (Zero Key Required)"]
+        ERA5["Open-Meteo ECMWF ERA5-Land API<br/>(Soil Moisture 0-28cm, LST, 60d Rain & FAO ET0)"]
         STAC["Element84 AWS Earth Search STAC v1<br/>(Copernicus Sentinel-2 L2A COGs & Thumbnails)"]
         GIBS["NASA EOSDIS GIBS & EOX WMTS<br/>(VIIRS SWIR, MODIS NDVI/LST, Sentinel-2 10m)"]
         ESRI["Esri World Imagery & Reference<br/>(0.5m Maxar Optical & Place Labels)"]
     end
 
     subgraph Web["apps/web — Next.js 15 App Router (TypeScript)"]
-        UI["Official GovTech Command UI<br/>(Executive Overview, MapLibre EO, ESZ, Jalyukt Shivar, SEOC Alerts)"]
-        API_LIVE["/api/telemetry/live<br/>(35-District ERA5 + FSI Aggregator)"]
+        UI["Dual-Theme (P3 Dark ⇄ P4 Light) & Bilingual (EN ⇄ मराठी) UI<br/>(Overview, MapLibre EO, ESZ, Watershed Siting, Alerts, Reports)"]
+        API_LIVE["/api/telemetry/live<br/>(35-District ERA5 + FSI ISFR Aggregator)"]
         API_STAC["/api/eo/stac<br/>(Sentinel-2 Pass Inspector)"]
         GEO["Survey of India / DataMeet GeoJSON<br/>(35 Districts + 11 Riverbeds + 12 ESZs)"]
     end
@@ -125,76 +151,92 @@ flowchart TB
 
 ```text
 mdias/
+├── .github/
+│   └── FUNDING.yml                             # GitHub Sponsors, Buy Me a Coffee & Ko-fi config
+├── .agent/
+│   └── skills/
+│       ├── govtech-official-ui/SKILL.md        # Dual-Theme (Palette 3 Dark ⇄ Palette 4 Light) UI Skill
+│       └── github-repo-sync/                   # Automated GitHub Sync & Release Skill
 ├── apps/
-│   ├── web/                        # Next.js 15 App Router (Official Command Portal)
-│   │   ├── public/data/            # Authentic 35-District Maharashtra GeoJSON
+│   ├── web/                                    # Next.js 15 App Router (TypeScript + Tailwind + MapLibre)
+│   │   ├── public/data/                        # Survey of India / DataMeet 35-District GeoJSON
 │   │   └── src/
 │   │       ├── app/
-│   │       │   ├── (dashboard)/    # Protected Executive Situation Room routes
-│   │       │   │   └── dashboard/
-│   │       │   │       ├── page.tsx            # State Situation Room Overview
-│   │       │   │       ├── map/page.tsx        # Multi-Sensor EO & Riverbed Map
-│   │       │   │       ├── wildlife/page.tsx   # Forest, Wildlife & ESZ Threats
-│   │       │   │       ├── alerts/page.tsx     # SEOC Early Warning Directives
-│   │       │   │       ├── analytics/page.tsx  # Basin Scarcity & SPI/NDVI Charts
-│   │       │   │       ├── interventions/      # Jalyukt Shivar 2.0 Watershed Siting
-│   │       │   │       ├── reports/page.tsx    # Collectorate & Cabinet Dossiers
-│   │       │   │       └── settings/page.tsx   # API & Governance Controls
-│   │       │   └── api/
-│   │       │       ├── telemetry/live/route.ts # Live 35-District ERA5-Land Feed
-│   │       │       └── eo/stac/route.ts        # Live Sentinel-2 STAC v1 Search
-│   │       ├── components/         # MapLibre container, KPI cards, Header, Sidebar
-│   │       └── lib/                # Riverbeds, ESZ zones, GeoJSON paths, color scales
-│   └── python-api/                 # FastAPI Python 3.12 ML & Hydrological Engine
-├── packages/
-│   ├── db/                         # Prisma schema & PostgreSQL/PostGIS client
-│   └── types/                      # Shared TypeScript interfaces (@mdias/types)
-├── docs/                           # Architecture & Official Briefing Documentation
-└── .agent/skills/                  # Custom Antigravity Skills (GovTech UI & GitHub Sync)
+│   │       │   ├── (dashboard)/dashboard/      # Overview, Map, Wildlife, Alerts, Analytics, Interventions, Reports, Settings
+│   │       │   └── api/                        # /api/telemetry/live, /api/eo/stac, /api/alerts, /api/interventions
+│   │       ├── components/                     # Header (Theme + Marathi + Notification Center), Sidebar, MapLibre Container
+│   │       └── lib/                            # i18n.ts (EN ⇄ मराठी), maharashtra-rivers.ts, wildlife-zones.ts
+│   └── python-api/                             # FastAPI Python 3.12 Geospatial & ML Microservice
+│       └── app/
+│           ├── routers/                        # /indices (SPI/SPEI), /forecast (XGBoost), /interventions (SRTM D8)
+│           └── services/                       # Copernicus STAC, CHIRPS, MODIS & DEM Processing
+├── docs/
+│   └── screenshots/                            # High-resolution UI proof screenshots (Dark, Light & Marathi)
+└── packages/
+    ├── db/                                     # Prisma PostgreSQL + PostGIS schema & seed
+    └── types/                                  # Shared TypeScript interfaces (@mdias/types)
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quickstart & Local Development
 
-### 1. Prerequisites
-- **Node.js** `>= 20.x` and **npm** `>= 10.x`
-- **Python** `>= 3.11` (optional, for the FastAPI ML microservice)
-- **Clerk Account** (for authentication keys in `apps/web/.env.local`)
+### Prerequisites
+- **Node.js** `>= 20.x` & **npm** `>= 10.x`
+- **Python** `>= 3.11` *(optional, for the FastAPI ML microservice)*
 
-### 2. Install Dependencies
+### 1. Clone & Install Dependencies
+
 ```bash
+git clone https://github.com/Lucifer2325/mdias-maharashtra-drought-eo.git
+cd mdias-maharashtra-drought-eo
 npm install
 ```
 
-### 3. Configure Environment Variables
-Copy `.env.example` to `apps/web/.env.local` and add your Clerk keys:
-```env
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-```
-*(Note: The satellite map, ERA5-Land telemetry, and Sentinel-2 STAC catalog require **zero API keys** out of the box.)*
+### 2. Configure Environment Variables
 
-### 4. Start the Development Server
+```bash
+cp .env.example apps/web/.env.local
+```
+
+> **Zero API Key Required for Satellite Map & Live Telemetry**: MapLibre GL, Esri 0.5m World Imagery, Copernicus Sentinel-2 10m Cloudless, NASA GIBS MODIS/VIIRS rasters, Element84 AWS Earth Search STAC v1, and Open-Meteo ECMWF ERA5-Land all run out-of-the-box without paid API keys.
+
+### 3. Start the Web Application
+
 ```bash
 cd apps/web
 npx next dev -p 3000
 ```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+
+Open **[http://localhost:3000/dashboard](http://localhost:3000/dashboard)** in your browser.
 
 ---
 
-## 📚 Additional Documentation
-- [**Architecture & Data Provenance (`docs/ARCHITECTURE.md`)**](./docs/ARCHITECTURE.md)
-- [**Official Briefing & Presentation Guide (`docs/OFFICIAL_BRIEFING_GUIDE.md`)**](./docs/OFFICIAL_BRIEFING_GUIDE.md)
-- [**GitHub Repo Sync Skill (`.agent/skills/github-repo-sync/SKILL.md`)**](./.agent/skills/github-repo-sync/SKILL.md)
-- [**GovTech Official UI Skill (`.agent/skills/govtech-official-ui/SKILL.md`)**](./.agent/skills/govtech-official-ui/SKILL.md)
+## ☕ Support the Project & Buy Me a Coffee
+
+Building and maintaining open-access Earth Observation, riverbed hydrology, and drought-resilience tools for Maharashtra takes continuous research, satellite data pipeline engineering, and compute resources.
+
+If you find **MDIAS** useful for your research, coursework, watershed planning, or civic-tech work, consider supporting the project:
+
+<div align="center">
+
+[![Buy Me A Coffee](https://img.shields.io/badge/☕_Buy_Me_A_Coffee-Support_Suraj_(Lucifer2325)-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/Lucifer2325)
+[![GitHub Sponsors](https://img.shields.io/badge/💖_GitHub_Sponsors-Sponsor_Monthly-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/Lucifer2325)
+[![Ko-fi](https://img.shields.io/badge/☕_Ko--fi-Tip_the_Developer-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/Lucifer2325)
+
+</div>
+
+- **☕ Buy Me a Coffee**: [https://www.buymeacoffee.com/Lucifer2325](https://www.buymeacoffee.com/Lucifer2325)
+- **💖 GitHub Sponsors**: [https://github.com/sponsors/Lucifer2325](https://github.com/sponsors/Lucifer2325)
+- **⭐ Star the Repository**: Giving a star on [GitHub](https://github.com/Lucifer2325/mdias-maharashtra-drought-eo) helps researchers and water-resource engineers discover this project!
 
 ---
 
-## 📜 License
-Developed for drought resilience, watershed conservation, and ecological protection across Maharashtra.
+## 📜 License & Attribution
+
+- **Satellite & Meteorological Data Attribution**:
+  - **ECMWF ERA5-Land** via [Open-Meteo API](https://open-meteo.com/)
+  - **Copernicus Sentinel-2 L2A** via [Element84 AWS Earth Search STAC v1](https://earth-search.aws.element84.com/v1) & [EOX Maps](https://maps.eox.at/)
+  - **MODIS NDVI / LST & VIIRS SWIR** via [NASA EOSDIS GIBS](https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/gibs)
+  - **0.5m Optical Imagery** via Esri World Imagery
+- **License**: Released under the **MIT License** for academic, environmental, and decision-support research.
