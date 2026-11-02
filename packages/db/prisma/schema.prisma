@@ -1,0 +1,437 @@
+// This is your Prisma schema file for MDIAS
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MULTI-TENANT AUTH
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum Plan {
+  FREE
+  RESEARCHER
+  PRO
+  GOVERNMENT
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  ANALYST
+  VIEWER
+}
+
+model Organization {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  plan             Plan     @default(FREE)
+  stripeCustomerId String?  @unique
+  stripePriceId    String?
+  stripeSubId      String?
+  trialEndsAt      DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  users     User[]
+  alerts    Alert[]
+  reports   Report[]
+  apiKeys   ApiKey[]
+
+  @@map("organizations")
+}
+
+model User {
+  id             String       @id @default(cuid())
+  clerkId        String       @unique
+  email          String       @unique
+  name           String?
+  avatarUrl      String?
+  role           UserRole     @default(VIEWER)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  reports Report[]
+
+  @@map("users")
+}
+
+model ApiKey {
+  id             String       @id @default(cuid())
+  name           String
+  keyHash        String       @unique
+  prefix         String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lastUsedAt     DateTime?
+  expiresAt      DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@map("api_keys")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GEOSPATIAL REGIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum RegionType {
+  STATE
+  DIVISION
+  DISTRICT
+  TALUKA
+  VILLAGE
+}
+
+model Region {
+  id         String     @id @default(cuid())
+  lgdCode    String?    @unique  // Local Government Directory code
+  name       String
+  nameMarathi String?
+  type       RegionType
+  parentId   String?
+  parent     Region?    @relation("RegionHierarchy", fields: [parentId], references: [id])
+  children   Region[]   @relation("RegionHierarchy")
+  // geometry stored as GeoJSON text; spatial index done via PostGIS raw SQL
+  geometryWkt String?   @db.Text
+  centroidLat Float?
+  centroidLon Float?
+  areaKm2     Float?
+  createdAt   DateTime  @default(now())
+
+  droughtIndicators DroughtIndicator[]
+  groundwaterWells  GroundwaterWell[]
+  interventionSites InterventionSite[]
+  droughtEvents       DroughtEvent[]
+  rainfallRecords     RainfallRecord[]
+  alerts              Alert[]
+  forestWildlifeZones ForestWildlifeZone[]
+
+  @@map("regions")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DROUGHT INDICATORS (satellite-derived, per region per date)
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum DroughtClass {
+  NONE
+  WATCH       // Mild — early warning
+  WARNING     // Moderate — intervention needed
+  ALERT       // Severe — crisis response
+  EMERGENCY   // Extreme
+}
+
+model DroughtIndicator {
+  id       String   @id @default(cuid())
+  regionId String
+  region   Region   @relation(fields: [regionId], references: [id])
+  date     DateTime @db.Date
+
+  // Vegetation (MODIS / Sentinel-2)
+  ndvi           Float?   // Normalized Difference Vegetation Index (-1 to 1)
+  ndviAnomaly    Float?   // Deviation from long-term mean
+  ndwiSurface    Float?   // Normalized Difference Water Index (surface)
+  eviValue       Float?   // Enhanced Vegetation Index
+
+  // Precipitation (CHIRPS / GPM IMERG)
+  spi1m          Float?   // Standardized Precipitation Index — 1 month
+  spi3m          Float?   // SPI — 3 month (agricultural drought proxy)
+  spi6m          Float?   // SPI — 6 month (hydrological drought proxy)
+  spi12m         Float?   // SPI — 12 month (long-term drought)
+  rainfallMmActual Float?
+  rainfallMmNormal Float?
+  rainfallDeparturePct Float?
+
+  // Soil Moisture (SMAP)
+  soilMoisture   Float?   // m³/m³
+  soilMoistureAnomaly Float?
+
+  // Land Surface Temperature (MODIS LST)
+  lst            Float?   // °C
+  lstAnomaly     Float?
+
+  // Surface Water (JRC / Landsat)
+  reservoirFillPct Float? // % of live storage
+  surfaceWaterAreaKm2 Float?
+
+  // Groundwater (GRACE-FO)
+  gwtAnomaly     Float?   // Groundwater storage anomaly (cm equivalent)
+
+  // Composite risk score (ML model output)
+  droughtRiskScore Float?  // 0–100
+  droughtClass   DroughtClass @default(NONE)
+
+  // Data quality
+  cloudCoverPct  Float?
+  source         String?  // e.g. "MODIS_MOD13A3+CHIRPS+SMAP"
+  processingVersion String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([regionId, date])
+  @@index([date])
+  @@index([droughtClass])
+  @@map("drought_indicators")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RAINFALL RECORDS (station-based + gridded)
+// ─────────────────────────────────────────────────────────────────────────────
+
+model RainfallRecord {
+  id         String   @id @default(cuid())
+  regionId   String
+  region     Region   @relation(fields: [regionId], references: [id])
+  date       DateTime @db.Date
+  rainfallMm Float
+  source     String   // IMD, CHIRPS, GPM
+  stationId  String?
+  isGridded  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([regionId, date])
+  @@map("rainfall_records")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GROUNDWATER WELLS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model GroundwaterWell {
+  id          String  @id @default(cuid())
+  wellId      String  @unique // Official well ID (CGWB / GSDA)
+  regionId    String
+  region      Region  @relation(fields: [regionId], references: [id])
+  lat         Float
+  lon         Float
+  aquiferType String? // Phreatic, Confined
+  depthM      Float?  // Total depth of well
+
+  observations GroundwaterObservation[]
+
+  @@map("groundwater_wells")
+}
+
+model GroundwaterObservation {
+  id           String          @id @default(cuid())
+  wellId       String
+  well         GroundwaterWell @relation(fields: [wellId], references: [id])
+  date         DateTime        @db.Date
+  depthToWaterM Float          // Depth to water table (m below ground)
+  qualityEcMs  Float?          // Electrical conductivity
+  source       String?
+  createdAt    DateTime        @default(now())
+
+  @@index([wellId, date])
+  @@map("groundwater_observations")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HISTORICAL DROUGHT EVENTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum DroughtSeverity {
+  MILD
+  MODERATE
+  SEVERE
+  EXTREME
+}
+
+model DroughtEvent {
+  id           String          @id @default(cuid())
+  regionId     String
+  region       Region          @relation(fields: [regionId], references: [id])
+  year         Int
+  season       String?         // Kharif, Rabi, Annual
+  severity     DroughtSeverity
+  officialDecl Boolean         @default(false) // Official government declaration
+  source       String          // IMD, Maharashtra GR, NRSC
+  notes        String?         @db.Text
+  cropLossPct  Float?
+  affectedPopulation Int?
+  createdAt    DateTime        @default(now())
+
+  @@index([regionId, year])
+  @@map("drought_events")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INTERVENTION CANDIDATE SITES
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum InterventionType {
+  CHECK_DAM
+  FARM_POND
+  CONTOUR_BUND
+  PERCOLATION_TANK
+  NALA_BUND
+  GROUNDWATER_RECHARGE
+  AFFORESTATION
+}
+
+enum InterventionStatus {
+  CANDIDATE    // AI-identified
+  VERIFIED     // Field-verified
+  APPROVED     // Govt approved
+  IMPLEMENTED  // Built
+  REJECTED
+}
+
+model InterventionSite {
+  id                 String             @id @default(cuid())
+  regionId           String
+  region             Region             @relation(fields: [regionId], references: [id])
+  type               InterventionType
+  status             InterventionStatus @default(CANDIDATE)
+
+  lat                Float
+  lon                Float
+
+  // Hydrological attributes
+  catchmentAreaHa    Float?
+  estimatedStorageM3 Float?
+  runoffCoefficient  Float?
+  slopePercent       Float?
+  drainageOrderStrahler Int?
+
+  // Scoring
+  priorityScore      Float?   // 0–100
+  benefitedHouseholds Int?
+  benefitedAreaHa    Float?
+
+  // Site metadata
+  demSource          String?  // SRTM / ALOS
+  soilType           String?
+  notes              String?  @db.Text
+  verifiedBy         String?
+  verifiedAt         DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("intervention_sites")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FOREST & WILDLIFE ZONES (Ecological Drought & Waterhole Telemetry)
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum ProtectedAreaCategory {
+  TIGER_RESERVE
+  WILDLIFE_SANCTUARY
+  NATIONAL_PARK
+  CONSERVATION_RESERVE
+  GRASSLAND_SANCTUARY
+}
+
+model ForestWildlifeZone {
+  id                      String                @id @default(cuid())
+  name                    String
+  category                ProtectedAreaCategory
+  regionId                String
+  region                  Region                @relation(fields: [regionId], references: [id])
+  lat                     Float
+  lon                     Float
+  areaKm2                 Float
+  forestCanopyPct         Float                 // % dense + moderately dense canopy
+  ndviAnomaly             Float?
+  naturalWaterholesTotal  Int                   @default(0)
+  naturalWaterholesDry    Int                   @default(0)
+  solarPumpsActive        Int                   @default(0)
+  fireRiskIndex           Float?                // 0-100 composite thermal + dryness index
+  waterStressClass        DroughtClass          @default(NONE)
+  keySpecies              String[]
+  recommendedInterventions String[]
+  updatedAt               DateTime              @updatedAt
+  createdAt               DateTime              @default(now())
+
+  @@map("forest_wildlife_zones")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ALERTS (early warning subscriptions)
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum AlertChannel {
+  EMAIL
+  SMS
+  WEBHOOK
+}
+
+enum AlertMetric {
+  DROUGHT_CLASS
+  NDVI_ANOMALY
+  SPI_3M
+  RESERVOIR_FILL
+  GROUNDWATER_DEPTH
+  RISK_SCORE
+}
+
+model Alert {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  regionId       String
+  region         Region       @relation(fields: [regionId], references: [id])
+  metric         AlertMetric
+  threshold      Float
+  // e.g. drought class >= WARNING, SPI-3m <= -1.5
+  operator       String       // "gte" | "lte" | "eq"
+  channel        AlertChannel
+  destination    String       // email, phone, or webhook URL
+  active         Boolean      @default(true)
+  lastTriggeredAt DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@map("alerts")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// REPORTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Report {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  generatedById  String
+  generatedBy    User         @relation(fields: [generatedById], references: [id])
+  title          String
+  regionId       String?
+  fromDate       DateTime     @db.Date
+  toDate         DateTime     @db.Date
+  fileUrl        String?      // PDF stored in S3
+  status         String       @default("pending") // pending | generating | ready | failed
+  createdAt      DateTime     @default(now())
+
+  @@map("reports")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUDIT LOG
+// ─────────────────────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id             String   @id @default(cuid())
+  organizationId String
+  userId         String?
+  action         String   // e.g. "ALERT_CREATED", "REPORT_DOWNLOADED"
+  resource       String?
+  resourceId     String?
+  metadata       Json?
+  ipAddress      String?
+  createdAt      DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+  @@map("audit_logs")
+}

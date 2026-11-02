@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Environment & Secrets (NEVER COMMIT)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+apps/web/.env.local
+apps/python-api/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Logs & OS
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
