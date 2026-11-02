@@ -258,10 +258,10 @@ function getMapStyleForMode(mode: BaseMapMode) {
     return {
       version: 8 as const,
       sources: {
-        "esri-dark-gray": {
+        "esri-light-gray": {
           type: "raster" as const,
           tiles: [
-            "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+            "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
           ],
           tileSize: 256,
           maxzoom: 16,
@@ -271,9 +271,9 @@ function getMapStyleForMode(mode: BaseMapMode) {
       },
       layers: [
         {
-          id: "esri-dark-base",
+          id: "esri-light-base",
           type: "raster" as const,
-          source: "esri-dark-gray",
+          source: "esri-light-gray",
           minzoom: 0,
           maxzoom: 19,
         },
@@ -283,7 +283,7 @@ function getMapStyleForMode(mode: BaseMapMode) {
           source: "esri-hybrid-labels",
           minzoom: 0,
           maxzoom: 19,
-          paint: { "raster-opacity": 0.88 },
+          paint: { "raster-opacity": 0.92 },
         },
       ],
     };
@@ -592,27 +592,27 @@ export function MapContainer() {
   const isZoomedIn = currentZoom >= 8.2;
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-slate-950 select-none">
+    <div className="relative w-full h-full overflow-hidden bg-[#F8FAFC] select-none">
       {/* TOP-LEFT STACK: Status Bar + Quick Ground Condition Inspection Bar (Non-overlapping flex column) */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-2 max-w-[calc(100%-310px)] pointer-events-none">
         {/* 1. Live Telemetry & Earth Observation Sensor Status Bar */}
-        <div className="pointer-events-auto inline-flex flex-wrap items-center gap-2 bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-300 shadow-2xl w-fit">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-semibold">
+        <div className="pointer-events-auto inline-flex flex-wrap items-center gap-2 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-600 shadow-lg w-fit">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-bold">
             <Radio className="w-3 h-3 animate-pulse" />
             {loadingLive
               ? "Syncing EO Feeds..."
               : "LIVE EO: Sentinel-2 + NASA GIBS + ERA5"}
           </span>
-          <span className="text-slate-600 hidden sm:inline">|</span>
+          <span className="text-slate-300 hidden sm:inline">|</span>
           <span className="hidden sm:flex items-center gap-1">
-            <Layers className="w-3.5 h-3.5 text-indigo-400" />
-            <strong className="text-white">{layerConfig.label}</strong>
+            <Layers className="w-3.5 h-3.5 text-[#635BFF]" />
+            <strong className="text-[#0A2540]">{layerConfig.label}</strong>
           </span>
           {baseMapMode !== "schematic" && (
             <>
-              <span className="text-slate-600">|</span>
-              <span className="inline-flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
-                <Eye className="w-3 h-3 text-cyan-400" />
+              <span className="text-slate-300">|</span>
+              <span className="inline-flex items-center gap-1 font-mono font-semibold text-[11px] px-2 py-0.5 rounded bg-[#EFF6FF] text-[#0A2540] border border-blue-200">
+                <Eye className="w-3 h-3 text-[#635BFF]" />
                 {currentZoom.toFixed(1)}x{" "}
                 <span className="hidden md:inline">
                   {currentZoom >= 11
@@ -631,33 +631,33 @@ export function MapContainer() {
                 `Map Center (${mapCenter.lat.toFixed(2)}°N, ${mapCenter.lon.toFixed(2)}°E)`
               );
             }}
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-indigo-500/20 hover:bg-indigo-500/35 border border-indigo-400/40 text-indigo-200 font-medium text-[11px] transition-colors"
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#635BFF] hover:bg-[#5249e6] text-white font-semibold text-[11px] transition-colors shadow-sm"
             title="Query AWS Earth Search STAC API for latest Copernicus Sentinel-2 passes at current map center"
           >
-            <ScanSearch className="w-3 h-3 text-indigo-400" />
+            <ScanSearch className="w-3 h-3" />
             <span className="hidden md:inline">Scan Sentinel-2 Here</span>
           </button>
           {lastFetchedTime && (
-            <span className="text-[11px] text-slate-500 hidden xl:inline">
+            <span className="text-[11px] text-slate-400 hidden xl:inline">
               {lastFetchedTime}
             </span>
           )}
           <button
             onClick={fetchLiveTelemetry}
             disabled={loadingLive}
-            className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+            className="p-1 rounded hover:bg-[#EFF6FF] text-slate-500 hover:text-[#0A2540] transition-colors"
             title="Refresh live satellite & weather telemetry"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 ${loadingLive ? "animate-spin text-indigo-400" : ""}`}
+              className={`w-3.5 h-3.5 ${loadingLive ? "animate-spin text-[#635BFF]" : ""}`}
             />
           </button>
         </div>
 
         {/* 2. Quick Ground Condition Inspection Bar */}
-        <div className="pointer-events-auto inline-flex flex-wrap items-center gap-1.5 bg-slate-900/92 backdrop-blur-xl border border-slate-800 rounded-xl px-2.5 py-1.5 shadow-xl w-fit">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1 px-1">
-            <Satellite className="w-3.5 h-3.5" />
+        <div className="pointer-events-auto inline-flex flex-wrap items-center gap-1.5 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-xl px-2.5 py-1.5 shadow-lg w-fit">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#0A2540] flex items-center gap-1 px-1">
+            <Satellite className="w-3.5 h-3.5 text-[#C7A84B]" />
             Ground Zoom:
           </span>
           {GROUND_INSPECTION_HOTSPOTS.map((spot) => {
@@ -681,13 +681,13 @@ export function MapContainer() {
                     spot.name
                   );
                 }}
-                className={`px-2 py-0.5 rounded-lg text-[11px] font-medium transition-all flex items-center gap-1 border ${
+                className={`px-2 py-0.5 rounded-lg text-[11px] font-semibold transition-all flex items-center gap-1 border ${
                   isCurrent
-                    ? "bg-amber-500/25 border-amber-400 text-amber-200 shadow"
-                    : "bg-slate-800/80 border-slate-700/80 text-slate-300 hover:bg-slate-700 hover:text-white"
+                    ? "bg-[#0A2540] border-[#C7A84B] text-[#C7A84B] shadow-sm"
+                    : "bg-[#F8FAFC] border-slate-200 text-[#0A2540] hover:bg-[#EFF6FF] hover:border-[#635BFF]/40"
                 }`}
               >
-                <Crosshair className="w-2.5 h-2.5 text-amber-400" />
+                <Crosshair className="w-2.5 h-2.5 text-[#C7A84B]" />
                 {spot.name.split("&")[0].split("(")[0].trim()}
               </button>
             );
@@ -695,7 +695,7 @@ export function MapContainer() {
           {currentZoom > 7.0 && baseMapMode !== "schematic" && (
             <button
               onClick={resetMapCamera}
-              className="px-2 py-0.5 rounded-lg text-[11px] font-semibold bg-indigo-600/30 border border-indigo-400/50 text-indigo-200 hover:bg-indigo-600/50 transition-colors flex items-center gap-1"
+              className="px-2 py-0.5 rounded-lg text-[11px] font-bold bg-[#635BFF] text-white hover:bg-[#5249e6] transition-colors flex items-center gap-1 shadow-sm"
             >
               <RotateCcw className="w-2.5 h-2.5" />
               Reset View
@@ -1044,22 +1044,22 @@ export function MapContainer() {
         </Map>
       ) : (
         /* SCHEMATIC VECTOR GRID MODE (35 Districts + 11 Riverbeds + ESZ Rings) */
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_#0f172a_0%,_#020617_100%)]">
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_#EFF6FF_0%,_#F8FAFC_100%)]">
           <div
-            className="absolute inset-0 opacity-15 pointer-events-none"
+            className="absolute inset-0 opacity-30 pointer-events-none"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #334155 1px, transparent 1px), linear-gradient(to bottom, #334155 1px, transparent 1px)",
+                "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)",
               backgroundSize: "48px 48px",
             }}
           />
 
-          <div className="absolute top-28 left-3 z-10 flex flex-col bg-slate-900/90 backdrop-blur border border-slate-800 rounded-lg overflow-hidden shadow-lg">
+          <div className="absolute top-28 left-3 z-10 flex flex-col bg-white border border-slate-200 rounded-lg overflow-hidden shadow-md">
             <button
               onClick={() =>
                 setSvgZoom((z) => Math.min(2.2, +(z + 0.2).toFixed(2)))
               }
-              className="p-2 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors border-b border-slate-800"
+              className="p-2 text-[#0A2540] hover:bg-[#EFF6FF] transition-colors border-b border-slate-200"
               title="Zoom in"
             >
               <ZoomIn className="w-4 h-4" />
@@ -1068,14 +1068,14 @@ export function MapContainer() {
               onClick={() =>
                 setSvgZoom((z) => Math.max(0.75, +(z - 0.2).toFixed(2)))
               }
-              className="p-2 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors border-b border-slate-800"
+              className="p-2 text-[#0A2540] hover:bg-[#EFF6FF] transition-colors border-b border-slate-200"
               title="Zoom out"
             >
               <ZoomOut className="w-4 h-4" />
             </button>
             <button
               onClick={() => setSvgZoom(1)}
-              className="p-2 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
+              className="p-2 text-[#0A2540] hover:bg-[#EFF6FF] transition-colors"
               title="Reset view"
             >
               <RotateCcw className="w-4 h-4" />
@@ -1344,24 +1344,24 @@ export function MapContainer() {
         </div>
 
         {showStacInspector && (
-          <div className="pointer-events-auto w-80 rounded-xl bg-slate-900/95 backdrop-blur-xl border border-indigo-500/40 p-3 shadow-2xl">
+          <div className="pointer-events-auto w-80 rounded-xl bg-white/95 backdrop-blur-xl border border-slate-200 p-3 shadow-xl">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div className="min-w-0">
-                <span className="text-[9.5px] font-mono uppercase tracking-wider text-indigo-400 flex items-center gap-1">
+                <span className="text-[9.5px] font-mono font-bold uppercase tracking-wider text-[#635BFF] flex items-center gap-1">
                   <ScanSearch className="w-3 h-3" />
                   AWS STAC v1 • Sentinel-2 L2A
                 </span>
-                <h4 className="text-xs font-bold text-white truncate">
+                <h4 className="text-xs font-extrabold text-[#0A2540] truncate">
                   {stacTargetLabel}
                 </h4>
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 {stacLoading && (
-                  <RefreshCw className="w-3.5 h-3.5 text-indigo-400 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 text-[#635BFF] animate-spin" />
                 )}
                 <button
                   onClick={() => setShowStacInspector(false)}
-                  className="text-slate-400 hover:text-white p-0.5 rounded"
+                  className="text-slate-400 hover:text-[#0A2540] p-0.5 rounded"
                   title="Hide Sentinel-2 STAC Feed"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -1377,7 +1377,7 @@ export function MapContainer() {
                       href={activeScene.visualCogUrl ?? activeScene.thumbnailUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="relative w-16 h-16 rounded-lg overflow-hidden border border-slate-700 shrink-0 group bg-slate-950"
+                      className="relative w-16 h-16 rounded-lg overflow-hidden border border-slate-200 shrink-0 group bg-[#F8FAFC]"
                       title="Click to open full-resolution Sentinel-2 True-Color COG"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1386,21 +1386,21 @@ export function MapContainer() {
                         alt={activeScene.id}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       />
-                      <span className="absolute bottom-0 inset-x-0 bg-slate-950/80 text-[8px] text-center text-indigo-300 py-0.5 font-mono">
+                      <span className="absolute bottom-0 inset-x-0 bg-[#0A2540]/85 text-[8px] text-center text-white py-0.5 font-mono">
                         10m RGB
                       </span>
                     </a>
                   ) : (
-                    <div className="w-16 h-16 rounded-lg bg-slate-800 flex items-center justify-center text-[10px] text-slate-400 shrink-0">
+                    <div className="w-16 h-16 rounded-lg bg-[#EFF6FF] flex items-center justify-center text-[10px] text-slate-500 shrink-0">
                       No Preview
                     </div>
                   )}
 
                   <div className="min-w-0 flex-1 text-[11px] space-y-1">
-                    <div className="font-mono text-[10px] text-indigo-200 truncate">
+                    <div className="font-mono font-bold text-[10px] text-[#0A2540] truncate">
                       {activeScene.id}
                     </div>
-                    <div className="flex items-center gap-2 text-slate-300">
+                    <div className="flex items-center gap-2 text-slate-600">
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="w-3 h-3 text-slate-400" />
                         {new Date(activeScene.datetime).toLocaleDateString(
@@ -1412,7 +1412,7 @@ export function MapContainer() {
                           }
                         )}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-cyan-300 font-mono text-[10px]">
+                      <span className="inline-flex items-center gap-1 text-[#0D9488] font-mono font-bold text-[10px]">
                         <Cloud className="w-3 h-3" />
                         {activeScene.cloudCover}%
                       </span>
@@ -1423,7 +1423,7 @@ export function MapContainer() {
                           href={activeScene.visualCogUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="px-1.5 py-0.5 rounded bg-indigo-500/20 hover:bg-indigo-500/35 border border-indigo-500/40 text-indigo-200 text-[9.5px] font-medium inline-flex items-center gap-0.5"
+                          className="px-1.5 py-0.5 rounded bg-[#EFF6FF] hover:bg-blue-100 border border-[#635BFF]/30 text-[#635BFF] text-[9.5px] font-bold inline-flex items-center gap-0.5"
                         >
                           RGB <ExternalLink className="w-2.5 h-2.5" />
                         </a>
@@ -1433,7 +1433,7 @@ export function MapContainer() {
                           href={activeScene.nirCogUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="px-1.5 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/35 border border-emerald-500/40 text-emerald-200 text-[9.5px] font-medium inline-flex items-center gap-0.5"
+                          className="px-1.5 py-0.5 rounded bg-[#0D9488]/10 hover:bg-[#0D9488]/20 border border-[#0D9488]/30 text-[#0D9488] text-[9.5px] font-bold inline-flex items-center gap-0.5"
                         >
                           NIR B08 <ExternalLink className="w-2.5 h-2.5" />
                         </a>
@@ -1443,7 +1443,7 @@ export function MapContainer() {
                           href={activeScene.swirCogUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="px-1.5 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/35 border border-amber-500/40 text-amber-200 text-[9.5px] font-medium inline-flex items-center gap-0.5"
+                          className="px-1.5 py-0.5 rounded bg-[#C7A84B]/15 hover:bg-[#C7A84B]/30 border border-[#C7A84B] text-[#0A2540] text-[9.5px] font-bold inline-flex items-center gap-0.5"
                         >
                           SWIR B11 <ExternalLink className="w-2.5 h-2.5" />
                         </a>
@@ -1453,15 +1453,15 @@ export function MapContainer() {
                 </div>
 
                 {stacScenes.length > 1 && (
-                  <div className="flex items-center gap-1 pt-1 border-t border-slate-800 overflow-x-auto">
+                  <div className="flex items-center gap-1 pt-1 border-t border-slate-100 overflow-x-auto">
                     {stacScenes.map((sc, idx) => (
                       <button
                         key={sc.id}
                         onClick={() => setSelectedSceneIdx(idx)}
-                        className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono shrink-0 transition-colors ${
+                        className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono font-semibold shrink-0 transition-colors ${
                           idx === selectedSceneIdx
-                            ? "bg-indigo-600 text-white"
-                            : "bg-slate-800 text-slate-400 hover:text-slate-200"
+                            ? "bg-[#635BFF] text-white"
+                            : "bg-[#F8FAFC] text-slate-600 hover:text-[#0A2540] border border-slate-200"
                         }`}
                       >
                         {new Date(sc.datetime).toLocaleDateString("en-IN", {
@@ -1475,7 +1475,7 @@ export function MapContainer() {
                 )}
               </div>
             ) : (
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 {stacLoading
                   ? "Querying Copernicus Sentinel-2 L2A STAC catalog..."
                   : "Click any riverbed, sanctuary, or district to load Sentinel-2 passes."}
@@ -1490,30 +1490,30 @@ export function MapContainer() {
         !selectedDistrict &&
         !selectedWildlifeZone &&
         !selectedRiver && (
-          <div className="absolute bottom-4 right-14 z-20 w-72 rounded-xl bg-slate-900/95 backdrop-blur-xl border border-slate-700 p-3.5 shadow-2xl pointer-events-none">
+          <div className="absolute bottom-4 right-14 z-20 w-72 rounded-xl bg-white/95 backdrop-blur-xl border border-slate-200 p-3.5 shadow-xl pointer-events-none">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div>
-                <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block">
+                <span className="text-[10px] font-mono font-bold text-[#0D9488] uppercase tracking-wider block">
                   Live Open-Meteo ERA5
                 </span>
-                <p className="text-sm font-bold text-white">
+                <p className="text-sm font-extrabold text-[#0A2540]">
                   {hoveredDistrictObj.name}
                 </p>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-slate-500">
                   {hoveredDistrictObj.division} ({hoveredDistrictObj.lat}°N,{" "}
                   {hoveredDistrictObj.lon}°E)
                 </p>
               </div>
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700">
+              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#EFF6FF] text-[#0A2540] border border-blue-200">
                 Risk: {hoveredDistrictObj.riskScore}/100
               </span>
             </div>
-            <div className="grid grid-cols-2 gap-2 text-xs border-t border-slate-800 pt-2">
+            <div className="grid grid-cols-2 gap-2 text-xs border-t border-slate-100 pt-2">
               <div>
                 <span className="text-slate-500 block text-[10px]">
                   Soil Moisture (0–28cm)
                 </span>
-                <span className="font-mono text-slate-200">
+                <span className="font-mono font-semibold text-[#0A2540]">
                   {hoveredDistrictObj.soilMoisture}% (
                   {hoveredDistrictObj.soilMoistureRawM3} m³/m³)
                 </span>
@@ -1522,7 +1522,7 @@ export function MapContainer() {
                 <span className="text-slate-500 block text-[10px]">
                   60d Rainfall / ET0
                 </span>
-                <span className="font-mono text-slate-200">
+                <span className="font-mono font-semibold text-[#0A2540]">
                   {hoveredDistrictObj.rainfall60dMm} /{" "}
                   {hoveredDistrictObj.evapotranspiration60dMm} mm
                 </span>
@@ -1531,7 +1531,7 @@ export function MapContainer() {
                 <span className="text-slate-500 block text-[10px]">
                   Surface Temp (LST)
                 </span>
-                <span className="font-mono text-slate-200">
+                <span className="font-mono font-semibold text-[#0A2540]">
                   {hoveredDistrictObj.lst}°C (Air: {hoveredDistrictObj.airTempC}
                   °C)
                 </span>
@@ -1540,7 +1540,7 @@ export function MapContainer() {
                 <span className="text-slate-500 block text-[10px]">
                   SPI-3M / FSI Forest
                 </span>
-                <span className="font-mono text-emerald-400">
+                <span className="font-mono font-semibold text-[#0D9488]">
                   {hoveredDistrictObj.spi3m} /{" "}
                   {hoveredDistrictObj.forestCanopyPct}%
                 </span>
@@ -1551,20 +1551,20 @@ export function MapContainer() {
 
       {/* Selected Riverbed & Sand Mining Dossier Card */}
       {selectedRiver && !selectedDistrict && (
-        <div className="absolute bottom-4 right-14 z-30 w-80 sm:w-96 rounded-xl bg-slate-900/95 backdrop-blur-xl border border-cyan-500/40 p-4 shadow-2xl">
+        <div className="absolute bottom-4 right-14 z-30 w-80 sm:w-96 rounded-xl bg-white/98 backdrop-blur-xl border border-slate-200 p-4 shadow-xl">
           <div className="flex items-start justify-between gap-2 mb-2">
             <div className="flex items-start gap-2">
-              <div className="p-1.5 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 mt-0.5">
+              <div className="p-1.5 rounded-lg bg-[#EFF6FF] border border-blue-200 text-[#635BFF] mt-0.5">
                 <Waves className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 block">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#635BFF] block">
                   {selectedRiver.basin}
                 </span>
-                <h4 className="text-sm font-bold text-white leading-snug">
+                <h4 className="text-sm font-extrabold text-[#0A2540] leading-snug">
                   {selectedRiver.name}
                 </h4>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-slate-500">
                   {selectedRiver.lengthInStateKm} km in Maharashtra •{" "}
                   {selectedRiver.waterStatus.replace(/_/g, " ")}
                 </p>
@@ -1572,18 +1572,18 @@ export function MapContainer() {
             </div>
             <button
               onClick={() => setSelectedRiver(null)}
-              className="text-slate-400 hover:text-white p-1"
+              className="text-slate-400 hover:text-[#0A2540] p-1"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-xs border-y border-slate-800 py-2.5 my-2">
+          <div className="grid grid-cols-3 gap-2 text-xs border-y border-slate-100 py-2.5 my-2">
             <div>
               <span className="text-slate-500 block text-[10px]">
                 Exposed Dry Bed
               </span>
-              <span className="font-mono font-bold text-red-400">
+              <span className="font-mono font-bold text-[#B91C1C]">
                 {selectedRiver.exposedBedPct}%
               </span>
             </div>
@@ -1591,7 +1591,7 @@ export function MapContainer() {
               <span className="text-slate-500 block text-[10px]">
                 Baseflow vs Normal
               </span>
-              <span className="font-mono font-bold text-cyan-300">
+              <span className="font-mono font-bold text-[#0D9488]">
                 {selectedRiver.flowRatePctOfNormal}%
               </span>
             </div>
@@ -1599,25 +1599,25 @@ export function MapContainer() {
               <span className="text-slate-500 block text-[10px]">
                 Sand Mining Alerts
               </span>
-              <span className="font-mono font-bold text-amber-400">
+              <span className="font-mono font-bold text-[#0A2540]">
                 ⛏ {selectedRiver.sandMiningAlerts} ghats
               </span>
             </div>
           </div>
 
-          <p className="text-xs text-slate-300 leading-relaxed mb-2.5">
+          <p className="text-xs text-slate-600 leading-relaxed mb-2.5">
             {selectedRiver.conditionSummary}
           </p>
 
           <div className="mb-3">
-            <span className="text-[10px] uppercase tracking-wider text-slate-500 block mb-1">
-              Major Dams & Barrages on Channel
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+              Major Dams &amp; Barrages on Channel
             </span>
             <div className="flex flex-wrap gap-1">
               {selectedRiver.majorDams.map((dam) => (
                 <span
                   key={dam}
-                  className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-200 border border-slate-700"
+                  className="px-1.5 py-0.5 rounded bg-[#F8FAFC] text-[10px] font-medium text-[#0A2540] border border-slate-200"
                 >
                   {dam}
                 </span>
@@ -1639,7 +1639,7 @@ export function MapContainer() {
                 selectedRiver.name
               );
             }}
-            className="w-full py-2 px-3 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow transition-colors"
+            className="w-full py-2 px-3 rounded-lg bg-[#635BFF] hover:bg-[#5249e6] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
           >
             <Satellite className="w-3.5 h-3.5" />
             Zoom to Actual Satellite Riverbed (14x)
@@ -1649,20 +1649,20 @@ export function MapContainer() {
 
       {/* Selected Wildlife Sanctuary / ESZ Threat Card */}
       {selectedWildlifeZone && !selectedDistrict && (
-        <div className="absolute bottom-4 right-14 z-30 w-80 sm:w-96 rounded-xl bg-slate-900/95 backdrop-blur-xl border border-emerald-500/40 p-4 shadow-2xl">
+        <div className="absolute bottom-4 right-14 z-30 w-80 sm:w-96 rounded-xl bg-white/98 backdrop-blur-xl border border-slate-200 p-4 shadow-xl">
           <div className="flex items-start justify-between gap-2 mb-2">
             <div className="flex items-start gap-2">
-              <div className="p-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 mt-0.5">
+              <div className="p-1.5 rounded-lg bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] mt-0.5">
                 <Trees className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 block">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0D9488] block">
                   {selectedWildlifeZone.category.replace(/_/g, " ")}
                 </span>
-                <h4 className="text-sm font-bold text-white leading-snug">
+                <h4 className="text-sm font-extrabold text-[#0A2540] leading-snug">
                   {selectedWildlifeZone.name}
                 </h4>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-slate-500">
                   {selectedWildlifeZone.districtName} •{" "}
                   {selectedWildlifeZone.areaKm2} km²
                 </p>
@@ -1670,22 +1670,22 @@ export function MapContainer() {
             </div>
             <button
               onClick={() => setSelectedWildlifeZone(null)}
-              className="text-slate-400 hover:text-white p-1"
+              className="text-slate-400 hover:text-[#0A2540] p-1"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="grid grid-cols-4 gap-1.5 text-xs border-y border-slate-800 py-2.5 my-2">
+          <div className="grid grid-cols-4 gap-1.5 text-xs border-y border-slate-100 py-2.5 my-2">
             <div>
               <span className="text-slate-500 block text-[10px]">Canopy</span>
-              <span className="font-mono font-semibold text-emerald-400">
+              <span className="font-mono font-bold text-[#0D9488]">
                 {selectedWildlifeZone.forestCanopyPct}%
               </span>
             </div>
             <div>
               <span className="text-slate-500 block text-[10px]">Dry Pits</span>
-              <span className="font-mono font-semibold text-amber-300">
+              <span className="font-mono font-bold text-[#0A2540]">
                 {selectedWildlifeZone.naturalWaterholesDry}/
                 {selectedWildlifeZone.naturalWaterholesTotal}
               </span>
@@ -1694,7 +1694,7 @@ export function MapContainer() {
               <span className="text-slate-500 block text-[10px]">
                 Illegal Dig
               </span>
-              <span className="font-mono font-semibold text-red-400">
+              <span className="font-mono font-bold text-[#B91C1C]">
                 ⛏ {selectedWildlifeZone.illegalExcavationSites} sites
               </span>
             </div>
@@ -1702,7 +1702,7 @@ export function MapContainer() {
               <span className="text-slate-500 block text-[10px]">
                 ESZ Buffer
               </span>
-              <span className="font-mono font-semibold text-indigo-300">
+              <span className="font-mono font-bold text-[#635BFF]">
                 {selectedWildlifeZone.eszBufferKm} km
               </span>
             </div>
@@ -1710,12 +1710,12 @@ export function MapContainer() {
 
           <div className="space-y-2 text-xs">
             {selectedWildlifeZone.excavationHotspots?.length > 0 && (
-              <div className="bg-red-950/40 border border-red-500/30 rounded-lg p-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 block mb-0.5">
-                  ⛏ Illegal Excavation & Quarrying Alert (
+              <div className="bg-red-50 border border-[#B91C1C]/30 rounded-lg p-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#B91C1C] block mb-0.5">
+                  ⛏ Illegal Excavation &amp; Quarrying Alert (
                   {selectedWildlifeZone.unauthorizedQuarryingHa} ha)
                 </span>
-                <p className="text-[11px] text-red-200 leading-snug">
+                <p className="text-[11px] text-[#0A2540] leading-snug">
                   {selectedWildlifeZone.excavationHotspots[0]}
                 </p>
               </div>
@@ -1723,10 +1723,10 @@ export function MapContainer() {
 
             {selectedWildlifeZone.massiveThreats?.length > 0 && (
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold block mb-0.5">
-                  Massive Ecological Threats
+                <span className="text-[10px] uppercase tracking-wider text-[#0A2540] font-bold block mb-0.5">
+                  Ecological &amp; Hydro-Geological Threats
                 </span>
-                <p className="text-[11px] text-slate-300 leading-snug">
+                <p className="text-[11px] text-slate-600 leading-snug">
                   • {selectedWildlifeZone.massiveThreats[0]}
                 </p>
               </div>
@@ -1742,7 +1742,7 @@ export function MapContainer() {
                   selectedWildlifeZone.shortLabel
                 )
               }
-              className="w-full mt-1 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow transition-colors"
+              className="w-full mt-1 py-2 px-3 rounded-lg bg-[#0D9488] hover:bg-[#0b7c72] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
             >
               <Satellite className="w-3.5 h-3.5" />
               Zoom to Actual Satellite Ground View (14x)

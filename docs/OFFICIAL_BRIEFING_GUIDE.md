@@ -1,16 +1,16 @@
-# Official Presentation & Walkthrough Guide for Government Officials
+# Presentation & Demo Walkthrough Guide (Decision-Support Prototype)
 
-This guide outlines a structured **5-minute live demonstration** of the **Maharashtra Drought Intelligence & Early Warning System (MDIAS)** for IAS Officers, Divisional Commissioners, District Collectors, and WRD/MFD engineers.
+This guide outlines a structured **5-minute live demonstration** of the **Maharashtra Drought & Earth Observation Intelligence Platform (MDIAS)** prototype when presenting the system to officials, water-resource engineers, and researchers.
 
 ---
 
-## Step 1: State Situation Room Overview (`/dashboard`)
+## Step 1: Platform Overview (`/dashboard`)
 
-![State Situation Room Overview](./screenshots/live-01-executive-command.png)
+![Platform Overview](./screenshots/01-executive-situation-room.png)
 
-1. Point out the **Institutional Authority Bar** at the top (`Relief & Rehabilitation Dept. • Water Resources Dept. (WRD) • Revenue & Forest Dept.`) and the live ticking **IST Command Clock**.
-2. Highlight the **Executive Divisional Breakdown Strip**, which aggregates live ECMWF ERA5-Land telemetry across **Marathwada**, **Vidarbha**, **Pune & Western Rain-Shadow**, **Nashik**, and **Konkan**.
-3. Review the **Immediate Administrative Directives Matrix** (`DIR-RRD-104` Tanker Requisition, `DIR-REV-219` NGT Riverbed Sand-Mining Enforcement, `DIR-WRD-088` Reservoir Dead-Storage Reservation, and `DIR-MFD-312` Wildlife Waterhole Solar Pump Activation).
+1. Point out the **Decision-Support Prototype Provenance Bar** at the top (`Open-Meteo ECMWF ERA5-Land • Copernicus Sentinel-2 STAC • NASA EOSDIS GIBS`) and the live ticking **IST Clock**.
+2. Highlight the **Regional Situational Summary Matrix**, which aggregates live ECMWF ERA5-Land telemetry across **Marathwada**, **Vidarbha**, **Pune & Western Rain-Shadow**, **Nashik**, and **Konkan**.
+3. Review the **Recommended Mitigation Scenarios Matrix** (`SIM-WAT-104` Tanker Allocation Modeling, `SIM-EO-219` Riverbed Sand-Dredging Detection, `SIM-HYD-088` Reservoir Dead-Storage Thresholds, and `SIM-ECO-312` Wildlife Waterhole Solar Pump Planning).
 
 ---
 

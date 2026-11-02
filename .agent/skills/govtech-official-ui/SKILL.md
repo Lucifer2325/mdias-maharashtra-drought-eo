@@ -1,33 +1,32 @@
 ---
 name: govtech-official-ui
-description: Official Government of Maharashtra Executive Command Center & GovTech UI/UX Design Skill for MDIAS. Use whenever creating, updating, or styling dashboard pages, map overlays, collectorate reports, or briefing views to ensure an authoritative, presentation-ready aesthetic for IAS officers, Divisional Commissioners, and Cabinet officials.
+description: High-Trust Light UI/UX & Independent Decision-Support Prototype Design Skill for MDIAS. Use whenever creating, updating, or styling dashboard pages, map overlays, analytical reports, or executive views to ensure a clean, authoritative, research-grade Palette 4 High-Trust Light aesthetic suitable for live demonstration to administrators and domain experts.
 ---
 
-# Government of Maharashtra — Official Command Center UI/UX Skill (`govtech-official-ui`)
+# MDIAS — High-Trust Light & Decision-Support Prototype UI/UX Skill (`govtech-official-ui`)
 
 ## Purpose
-Ensures every page and component of the **Maharashtra Drought Intelligence & Early Warning System (MDIAS)** adheres to an authoritative, high-trust **State Situation Room & Earth Observation Command** aesthetic suitable for live presentation to:
-- **Relief & Rehabilitation Department (Mantralaya, Mumbai)**
-- **Water Resources Department (WRD) & GSDA Maharashtra**
-- **Revenue & Forest Department (MFD) & National Green Tribunal (NGT) Enforcement Cells**
-- **Divisional Commissioners & District Collectors (All 35 Districts)**
+Ensures every page and component of the **Maharashtra Drought & Earth Observation Intelligence Platform (MDIAS)** adheres to a transparent, high-trust **Independent Research & Decision-Support Prototype** framing with the **Palette 4 — Fintech / High-Trust Light** color system:
+- **Framing**: Always present MDIAS honestly as an **Independent Research & Decision-Support Prototype** (`MDIAS — Maharashtra Drought & Earth Observation Intelligence Platform (Decision-Support Prototype)`).
+- **No Unverified Official Claims**: Never claim to already be an official Government of Maharashtra portal; do not use `GOVT. OF MAHARASHTRA`, `OFFICIAL TELEMETRY`, `MANTRALAYA SYNC`, `SEOC Directives`, `Cabinet Briefing`, or fake Government Resolution codes (`GR-WCD-2026/...`).
+- **Terminology**: Use accurate, research-grade decision-support terms such as `Recommended Mitigation Protocols`, `Regional Summary Matrix`, `Priority District Watchlist`, and `Model Reference ID (SIM-...)`.
 
-## Visual & Institutional Design Pillars
+## Palette 4 — Fintech / High-Trust Light Color Architecture
 
-1. **Institutional Header & Tricolor/State Accent**:
-   - Top 4px state command accent bar (`bg-gradient-to-r from-amber-500 via-white/80 to-emerald-500`).
-   - Official classification badges: `GOVT. OF MAHARASHTRA • STATE DROUGHT & EO COMMAND (SDMC)`, `OFFICIAL TELEMETRY • LIVE`.
-   - Authentic data attribution pills: `ECMWF ERA5-Land`, `Copernicus Sentinel-2 L2A (STAC)`, `NASA EOSDIS GIBS`, `FSI ISFR Baseline`.
+1. **Surfaces & Canvas**:
+   - **Main Canvas Background**: `#F8FAFC` (`bg-[#F8FAFC]`)
+   - **Cards & Primary Panels**: `#FFFFFF` (`bg-white`) with crisp light borders (`border-slate-200`) and subtle elevation (`shadow-sm`).
+   - **Secondary Panels & Map Water/Topographic Containers**: `#EFF6FF` (`bg-[#EFF6FF]`) with `border-blue-100` or `border-slate-200`.
+   - **Zero Dark Navy Cards**: Never use `bg-slate-900` or `bg-slate-950` for cards or page backgrounds.
 
-2. **Color & Surface Architecture**:
-   - **Primary Canvas**: Deep obsidian slate (`bg-slate-950`) with elevated glassmorphic command cards (`bg-slate-900/90 backdrop-blur-xl border border-slate-800/90`).
-   - **Semantic Severity Palette**:
-     - `EMERGENCY` / `EXTREME THREAT`: Crimson (`#ef4444` / `bg-red-950/50 border-red-500/40 text-red-200`)
-     - `ALERT` / `CRITICAL DEPLETION`: Saffron-Orange (`#f97316` / `bg-amber-950/50 border-amber-500/40 text-amber-200`)
-     - `WATCH`: Gold (`#eab308`)
-     - `NORMAL` / `SAFE`: State Emerald (`#10b981`)
-     - `HYDROLOGY` / `SATELLITE EO`: Command Cyan (`#06b6d4`) & Indigo (`#6366f1`)
+2. **Typography & Accents**:
+   - **Primary Headings & Values**: Deep Navy `#0A2540` (`text-[#0A2540]`)
+   - **Secondary Body Copy**: `text-slate-600` and `text-slate-500`
+   - **Interactive Primary Accent**: Indigo `#635BFF` (`bg-[#635BFF] text-white`, `text-[#635BFF]`, `border-[#635BFF]/30`)
+   - **Warm Gold Accent**: `#C7A84B` (`text-[#C7A84B]`, `bg-[#C7A84B]/15`, `border-[#C7A84B]/40`)
+   - **Positive / Live Telemetry / Normal State**: Teal `#0D9488` (`text-[#0D9488]`, `bg-[#0D9488]/10`)
+   - **High-Risk / Critical / Dry-Bed State**: Crimson `#B91C1C` (`text-[#B91C1C]`, `bg-[#B91C1C]/10`)
 
-3. **Typography & Telemetry Precision**:
-   - All numerical indicators (Soil Moisture `%`, SPI-3M, NDVI anomaly, Riverbed Exposed `%`, GPS coordinates, Government Resolution numbers) MUST use `font-mono` (`tabular-nums`) with explicit units.
-   - Always use updated official Maharashtra district names in user-facing labels (`Chhatrapati Sambhajinagar`, `Dharashiv`, `Ahilyanagar`).
+3. **Telemetry & Geographic Precision**:
+   - All numerical metrics (Soil Moisture `%`, SPI-3M, NDVI anomaly, Riverbed Exposed `%`, GPS coordinates, Model Reference IDs) MUST use `font-mono` (`tabular-nums`) with explicit units.
+   - Always use updated Maharashtra district names (`Chhatrapati Sambhajinagar`, `Dharashiv`, `Ahilyanagar`).

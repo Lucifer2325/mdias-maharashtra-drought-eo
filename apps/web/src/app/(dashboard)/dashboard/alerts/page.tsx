@@ -10,74 +10,74 @@ import {
   Phone,
   Globe,
   ShieldAlert,
-  Landmark,
   Siren,
   Truck,
   Flame,
   Pickaxe,
   Radio,
+  Cpu,
 } from "lucide-react";
 import { CreateAlertDialog } from "@/components/alerts/create-alert-dialog";
 import type { Alert } from "@mdias/types";
 
-type ProtocolBadgeType =
-  | "NDRF/SDRF Trigger"
-  | "Tanker Requisition Protocol"
-  | "NGT Section 19 Illegal Excavation Alert"
-  | "Forest Fire & Waterhole Emergency";
+type TriggerCategoryType =
+  | "Critical Reservoir Reserve Trigger"
+  | "Water Tanker Demand Advisory"
+  | "SAR Riverbed Excavation Anomaly"
+  | "Forest Canopy & Waterhole Stress";
 
-interface ProtocolMeta {
-  protocol: ProtocolBadgeType;
-  directiveCode: string;
-  authority: string;
-  slaResponse: string;
+interface TriggerMeta {
+  protocol: TriggerCategoryType;
+  ruleCode: string;
+  stakeholderGroup: string;
+  leadTimeWindow: string;
   actionSummary: string;
 }
 
-const PROTOCOL_BY_ALERT_ID: Record<string, ProtocolMeta> = {
+const TRIGGER_BY_ALERT_ID: Record<string, TriggerMeta> = {
   "alt-1": {
-    protocol: "Tanker Requisition Protocol",
-    directiveCode: "DIR-R&R-2026/TANKER-402",
-    authority: "District Collector & Tahsildar (Dharashiv)",
-    slaResponse: "24 Hours Dispatch",
-    actionSummary: "Authorize GPS-tracked private & WRD water tankers for 42 wadis/villages.",
+    protocol: "Water Tanker Demand Advisory",
+    ruleCode: "TRIG-SPI-2026/TANKER-402",
+    stakeholderGroup: "District Water Supply & Rural Mitigation Planners (Dharashiv)",
+    leadTimeWindow: "14-Day Lead Advisory",
+    actionSummary: "Model projects acute drinking water stress across 42 rural habitations; recommends tanker route pre-positioning.",
   },
   "alt-2": {
-    protocol: "Forest Fire & Waterhole Emergency",
-    directiveCode: "DIR-MFD-2026/WL-109",
-    authority: "Dy. Conservator of Forests (Beed / Naigaon Sanctuary)",
-    slaResponse: "6 Hours Field Mobilization",
-    actionSummary: "Replenish solar artificial waterholes & activate Beat Guard fire watch.",
+    protocol: "Forest Canopy & Waterhole Stress",
+    ruleCode: "TRIG-ECO-2026/WL-109",
+    stakeholderGroup: "Wildlife Habitat & Sanctuary Conservation Team (Beed)",
+    leadTimeWindow: "7-Day Ecological Watch",
+    actionSummary: "NDVI drop below -0.30 indicates severe scrubland desiccation; prioritize solar waterhole replenishment.",
   },
   "alt-3": {
-    protocol: "NDRF/SDRF Trigger",
-    directiveCode: "DIR-SEOC-2026/SDRF-018",
-    authority: "State Emergency Operations Center (Mantralaya)",
-    slaResponse: "Immediate Reserve Order",
-    actionSummary: "Enforce Section 144 CrPC around dead-storage intake & reserve drinking water.",
+    protocol: "Critical Reservoir Reserve Trigger",
+    ruleCode: "TRIG-HYD-2026/RES-018",
+    stakeholderGroup: "Sub-Basin Reservoir Operations & Urban Water Utility (Latur)",
+    leadTimeWindow: "Immediate Storage Threshold",
+    actionSummary: "Live storage approaching 20% threshold; recommends prioritizing drinking water allocation over non-perennial irrigation.",
   },
   "alt-4": {
-    protocol: "Tanker Requisition Protocol",
-    directiveCode: "DIR-R&R-2026/TANKER-519",
-    authority: "Collectorate Scarcity Branch, Yavatmal",
-    slaResponse: "12 Hours Verification",
-    actionSummary: "Requisition private agricultural borewells within 2 km of affected gram panchayats.",
+    protocol: "Water Tanker Demand Advisory",
+    ruleCode: "TRIG-RISK-2026/TANKER-519",
+    stakeholderGroup: "Regional Drought Research & Relief Planners (Yavatmal)",
+    leadTimeWindow: "10-Day Assessment Window",
+    actionSummary: "Composite risk score exceeding 75.0; evaluate supplemental community borewell buffer capacity.",
   },
   "alt-5": {
-    protocol: "NGT Section 19 Illegal Excavation Alert",
-    directiveCode: "DIR-REV-2026/NGT-SAND-88",
-    authority: "Sub-Divisional Magistrate (SDM) & Mining Officer, Solapur",
-    slaResponse: "4 Hours Flying Squad Raid",
-    actionSummary: "Bhima/Man riverbed SAR backscatter anomaly detected; dispatch revenue squad.",
+    protocol: "SAR Riverbed Excavation Anomaly",
+    ruleCode: "TRIG-SAR-2026/SAND-088",
+    stakeholderGroup: "Watershed & Riverbed Conservation Analysts (Solapur)",
+    leadTimeWindow: "5-Day SAR Overpass Cycle",
+    actionSummary: "Bhima/Man riverbed Sentinel-1 backscatter anomaly coupled with >18.5m groundwater depth drop.",
   },
 };
 
-const DEFAULT_PROTOCOL: ProtocolMeta = {
-  protocol: "Tanker Requisition Protocol",
-  directiveCode: "DIR-SEOC-2026/AUTO-GEN",
-  authority: "District Disaster Management Authority (DDMA)",
-  slaResponse: "12 Hours Escalation",
-  actionSummary: "Automated satellite telemetry directive routed to Collectorate control room.",
+const DEFAULT_TRIGGER: TriggerMeta = {
+  protocol: "Water Tanker Demand Advisory",
+  ruleCode: "TRIG-AUTO-2026/CUSTOM",
+  stakeholderGroup: "Regional Hydro-Climatic Monitoring Team",
+  leadTimeWindow: "7-Day Evaluation",
+  actionSummary: "Automated satellite indicator threshold rule configured in the MDIAS decision-support prototype.",
 };
 
 const INITIAL_ALERTS: Alert[] = [
@@ -89,7 +89,7 @@ const INITIAL_ALERTS: Alert[] = [
     threshold: -1.5,
     operator: "lte",
     channel: "EMAIL",
-    destination: "collector.dharashiv@maharashtra.gov.in",
+    destination: "water-research-cell@mdias-prototype.org",
     active: true,
     lastTriggeredAt: "2026-10-28T09:15:00Z",
   },
@@ -101,7 +101,7 @@ const INITIAL_ALERTS: Alert[] = [
     threshold: -0.3,
     operator: "lte",
     channel: "SMS",
-    destination: "+91 98230 11223 (DCF & SDO Control)",
+    destination: "+91 98230 11223 (Field Ecology Team)",
     active: true,
     lastTriggeredAt: "2026-10-31T06:00:00Z",
   },
@@ -113,7 +113,7 @@ const INITIAL_ALERTS: Alert[] = [
     threshold: 20.0,
     operator: "lte",
     channel: "WEBHOOK",
-    destination: "https://seoc.maharashtra.gov.in/webhooks/drought-ingest",
+    destination: "https://api.mdias-prototype.org/webhooks/drought-trigger",
     active: true,
     lastTriggeredAt: "2026-11-01T14:30:00Z",
   },
@@ -125,7 +125,7 @@ const INITIAL_ALERTS: Alert[] = [
     threshold: 75.0,
     operator: "gte",
     channel: "EMAIL",
-    destination: "collector.yavatmal@mah.nic.in",
+    destination: "vidarbha-hydrology@mdias-prototype.org",
     active: false,
     lastTriggeredAt: null,
   },
@@ -137,33 +137,33 @@ const INITIAL_ALERTS: Alert[] = [
     threshold: 18.5,
     operator: "gte",
     channel: "SMS",
-    destination: "+91 94220 54321 (SDM & Mining Squad)",
+    destination: "+91 94220 54321 (Watershed Field Desk)",
     active: true,
     lastTriggeredAt: "2026-10-25T11:00:00Z",
   },
 ];
 
-function getProtocolBadgeStyle(protocol: ProtocolBadgeType) {
+function getProtocolBadgeStyle(protocol: TriggerCategoryType) {
   switch (protocol) {
-    case "NDRF/SDRF Trigger":
+    case "Critical Reservoir Reserve Trigger":
       return {
-        cls: "bg-red-500/15 text-red-300 border-red-500/30",
-        icon: <Siren className="w-3.5 h-3.5 text-red-400 shrink-0" />,
+        cls: "bg-[#B91C1C]/10 text-[#B91C1C] border-[#B91C1C]/30",
+        icon: <Siren className="w-3.5 h-3.5 text-[#B91C1C] shrink-0" />,
       };
-    case "Tanker Requisition Protocol":
+    case "Water Tanker Demand Advisory":
       return {
-        cls: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
-        icon: <Truck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />,
+        cls: "bg-[#EFF6FF] text-[#635BFF] border-[#635BFF]/30",
+        icon: <Truck className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />,
       };
-    case "NGT Section 19 Illegal Excavation Alert":
+    case "SAR Riverbed Excavation Anomaly":
       return {
-        cls: "bg-amber-500/15 text-amber-300 border-amber-500/30",
-        icon: <Pickaxe className="w-3.5 h-3.5 text-amber-400 shrink-0" />,
+        cls: "bg-[#C7A84B]/15 text-[#8A6D1F] border-[#C7A84B]/40",
+        icon: <Pickaxe className="w-3.5 h-3.5 text-[#8A6D1F] shrink-0" />,
       };
-    case "Forest Fire & Waterhole Emergency":
+    case "Forest Canopy & Waterhole Stress":
       return {
-        cls: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
-        icon: <Flame className="w-3.5 h-3.5 text-emerald-400 shrink-0" />,
+        cls: "bg-[#0D9488]/10 text-[#0D9488] border-[#0D9488]/30",
+        icon: <Flame className="w-3.5 h-3.5 text-[#0D9488] shrink-0" />,
       };
   }
 }
@@ -192,67 +192,67 @@ export default function AlertsPage() {
     selectedProtocol === "ALL"
       ? alerts
       : alerts.filter((a) => {
-          const meta = PROTOCOL_BY_ALERT_ID[a.id] ?? DEFAULT_PROTOCOL;
+          const meta = TRIGGER_BY_ALERT_ID[a.id] ?? DEFAULT_TRIGGER;
           return meta.protocol === selectedProtocol;
         });
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
-      {/* Official Government Header */}
-      <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-amber-500 rounded-xl p-6 shadow-xl">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+      {/* Decision-Support Prototype Header */}
+      <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-widest">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300 font-semibold">
-                <Landmark className="w-3.5 h-3.5" />
-                RELIEF & REHABILITATION DEPT., MANTRALAYA • MUMBAI
+            <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+                <Cpu className="w-3.5 h-3.5" />
+                MDIAS — DECISION-SUPPORT PROTOTYPE • EARLY WARNING ENGINE
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-red-500/10 border border-red-500/30 text-red-300 font-semibold">
-                <Radio className="w-3.5 h-3.5 animate-pulse" />
-                SEOC HOTLINE: 1070 / DDMA 1077 INTEGRATED
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+                <Radio className="w-3.5 h-3.5" />
+                MULTI-SENSOR THRESHOLD MONITOR
               </span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-white flex items-center gap-3 tracking-tight">
-              <Bell className="w-7 h-7 text-amber-500 shrink-0" />
-              State Emergency Operations Center (SEOC) & Collectorate Early Warning Directives
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#0A2540] flex items-center gap-3 tracking-tight">
+              <Bell className="w-7 h-7 text-[#635BFF] shrink-0" />
+              Recommended Mitigation Triggers & Early Warning Rules
             </h1>
-            <p className="text-sm text-slate-400 max-w-4xl">
-              Automated statutory triggers connecting Copernicus/ISRO Earth Observation thresholds (SPI, NDVI, Live Storage, GRACE-FO & Sentinel-1 SAR) to District Collectors, SDM Flying Squads, and Forest Divisions.
+            <p className="text-sm text-slate-600 max-w-4xl">
+              Configurable rule-based alerts connecting Earth Observation indicators (SPI-3M, Sentinel-2 NDVI, Reservoir Storage, GRACE-FO & Sentinel-1 SAR) to recommended drought mitigation workflows.
             </p>
           </div>
           <button
             onClick={() => setIsDialogOpen(true)}
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-md transition-all shrink-0"
+            className="inline-flex items-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-sm transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
-            Issue New SEOC Directive Rule
+            Create Trigger Rule
           </button>
         </div>
       </div>
 
-      {/* Statutory Protocol Badges Filter Bar */}
+      {/* Recommended Mitigation Trigger Category Filter Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {(
           [
             {
-              protocol: "NDRF/SDRF Trigger" as ProtocolBadgeType,
-              sub: "Dead-Storage & CrPC 144 Water Watch",
-              count: "1 Active Directive",
+              protocol: "Critical Reservoir Reserve Trigger" as TriggerCategoryType,
+              sub: "Dead-Storage Buffer & Allocation Watch",
+              count: "1 Active Trigger",
             },
             {
-              protocol: "Tanker Requisition Protocol" as ProtocolBadgeType,
-              sub: "Collectorate GPS Tanker & Well Acquisition",
-              count: "2 Active Directives",
+              protocol: "Water Tanker Demand Advisory" as TriggerCategoryType,
+              sub: "Rural Habitation Tanker Demand Model",
+              count: "2 Configured Triggers",
             },
             {
-              protocol: "NGT Section 19 Illegal Excavation Alert" as ProtocolBadgeType,
-              sub: "Sentinel-1 SAR Riverbed Sand-Mining Watch",
-              count: "1 Active Directive",
+              protocol: "SAR Riverbed Excavation Anomaly" as TriggerCategoryType,
+              sub: "Sentinel-1 SAR Riverbed Disturbance Watch",
+              count: "1 Active Trigger",
             },
             {
-              protocol: "Forest Fire & Waterhole Emergency" as ProtocolBadgeType,
-              sub: "MFD Wildlife Corridor & Canopy Dryness",
-              count: "1 Active Directive",
+              protocol: "Forest Canopy & Waterhole Stress" as TriggerCategoryType,
+              sub: "Wildlife Corridor & Canopy Dryness Alert",
+              count: "1 Active Trigger",
             },
           ] as const
         ).map((item) => {
@@ -264,10 +264,10 @@ export default function AlertsPage() {
               onClick={() =>
                 setSelectedProtocol(isSelected ? "ALL" : item.protocol)
               }
-              className={`text-left p-3.5 rounded-xl border transition-all ${
+              className={`text-left p-3.5 rounded-xl border transition-all shadow-sm ${
                 isSelected
-                  ? "bg-slate-800 border-amber-500 shadow-lg"
-                  : "bg-slate-900/90 border-slate-800 hover:bg-slate-800/60"
+                  ? "bg-[#EFF6FF] border-[#635BFF]"
+                  : "bg-white border-slate-200 hover:bg-[#EFF6FF]/50"
               }`}
             >
               <div className="flex items-center justify-between gap-2">
@@ -278,8 +278,8 @@ export default function AlertsPage() {
                   {item.protocol}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-2 font-medium">{item.sub}</p>
-              <p className="text-[11px] font-mono text-slate-400 mt-1">
+              <p className="text-xs text-[#0A2540] mt-2 font-semibold">{item.sub}</p>
+              <p className="text-[11px] font-mono text-slate-500 mt-1">
                 {item.count} • Click to filter
               </p>
             </button>
@@ -289,93 +289,93 @@ export default function AlertsPage() {
 
       {/* KPI stats bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-slate-900 border border-slate-800 border-t-2 border-t-cyan-500 rounded-xl p-4 flex items-center gap-4">
-          <div className="p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg text-cyan-400">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-[#EFF6FF] border border-blue-100 rounded-lg text-[#635BFF]">
             <Bell className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-white font-mono">{alerts.length}</div>
-            <div className="text-xs text-slate-400 font-medium">
-              Configured Collectorate Directive Rules
+            <div className="text-2xl font-bold text-[#0A2540] font-mono">{alerts.length}</div>
+            <div className="text-xs text-slate-600 font-medium">
+              Configured Threshold Rules
             </div>
           </div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 border-t-2 border-t-emerald-500 rounded-xl p-4 flex items-center gap-4">
-          <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#0D9488] rounded-xl p-4 flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg text-[#0D9488]">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-emerald-400 font-mono">
+            <div className="text-2xl font-bold text-[#0D9488] font-mono">
               {alerts.filter((a) => a.active).length}
             </div>
-            <div className="text-xs text-slate-400 font-medium">
-              Active 24×7 Telemetry Watchlines
+            <div className="text-xs text-slate-600 font-medium">
+              Active Indicator Subscriptions
             </div>
           </div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 border-t-2 border-t-amber-500 rounded-xl p-4 flex items-center gap-4">
-          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg text-amber-400">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#B91C1C] rounded-xl p-4 flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/25 rounded-lg text-[#B91C1C]">
             <ShieldAlert className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-amber-400 font-mono">
+            <div className="text-2xl font-bold text-[#B91C1C] font-mono">
               {alerts.filter((a) => a.lastTriggeredAt).length}
             </div>
-            <div className="text-xs text-slate-400 font-medium">
-              Emergency Dispatches (Past 7 Days)
+            <div className="text-xs text-slate-600 font-medium">
+              Thresholds Breached (Past 7 Days)
             </div>
           </div>
         </div>
       </div>
 
       {/* Alerts Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
-        <div className="px-6 py-3.5 bg-slate-950/80 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold">
-            Active Collectorate & Departmental Trigger Matrix
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <div className="px-6 py-3.5 bg-[#EFF6FF] border-b border-blue-100 flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#0A2540] font-semibold">
+            Recommended Mitigation Trigger Matrix
           </span>
           {selectedProtocol !== "ALL" && (
             <button
               onClick={() => setSelectedProtocol("ALL")}
-              className="text-xs font-mono text-amber-400 hover:underline"
+              className="text-xs font-mono text-[#635BFF] font-semibold hover:underline"
             >
               Clear Filter ({selectedProtocol})
             </button>
           )}
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-300">
-            <thead className="bg-slate-950/60 text-[11px] font-mono uppercase tracking-wider text-slate-400 border-b border-slate-800">
+          <table className="w-full text-left text-sm text-[#0A2540]">
+            <thead className="bg-[#F8FAFC] text-[11px] font-mono uppercase tracking-wider text-slate-500 border-b border-slate-200">
               <tr>
-                <th className="px-5 py-4 font-semibold">District / Jurisdiction</th>
-                <th className="px-5 py-4 font-semibold">Statutory Protocol & Action</th>
-                <th className="px-5 py-4 font-semibold">Telemetry Condition</th>
-                <th className="px-5 py-4 font-semibold">Target Authority & Channel</th>
-                <th className="px-5 py-4 font-semibold">Armed</th>
-                <th className="px-5 py-4 font-semibold">Last Fired (IST)</th>
+                <th className="px-5 py-4 font-semibold">Region / Basin</th>
+                <th className="px-5 py-4 font-semibold">Recommended Mitigation Trigger</th>
+                <th className="px-5 py-4 font-semibold">Indicator Condition</th>
+                <th className="px-5 py-4 font-semibold">Recipient & Channel</th>
+                <th className="px-5 py-4 font-semibold">Active</th>
+                <th className="px-5 py-4 font-semibold">Last Triggered</th>
                 <th className="px-5 py-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-200">
               {filteredAlerts.map((alert) => {
-                const meta = PROTOCOL_BY_ALERT_ID[alert.id] ?? DEFAULT_PROTOCOL;
+                const meta = TRIGGER_BY_ALERT_ID[alert.id] ?? DEFAULT_TRIGGER;
                 const badge = getProtocolBadgeStyle(meta.protocol);
                 return (
                   <tr
                     key={alert.id}
-                    className="hover:bg-slate-800/40 transition-colors"
+                    className="hover:bg-[#EFF6FF]/50 transition-colors"
                   >
                     <td className="px-5 py-4">
-                      <div className="font-semibold text-white flex items-center gap-2">
+                      <div className="font-semibold text-[#0A2540] flex items-center gap-2">
                         <span
                           className={`w-2 h-2 rounded-full ${
-                            alert.active ? "bg-emerald-400" : "bg-slate-600"
+                            alert.active ? "bg-[#0D9488]" : "bg-slate-400"
                           }`}
                         />
                         {alert.regionName}
                       </div>
-                      <div className="text-[11px] font-mono text-slate-400 pl-4 mt-0.5">
-                        {meta.directiveCode}
+                      <div className="text-[11px] font-mono text-slate-500 pl-4 mt-0.5">
+                        {meta.ruleCode}
                       </div>
                     </td>
                     <td className="px-5 py-4 max-w-xs">
@@ -385,12 +385,12 @@ export default function AlertsPage() {
                         {badge.icon}
                         {meta.protocol}
                       </span>
-                      <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                      <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
                         {meta.actionSummary}
                       </p>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-950 text-xs font-mono font-semibold text-amber-300 border border-slate-800">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#F8FAFC] text-xs font-mono font-semibold text-[#0A2540] border border-slate-200">
                         {alert.metric}{" "}
                         {alert.operator === "lte"
                           ? "≤"
@@ -400,24 +400,24 @@ export default function AlertsPage() {
                         {alert.threshold}
                       </span>
                       <div className="text-[11px] font-mono text-slate-500 mt-1">
-                        SLA: {meta.slaResponse}
+                        Window: {meta.leadTimeWindow}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="text-xs font-medium text-slate-200 mb-1">
-                        {meta.authority}
+                      <div className="text-xs font-medium text-[#0A2540] mb-1">
+                        {meta.stakeholderGroup}
                       </div>
                       <div className="flex items-center gap-2 text-xs">
                         {alert.channel === "EMAIL" && (
-                          <Mail className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                          <Mail className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />
                         )}
                         {alert.channel === "SMS" && (
-                          <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                          <Phone className="w-3.5 h-3.5 text-[#0D9488] shrink-0" />
                         )}
                         {alert.channel === "WEBHOOK" && (
-                          <Globe className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                          <Globe className="w-3.5 h-3.5 text-[#8A6D1F] shrink-0" />
                         )}
-                        <span className="font-mono text-xs text-slate-400 truncate max-w-[210px]">
+                        <span className="font-mono text-xs text-slate-500 truncate max-w-[210px]">
                           {alert.destination}
                         </span>
                       </div>
@@ -426,7 +426,7 @@ export default function AlertsPage() {
                       <button
                         onClick={() => toggleAlert(alert.id)}
                         className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                          alert.active ? "bg-emerald-600" : "bg-slate-700"
+                          alert.active ? "bg-[#0D9488]" : "bg-slate-300"
                         }`}
                       >
                         <span
@@ -436,7 +436,7 @@ export default function AlertsPage() {
                         />
                       </button>
                     </td>
-                    <td className="px-5 py-4 text-xs font-mono text-slate-300">
+                    <td className="px-5 py-4 text-xs font-mono text-slate-600">
                       {alert.lastTriggeredAt
                         ? new Date(alert.lastTriggeredAt).toLocaleDateString(
                             "en-IN",
@@ -452,8 +452,8 @@ export default function AlertsPage() {
                     <td className="px-5 py-4 text-right">
                       <button
                         onClick={() => deleteAlert(alert.id)}
-                        className="text-slate-400 hover:text-red-400 transition-colors p-1"
-                        title="Delete directive rule"
+                        className="text-slate-400 hover:text-[#B91C1C] transition-colors p-1"
+                        title="Delete trigger rule"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

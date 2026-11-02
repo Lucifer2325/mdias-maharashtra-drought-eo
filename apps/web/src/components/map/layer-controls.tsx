@@ -61,8 +61,8 @@ const BASE_MODES: {
   },
   {
     id: "hybrid_dark",
-    label: "Dark Topo",
-    sub: "CARTO Vector",
+    label: "Light Topo",
+    sub: "Esri Reference",
     icon: MapIcon,
   },
   {
@@ -102,21 +102,21 @@ export function LayerControls() {
   const config = MAP_LAYER_CONFIGS[activeLayer];
 
   return (
-    <div className="bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 rounded-xl shadow-2xl w-72 select-none overflow-hidden">
+    <div className="bg-white/95 backdrop-blur-xl border border-slate-200 rounded-xl shadow-xl w-72 select-none overflow-hidden">
       {/* Header Bar with Collapse Toggle */}
       <div
         onClick={() => setCollapsed((c) => !c)}
-        className="flex items-center justify-between px-3.5 py-2.5 bg-slate-950/60 border-b border-slate-800/80 cursor-pointer hover:bg-slate-900 transition-colors"
+        className="flex items-center justify-between px-3.5 py-2.5 bg-[#EFF6FF] border-b border-blue-100 cursor-pointer hover:bg-blue-100/60 transition-colors"
       >
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
-          <span className="text-xs font-semibold text-white tracking-wide">
-            EO Sensors & Map Layers
+          <SlidersHorizontal className="w-3.5 h-3.5 text-[#635BFF]" />
+          <span className="text-xs font-bold text-[#0A2540] tracking-wide">
+            EO Sensors &amp; Map Layers
           </span>
         </div>
         <button
           type="button"
-          className="text-slate-400 hover:text-white p-0.5 rounded"
+          className="text-slate-500 hover:text-[#0A2540] p-0.5 rounded"
           aria-label="Toggle layer controls"
         >
           {collapsed ? (
@@ -128,17 +128,17 @@ export function LayerControls() {
       </div>
 
       {!collapsed && (
-        <div className="p-3">
+        <div className="p-3 bg-white">
           {/* 3-Tab Switcher */}
-          <div className="grid grid-cols-3 gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 mb-3">
+          <div className="grid grid-cols-3 gap-1 bg-[#F8FAFC] p-1 rounded-lg border border-slate-200 mb-3">
             <button
               type="button"
               onClick={() => setActiveTab("sensors")}
               className={cn(
-                "py-1.5 rounded-md text-[11px] font-semibold transition-all",
+                "py-1.5 rounded-md text-[11px] font-bold transition-all",
                 activeTab === "sensors"
-                  ? "bg-indigo-600 text-white shadow"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-[#635BFF] text-white shadow-sm"
+                  : "text-slate-600 hover:text-[#0A2540]"
               )}
             >
               Sensors
@@ -147,10 +147,10 @@ export function LayerControls() {
               type="button"
               onClick={() => setActiveTab("layers")}
               className={cn(
-                "py-1.5 rounded-md text-[11px] font-semibold transition-all",
+                "py-1.5 rounded-md text-[11px] font-bold transition-all",
                 activeTab === "layers"
-                  ? "bg-indigo-600 text-white shadow"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-[#635BFF] text-white shadow-sm"
+                  : "text-slate-600 hover:text-[#0A2540]"
               )}
             >
               Telemetry
@@ -159,10 +159,10 @@ export function LayerControls() {
               type="button"
               onClick={() => setActiveTab("overlays")}
               className={cn(
-                "py-1.5 rounded-md text-[11px] font-semibold transition-all",
+                "py-1.5 rounded-md text-[11px] font-bold transition-all",
                 activeTab === "overlays"
-                  ? "bg-indigo-600 text-white shadow"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-[#635BFF] text-white shadow-sm"
+                  : "text-slate-600 hover:text-[#0A2540]"
               )}
             >
               Overlays
@@ -173,7 +173,7 @@ export function LayerControls() {
           {activeTab === "sensors" && (
             <div className="space-y-3">
               <div>
-                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5 px-0.5">
+                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 px-0.5">
                   Base Satellite Imagery
                 </p>
                 <div className="grid grid-cols-2 gap-1.5">
@@ -188,21 +188,21 @@ export function LayerControls() {
                         className={cn(
                           "flex items-center gap-2 py-1.5 px-2 rounded-lg text-left border transition-all",
                           active
-                            ? "bg-indigo-600/25 border-indigo-500 text-white shadow-sm"
-                            : "bg-slate-800/50 border-slate-700/70 text-slate-300 hover:bg-slate-800 hover:text-white"
+                            ? "bg-[#EFF6FF] border-[#635BFF] text-[#0A2540] shadow-sm"
+                            : "bg-[#F8FAFC] border-slate-200 text-slate-600 hover:bg-[#EFF6FF]/50 hover:text-[#0A2540]"
                         )}
                       >
                         <Icon
                           className={cn(
                             "w-3.5 h-3.5 shrink-0",
-                            active ? "text-indigo-400" : "text-slate-400"
+                            active ? "text-[#635BFF]" : "text-slate-500"
                           )}
                         />
                         <div className="min-w-0">
-                          <span className="block text-[10.5px] font-semibold truncate leading-tight">
+                          <span className="block text-[10.5px] font-bold truncate leading-tight">
                             {m.label}
                           </span>
-                          <span className="block text-[9px] text-slate-400 truncate leading-tight">
+                          <span className="block text-[9px] text-slate-500 truncate leading-tight">
                             {m.sub}
                           </span>
                         </div>
@@ -213,8 +213,8 @@ export function LayerControls() {
               </div>
 
               {baseMapMode !== "schematic" && (
-                <div className="pt-2 border-t border-slate-800">
-                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5 px-0.5">
+                <div className="pt-2 border-t border-slate-100">
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 px-0.5">
                     NASA GIBS Spectral Raster Overlay
                   </p>
                   <div className="space-y-1">
@@ -226,15 +226,15 @@ export function LayerControls() {
                           type="button"
                           onClick={() => setEoSpectralOverlay(item.id)}
                           className={cn(
-                            "w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between border",
+                            "w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center justify-between border",
                             active
-                              ? "bg-amber-500/20 text-amber-200 border-amber-500/40"
-                              : "bg-slate-800/40 border-transparent text-slate-400 hover:bg-slate-800/80 hover:text-slate-200"
+                              ? "bg-[#C7A84B]/15 text-[#0A2540] border-[#C7A84B]"
+                              : "bg-[#F8FAFC] border-slate-200 text-slate-600 hover:bg-[#EFF6FF]/60 hover:text-[#0A2540]"
                           )}
                         >
                           <span className="truncate">{item.label}</span>
                           {active && item.id !== "none" && (
-                            <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">
+                            <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.5 rounded bg-[#0A2540] text-[#C7A84B]">
                               LIVE
                             </span>
                           )}
@@ -261,8 +261,8 @@ export function LayerControls() {
                         className={cn(
                           "flex items-center gap-2.5 w-full text-left px-2.5 py-1.5 rounded-lg text-xs transition-colors",
                           isActive
-                            ? "bg-indigo-600/25 border border-indigo-500/40 text-white font-semibold"
-                            : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                            ? "bg-[#EFF6FF] border border-[#635BFF]/40 text-[#0A2540] font-bold"
+                            : "text-slate-600 hover:text-[#0A2540] hover:bg-[#F8FAFC]"
                         )}
                         aria-pressed={isActive}
                       >
@@ -270,8 +270,8 @@ export function LayerControls() {
                           className={cn(
                             "flex-shrink-0 w-3 h-3 rounded-full border-2 transition-colors",
                             isActive
-                              ? "border-indigo-400 bg-indigo-400"
-                              : "border-slate-600 bg-transparent"
+                              ? "border-[#635BFF] bg-[#635BFF]"
+                              : "border-slate-300 bg-transparent"
                           )}
                         />
                         {layer.label}
@@ -280,8 +280,8 @@ export function LayerControls() {
                   );
                 })}
               </ul>
-              <div className="mt-2.5 pt-2 border-t border-slate-800 px-1">
-                <p className="text-[11px] text-slate-400 leading-snug">
+              <div className="mt-2.5 pt-2 border-t border-slate-100 px-1">
+                <p className="text-[11px] text-slate-500 leading-snug">
                   {config.description}
                 </p>
               </div>
@@ -295,22 +295,22 @@ export function LayerControls() {
                 type="button"
                 onClick={() => setShowRiverbeds(!showRiverbeds)}
                 className={cn(
-                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-medium transition-colors border",
+                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-semibold transition-colors border",
                   showRiverbeds
-                    ? "bg-cyan-950/60 border-cyan-500/40 text-cyan-200"
-                    : "bg-slate-800/50 border-slate-700 text-slate-400 hover:text-slate-200"
+                    ? "bg-[#EFF6FF] border-[#635BFF]/40 text-[#0A2540]"
+                    : "bg-[#F8FAFC] border-slate-200 text-slate-500 hover:text-[#0A2540]"
                 )}
               >
                 <span className="flex items-center gap-2">
-                  <Waves className="w-3.5 h-3.5 text-cyan-400" />
-                  Riverbeds & Sand Ghats (11)
+                  <Waves className="w-3.5 h-3.5 text-[#635BFF]" />
+                  Riverbeds &amp; Sand Ghats (11)
                 </span>
                 <span
                   className={cn(
                     "px-1.5 py-0.5 rounded text-[10px] font-bold uppercase",
                     showRiverbeds
-                      ? "bg-cyan-500/25 text-cyan-300"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-[#635BFF] text-white"
+                      : "bg-slate-200 text-slate-500"
                   )}
                 >
                   {showRiverbeds ? "ON" : "OFF"}
@@ -321,22 +321,22 @@ export function LayerControls() {
                 type="button"
                 onClick={() => setShowWildlifeZones(!showWildlifeZones)}
                 className={cn(
-                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-medium transition-colors border",
+                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-semibold transition-colors border",
                   showWildlifeZones
-                    ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-300"
-                    : "bg-slate-800/50 border-slate-700 text-slate-400 hover:text-slate-200"
+                    ? "bg-teal-50 border-[#0D9488]/40 text-[#0A2540]"
+                    : "bg-[#F8FAFC] border-slate-200 text-slate-500 hover:text-[#0A2540]"
                 )}
               >
                 <span className="flex items-center gap-2">
-                  <Trees className="w-3.5 h-3.5 text-emerald-400" />
-                  Wildlife & Forest Zones (12)
+                  <Trees className="w-3.5 h-3.5 text-[#0D9488]" />
+                  Wildlife &amp; Forest Zones (12)
                 </span>
                 <span
                   className={cn(
                     "px-1.5 py-0.5 rounded text-[10px] font-bold uppercase",
                     showWildlifeZones
-                      ? "bg-emerald-500/25 text-emerald-300"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-[#0D9488] text-white"
+                      : "bg-slate-200 text-slate-500"
                   )}
                 >
                   {showWildlifeZones ? "ON" : "OFF"}
@@ -347,22 +347,22 @@ export function LayerControls() {
                 type="button"
                 onClick={() => setShowEszRings(!showEszRings)}
                 className={cn(
-                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-medium transition-colors border",
+                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-semibold transition-colors border",
                   showEszRings
-                    ? "bg-red-950/60 border-red-500/40 text-red-300"
-                    : "bg-slate-800/50 border-slate-700 text-slate-400 hover:text-slate-200"
+                    ? "bg-red-50 border-[#B91C1C]/40 text-[#0A2540]"
+                    : "bg-[#F8FAFC] border-slate-200 text-slate-500 hover:text-[#0A2540]"
                 )}
               >
                 <span className="flex items-center gap-2">
-                  <ShieldAlert className="w-3.5 h-3.5 text-red-400" />
-                  ESZ & Illegal Excavation
+                  <ShieldAlert className="w-3.5 h-3.5 text-[#B91C1C]" />
+                  ESZ &amp; Illegal Excavation
                 </span>
                 <span
                   className={cn(
                     "px-1.5 py-0.5 rounded text-[10px] font-bold uppercase",
                     showEszRings
-                      ? "bg-red-500/25 text-red-300"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-[#B91C1C] text-white"
+                      : "bg-slate-200 text-slate-500"
                   )}
                 >
                   {showEszRings ? "ON" : "OFF"}
@@ -373,22 +373,22 @@ export function LayerControls() {
                 type="button"
                 onClick={() => setShowStacInspector(!showStacInspector)}
                 className={cn(
-                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-medium transition-colors border",
+                  "flex items-center justify-between w-full px-2.5 py-2 rounded-lg text-xs font-semibold transition-colors border",
                   showStacInspector
-                    ? "bg-indigo-950/70 border-indigo-500/50 text-indigo-200"
-                    : "bg-slate-800/50 border-slate-700 text-slate-400 hover:text-slate-200"
+                    ? "bg-[#EFF6FF] border-[#635BFF]/40 text-[#0A2540]"
+                    : "bg-[#F8FAFC] border-slate-200 text-slate-500 hover:text-[#0A2540]"
                 )}
               >
                 <span className="flex items-center gap-2">
-                  <ScanSearch className="w-3.5 h-3.5 text-indigo-400" />
+                  <ScanSearch className="w-3.5 h-3.5 text-[#635BFF]" />
                   Sentinel-2 STAC Scene Feed
                 </span>
                 <span
                   className={cn(
                     "px-1.5 py-0.5 rounded text-[10px] font-bold uppercase",
                     showStacInspector
-                      ? "bg-indigo-500/25 text-indigo-300"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-[#635BFF] text-white"
+                      : "bg-slate-200 text-slate-500"
                   )}
                 >
                   {showStacInspector ? "ON" : "OFF"}

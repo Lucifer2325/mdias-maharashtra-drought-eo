@@ -7,7 +7,7 @@ import {
   ChevronDown,
   Bell,
   Check,
-  ShieldCheck,
+  Sparkles,
   Satellite,
   Clock,
   MapPin,
@@ -51,36 +51,36 @@ const DATE_RANGES = [
 const MOCK_NOTIFICATIONS = [
   {
     id: 1,
-    title: "Latur & Dharashiv escalated to EMERGENCY Water Watch",
-    time: "5m ago • Mantralaya SEOC",
+    title: "Latur & Dharashiv flagged for Severe Soil Moisture Deficit",
+    time: "5m ago • ERA5-Land Anomaly Engine",
     read: false,
     severity: "emergency",
   },
   {
     id: 2,
-    title: "Sentinel-2 L2A & ERA5-Land Soil Telemetry Ingested",
-    time: "18m ago • NRSC/Copernicus Link",
+    title: "Sentinel-2 L2A & ERA5-Land Soil Telemetry Synced",
+    time: "18m ago • AWS Earth Search STAC v1",
     read: false,
     severity: "info",
   },
   {
     id: 3,
-    title: "Jayakwadi & Ujani Dead-Storage Advisory Issued by WRD",
-    time: "2h ago • Water Resources Dept.",
+    title: "Jayakwadi & Ujjani Storage Below Seasonal Threshold",
+    time: "2h ago • Basin Hydrology Monitor",
     read: true,
     severity: "alert",
   },
 ];
 
 const ROUTE_TITLES: Record<string, string> = {
-  dashboard: "State Executive Command",
+  dashboard: "Platform Overview",
   map: "Satellite & Riverbed EO",
-  wildlife: "Forest, ESZ & Mining Surveillance",
-  alerts: "Early Warning & Collectorate Alerts",
+  wildlife: "Forest, ESZ & Quarrying Monitor",
+  alerts: "Early Warning Rules & Triggers",
   analytics: "Hydrology & AI Forecast Models",
-  interventions: "Jalyukt Shivar 2.0 & Tanker Works",
-  reports: "Cabinet & Collectorate Briefings",
-  settings: "System & API Governance",
+  interventions: "Watershed & Check-Dam Siting",
+  reports: "Regional Summary Reports",
+  settings: "Data Feeds & System Settings",
 };
 
 function getBreadcrumbs(pathname: string) {
@@ -148,49 +148,49 @@ export function Header() {
     )?.[selectedDistrict] ?? [];
 
   return (
-    <header className="bg-slate-950/95 backdrop-blur-md border-b border-slate-800/90 shrink-0 relative z-20">
-      {/* Top Institutional Authority Strip */}
-      <div className="px-6 py-1.5 bg-slate-900/90 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+    <header className="bg-white border-b border-slate-200 shrink-0 relative z-20 shadow-sm">
+      {/* Top Data Provenance & Prototype Strip */}
+      <div className="px-6 py-1.5 bg-[#EFF6FF] border-b border-blue-100 flex flex-wrap items-center justify-between gap-2 text-[11px]">
         <div className="flex items-center gap-2 min-w-0">
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono font-bold text-[10px] tracking-wider uppercase shrink-0">
-            <ShieldCheck className="w-3 h-3 text-amber-400" />
-            OFFICIAL TELEMETRY • LIVE
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#0A2540] text-[#C7A84B] font-mono font-bold text-[10px] tracking-wider uppercase shrink-0">
+            <Sparkles className="w-3 h-3 text-[#C7A84B]" />
+            DECISION-SUPPORT PROTOTYPE
           </span>
-          <span className="text-slate-300 font-medium truncate">
-            Relief &amp; Rehabilitation Dept. • Water Resources Dept. (WRD) • Revenue &amp; Forest Dept.
+          <span className="text-[#0A2540] font-medium truncate">
+            Maharashtra Drought, Riverbed Hydrology &amp; Earth Observation Intelligence Platform
           </span>
         </div>
 
         <div className="hidden xl:flex items-center gap-3 shrink-0 font-mono text-[10px]">
-          <span className="inline-flex items-center gap-1.5 text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded">
-            <Satellite className="w-3 h-3 text-cyan-400" />
-            ECMWF ERA5-Land • Copernicus Sentinel-2 • ISRO/NRSC Reference
+          <span className="inline-flex items-center gap-1.5 text-[#635BFF] bg-white border border-[#635BFF]/25 px-2 py-0.5 rounded font-semibold">
+            <Satellite className="w-3 h-3 text-[#635BFF]" />
+            ECMWF ERA5-Land • Copernicus Sentinel-2 STAC • NASA GIBS
           </span>
-          <span className="inline-flex items-center gap-1 text-emerald-400 bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold">
+          <span className="inline-flex items-center gap-1 text-[#0D9488] bg-white border border-[#0D9488]/30 px-2 py-0.5 rounded font-bold">
             <Clock className="w-3 h-3" />
             {istClock}
           </span>
         </div>
       </div>
 
-      {/* Main Executive Command Bar */}
-      <div className="h-14 flex items-center gap-3 px-6">
+      {/* Main Navigation & Filter Bar */}
+      <div className="h-14 flex items-center gap-3 px-6 bg-white">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs min-w-0 flex-1">
-          <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-widest text-amber-400/90 bg-amber-500/10 border border-amber-500/25 px-1.5 py-0.5 rounded shrink-0">
-            SDMC
+          <span className="hidden sm:inline-block text-[10px] font-mono font-bold uppercase tracking-widest text-[#635BFF] bg-[#EFF6FF] border border-[#635BFF]/25 px-1.5 py-0.5 rounded shrink-0">
+            MDIAS
           </span>
           {breadcrumbs.map((crumb, i) => (
             <React.Fragment key={crumb.href}>
               {i > 0 && (
-                <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
               )}
               <span
                 className={cn(
                   "truncate",
                   i === breadcrumbs.length - 1
-                    ? "text-white font-semibold text-sm tracking-tight"
-                    : "text-slate-400"
+                    ? "text-[#0A2540] font-bold text-sm tracking-tight"
+                    : "text-slate-500"
                 )}
               >
                 {crumb.label}
@@ -201,9 +201,9 @@ export function Header() {
 
         {/* Region / Division / District / Taluka Selector */}
         <div className="hidden md:flex items-center gap-1.5 shrink-0">
-          <span className="hidden 2xl:inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 mr-1">
-            <MapPin className="w-3 h-3 text-amber-400" />
-            Jurisdiction:
+          <span className="hidden 2xl:inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-slate-500 mr-1">
+            <MapPin className="w-3 h-3 text-[#635BFF]" />
+            Region:
           </span>
 
           {/* Division */}
@@ -217,16 +217,16 @@ export function Header() {
                 setNotifOpen(false);
                 setUserOpen(false);
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/90 text-xs font-medium text-slate-200 hover:border-amber-500/50 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-slate-200 text-xs font-semibold text-[#0A2540] hover:border-[#635BFF] transition-colors"
             >
-              <span className="text-[10px] font-mono uppercase text-slate-400">
-                Div:
+              <span className="text-[10px] font-mono uppercase text-slate-500">
+                Region:
               </span>
               {selectedState}
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
             </button>
             {stateOpen && (
-              <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 min-w-[180px] py-1">
+              <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 min-w-[180px] py-1">
                 {Object.keys(REGIONS).map((s) => (
                   <button
                     key={s}
@@ -239,11 +239,11 @@ export function Header() {
                       setSelectedTaluka("All Talukas");
                       setStateOpen(false);
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-[#0A2540] hover:bg-[#EFF6FF] transition-colors"
                   >
                     {s}
                     {s === selectedState && (
-                      <Check className="w-3.5 h-3.5 text-amber-400" />
+                      <Check className="w-3.5 h-3.5 text-[#635BFF]" />
                     )}
                   </button>
                 ))}
@@ -262,16 +262,16 @@ export function Header() {
                 setNotifOpen(false);
                 setUserOpen(false);
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/90 text-xs font-medium text-slate-200 hover:border-cyan-500/50 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-slate-200 text-xs font-semibold text-[#0A2540] hover:border-[#635BFF] transition-colors"
             >
-              <span className="text-[10px] font-mono uppercase text-slate-400">
+              <span className="text-[10px] font-mono uppercase text-slate-500">
                 Dist:
               </span>
               {selectedDistrict}
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
             </button>
             {districtOpen && (
-              <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 min-w-[180px] py-1">
+              <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 min-w-[180px] py-1">
                 {districts.map((d) => (
                   <button
                     key={d}
@@ -280,11 +280,11 @@ export function Header() {
                       setSelectedTaluka("All Talukas");
                       setDistrictOpen(false);
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-[#0A2540] hover:bg-[#EFF6FF] transition-colors"
                   >
                     {d}
                     {d === selectedDistrict && (
-                      <Check className="w-3.5 h-3.5 text-cyan-400" />
+                      <Check className="w-3.5 h-3.5 text-[#635BFF]" />
                     )}
                   </button>
                 ))}
@@ -303,13 +303,13 @@ export function Header() {
                 setNotifOpen(false);
                 setUserOpen(false);
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/90 text-xs font-medium text-slate-200 hover:border-cyan-500/50 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-slate-200 text-xs font-semibold text-[#0A2540] hover:border-[#635BFF] transition-colors"
             >
               {selectedTaluka}
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
             </button>
             {talukaOpen && (
-              <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 min-w-[170px] py-1">
+              <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 min-w-[170px] py-1">
                 {["All Talukas", ...talukas].map((t) => (
                   <button
                     key={t}
@@ -317,11 +317,11 @@ export function Header() {
                       setSelectedTaluka(t);
                       setTalukaOpen(false);
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-2 text-xs text-[#0A2540] hover:bg-[#EFF6FF] transition-colors"
                   >
                     {t}
                     {t === selectedTaluka && (
-                      <Check className="w-3.5 h-3.5 text-cyan-400" />
+                      <Check className="w-3.5 h-3.5 text-[#635BFF]" />
                     )}
                   </button>
                 ))}
@@ -341,13 +341,13 @@ export function Header() {
               setNotifOpen(false);
               setUserOpen(false);
             }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/90 text-xs font-mono text-slate-200 hover:border-slate-600 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] border border-slate-200 text-xs font-mono font-semibold text-[#0A2540] hover:border-[#635BFF] transition-colors"
           >
             {DATE_RANGES.find((r) => r.value === dateRange)?.label}
-            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
           </button>
           {dateOpen && (
-            <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 min-w-[160px] py-1">
+            <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 min-w-[160px] py-1">
               {DATE_RANGES.map((r) => (
                 <button
                   key={r.value}
@@ -355,11 +355,11 @@ export function Header() {
                     setDateRange(r.value);
                     setDateOpen(false);
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2 text-xs text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
+                  className="w-full flex items-center justify-between px-3 py-2 text-xs text-[#0A2540] hover:bg-[#EFF6FF] transition-colors"
                 >
                   {r.label}
                   {r.value === dateRange && (
-                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                    <Check className="w-3.5 h-3.5 text-[#635BFF]" />
                   )}
                 </button>
               ))}
@@ -378,23 +378,23 @@ export function Header() {
               setDateOpen(false);
               setUserOpen(false);
             }}
-            className="relative w-8 h-8 flex items-center justify-center rounded-lg bg-slate-900/90 border border-slate-700/90 hover:border-amber-500/50 transition-colors"
-            title="SEOC Dispatches & Early Warnings"
+            className="relative w-8 h-8 flex items-center justify-center rounded-lg bg-[#F8FAFC] border border-slate-200 hover:border-[#635BFF] transition-colors"
+            title="Telemetry Alerts & Anomaly Notifications"
           >
-            <Bell className="w-4 h-4 text-slate-200" />
+            <Bell className="w-4 h-4 text-[#0A2540]" />
             {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-[10px] font-mono font-bold text-white flex items-center justify-center shadow">
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#B91C1C] text-[10px] font-mono font-bold text-white flex items-center justify-center shadow">
                 {unreadCount}
               </span>
             )}
           </button>
           {notifOpen && (
-            <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 w-80 py-2">
-              <div className="px-4 py-1.5 border-b border-slate-800 flex items-center justify-between">
-                <p className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-wider">
-                  SEOC Emergency Dispatches
+            <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 w-80 py-2">
+              <div className="px-4 py-1.5 border-b border-slate-100 flex items-center justify-between">
+                <p className="text-[10px] font-mono font-bold text-[#0A2540] uppercase tracking-wider">
+                  Telemetry Anomaly Alerts
                 </p>
-                <span className="text-[10px] font-mono text-slate-400">
+                <span className="text-[10px] font-mono text-slate-500">
                   {unreadCount} Unread
                 </span>
               </div>
@@ -402,25 +402,25 @@ export function Header() {
                 <div
                   key={n.id}
                   className={cn(
-                    "px-4 py-2.5 hover:bg-slate-800/80 transition-colors border-l-2",
+                    "px-4 py-2.5 hover:bg-[#F8FAFC] transition-colors border-l-2",
                     n.read
                       ? "border-transparent"
                       : n.severity === "emergency"
-                        ? "border-red-500"
+                        ? "border-[#B91C1C]"
                         : n.severity === "alert"
-                          ? "border-amber-500"
-                          : "border-cyan-500"
+                          ? "border-[#C7A84B]"
+                          : "border-[#635BFF]"
                   )}
                 >
                   <p
                     className={cn(
                       "text-xs",
-                      n.read ? "text-slate-400" : "text-white font-semibold"
+                      n.read ? "text-slate-500" : "text-[#0A2540] font-semibold"
                     )}
                   >
                     {n.title}
                   </p>
-                  <p className="text-[10px] font-mono text-slate-500 mt-0.5">
+                  <p className="text-[10px] font-mono text-slate-400 mt-0.5">
                     {n.time}
                   </p>
                 </div>
@@ -440,43 +440,43 @@ export function Header() {
               setDateOpen(false);
               setNotifOpen(false);
             }}
-            className="flex items-center gap-2 px-2 py-1 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition-colors"
+            className="flex items-center gap-2 px-2 py-1 rounded-lg bg-[#F8FAFC] border border-slate-200 hover:border-[#635BFF] transition-colors"
           >
             {isLoaded && user?.imageUrl ? (
               <img
                 src={user.imageUrl}
-                alt={user.fullName ?? "Officer"}
-                className="w-6 h-6 rounded-full border border-amber-500/40"
+                alt={user.fullName ?? "Presenter"}
+                className="w-6 h-6 rounded-full border border-[#C7A84B]"
               />
             ) : (
-              <div className="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center">
-                <span className="text-[11px] font-bold text-amber-300">
-                  {user?.firstName?.[0] ?? "I"}
+              <div className="w-6 h-6 rounded-full bg-[#0A2540] border border-[#C7A84B] flex items-center justify-center">
+                <span className="text-[11px] font-bold text-[#C7A84B]">
+                  {user?.firstName?.[0] ?? "M"}
                 </span>
               </div>
             )}
-            <span className="hidden lg:block text-xs font-medium text-slate-200 max-w-[110px] truncate">
-              {user?.firstName ?? "IAS Command"}
+            <span className="hidden lg:block text-xs font-semibold text-[#0A2540] max-w-[110px] truncate">
+              {user?.firstName ?? "Presenter"}
             </span>
-            <ChevronDown className="hidden lg:block w-3 h-3 text-slate-400" />
+            <ChevronDown className="hidden lg:block w-3 h-3 text-slate-500" />
           </button>
           {userOpen && (
-            <div className="absolute top-full mt-1 right-0 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-xl shadow-2xl z-50 w-56 py-2">
-              <div className="px-4 py-2 border-b border-slate-800 mb-1">
-                <p className="text-xs font-semibold text-white truncate">
-                  {user?.fullName ?? "State Relief Commissioner"}
+            <div className="absolute top-full mt-1 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-50 w-56 py-2">
+              <div className="px-4 py-2 border-b border-slate-100 mb-1">
+                <p className="text-xs font-bold text-[#0A2540] truncate">
+                  {user?.fullName ?? "Project Presenter"}
                 </p>
-                <p className="text-[10px] font-mono text-slate-400 truncate">
+                <p className="text-[10px] font-mono text-slate-500 truncate">
                   {user?.primaryEmailAddress?.emailAddress ??
-                    "relief.mantralaya@maharashtra.gov.in"}
+                    "research@mdias-platform.org"}
                 </p>
               </div>
-              <div className="border-t border-slate-800 mt-1 pt-1">
+              <div className="border-t border-slate-100 mt-1 pt-1">
                 <button
                   onClick={() => signOut()}
-                  className="w-full text-left px-4 py-2 text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
+                  className="w-full text-left px-4 py-2 text-xs text-[#B91C1C] hover:bg-red-50 transition-colors font-medium"
                 >
-                  Sign out of Command Session
+                  Sign out
                 </button>
               </div>
             </div>

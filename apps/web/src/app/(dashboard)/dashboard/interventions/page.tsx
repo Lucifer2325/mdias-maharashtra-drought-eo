@@ -6,28 +6,24 @@ import {
   Compass,
   Download,
   MapPin,
-  CheckCircle2,
-  ChevronRight,
   Sparkles,
-  Landmark,
   Droplets,
   Users,
   IndianRupee,
-  FileCheck2,
   Satellite,
   Layers,
-  ShieldCheck,
   ExternalLink,
   Printer,
+  Cpu,
 } from "lucide-react";
 import type { InterventionType } from "@mdias/types";
 
 interface MockIntervention {
   id: string;
-  grNumber: string;
-  scheme: "Jalyukt Shivar 2.0" | "MGNREGA-NRM" | "Atal Bhujal Yojana" | "PMKSY-WDC 2.0";
+  modelRunId: string;
+  programCategory: "Watershed Recharge Modeling" | "Rural NRM Siting" | "Aquifer Sustainability" | "Micro-Catchment Storage";
   region: string;
-  division: "Chhatrapati Sambhajinagar (Marathwada)" | "Amravati (Vidarbha)" | "Pune (Western Rain-Shadow)";
+  division: "Marathwada Region" | "Vidarbha Region" | "Western Rain-Shadow Region";
   taluka: string;
   village: string;
   watershedCode: string;
@@ -38,20 +34,20 @@ interface MockIntervention {
   catchmentAreaHa: number;
   estStorageM3: number;
   benefitedHouseholds: number;
-  sanctionedOutlayLakhs: number;
+  estimatedCostLakhs: number;
   slopePct: number;
   strahlerOrder: number;
   coords: [number, number];
-  executingAgency: string;
+  hydrologyNote: string;
 }
 
 const MOCK_INTERVENTIONS: MockIntervention[] = [
   {
-    id: "JSA2-OSM-001",
-    grNumber: "GR-WCD-2026/JSA-2/CR-114/Desk-7",
-    scheme: "Jalyukt Shivar 2.0",
+    id: "SITE-OSM-001",
+    modelRunId: "SIM-WCD-2026-M114",
+    programCategory: "Watershed Recharge Modeling",
     region: "Dharashiv (Osmanabad)",
-    division: "Chhatrapati Sambhajinagar (Marathwada)",
+    division: "Marathwada Region",
     taluka: "Kalamb",
     village: "Babhalgaon",
     watershedCode: "BM-14-MANJARA-03",
@@ -62,18 +58,18 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 142.8,
     estStorageM3: 28500,
     benefitedHouseholds: 145,
-    sanctionedOutlayLakhs: 42.5,
+    estimatedCostLakhs: 42.5,
     slopePct: 3.4,
     strahlerOrder: 3,
     coords: [18.2561, 76.0452],
-    executingAgency: "Minor Irrigation (Local Sector), Dharashiv",
+    hydrologyNote: "3rd-order ephemeral stream confluence with high basalt fracture permeability",
   },
   {
-    id: "JSA2-BED-002",
-    grNumber: "GR-WCD-2026/JSA-2/CR-129/Desk-4",
-    scheme: "Jalyukt Shivar 2.0",
+    id: "SITE-BED-002",
+    modelRunId: "SIM-WCD-2026-M129",
+    programCategory: "Watershed Recharge Modeling",
     region: "Beed",
-    division: "Chhatrapati Sambhajinagar (Marathwada)",
+    division: "Marathwada Region",
     taluka: "Ashti",
     village: "Kada",
     watershedCode: "GV-09-SINA-11",
@@ -84,18 +80,18 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 265.0,
     estStorageM3: 48000,
     benefitedHouseholds: 240,
-    sanctionedOutlayLakhs: 68.0,
+    estimatedCostLakhs: 68.0,
     slopePct: 2.1,
     strahlerOrder: 2,
     coords: [18.8412, 75.2934],
-    executingAgency: "GSDA & Soil & Water Conservation Dept., Beed",
+    hydrologyNote: "Gentle 2.1% slope depression ideal for high-volume percolation storage",
   },
   {
-    id: "MGN-LAT-003",
-    grNumber: "GR-EGS-2026/NRM/CR-088/Latur",
-    scheme: "MGNREGA-NRM",
+    id: "SITE-LAT-003",
+    modelRunId: "SIM-WCD-2026-M088",
+    programCategory: "Rural NRM Siting",
     region: "Latur",
-    division: "Chhatrapati Sambhajinagar (Marathwada)",
+    division: "Marathwada Region",
     taluka: "Ausa",
     village: "Belkund",
     watershedCode: "GV-18-TERNA-06",
@@ -106,18 +102,18 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 65.2,
     estStorageM3: 14200,
     benefitedHouseholds: 68,
-    sanctionedOutlayLakhs: 19.8,
+    estimatedCostLakhs: 19.8,
     slopePct: 1.8,
     strahlerOrder: 1,
     coords: [18.2514, 76.5021],
-    executingAgency: "Zilla Parishad Minor Irrigation, Latur",
+    hydrologyNote: "1st-order micro-catchment runoff harvesting for protective Rabi irrigation",
   },
   {
-    id: "ABY-JLN-004",
-    grNumber: "GR-WRD-2026/ABY/CR-204/Jalna",
-    scheme: "Atal Bhujal Yojana",
+    id: "SITE-JLN-004",
+    modelRunId: "SIM-WCD-2026-M204",
+    programCategory: "Aquifer Sustainability",
     region: "Jalna",
-    division: "Chhatrapati Sambhajinagar (Marathwada)",
+    division: "Marathwada Region",
     taluka: "Ambad",
     village: "Zirpi",
     watershedCode: "GV-04-GODAVARI-19",
@@ -128,18 +124,18 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 118.4,
     estStorageM3: 21400,
     benefitedHouseholds: 94,
-    sanctionedOutlayLakhs: 31.2,
+    estimatedCostLakhs: 31.2,
     slopePct: 4.2,
     strahlerOrder: 2,
     coords: [19.6102, 75.7821],
-    executingAgency: "Sub-Divisional Soil Conservation Officer, Ambad",
+    hydrologyNote: "Reduces peak runoff velocity and recharges downstream dugwells",
   },
   {
-    id: "PMK-YVT-005",
-    grNumber: "GR-WCD-2026/PMKSY-2/CR-052/Yavatmal",
-    scheme: "PMKSY-WDC 2.0",
+    id: "SITE-YVT-005",
+    modelRunId: "SIM-WCD-2026-V052",
+    programCategory: "Micro-Catchment Storage",
     region: "Yavatmal",
-    division: "Amravati (Vidarbha)",
+    division: "Vidarbha Region",
     taluka: "Ralegaon",
     village: "Pimpalgaon",
     watershedCode: "WG-07-WARDHA-14",
@@ -150,18 +146,18 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 180.5,
     estStorageM3: 34000,
     benefitedHouseholds: 175,
-    sanctionedOutlayLakhs: 49.5,
+    estimatedCostLakhs: 49.5,
     slopePct: 2.8,
     strahlerOrder: 3,
     coords: [20.4285, 78.5112],
-    executingAgency: "GSDA & Forest Watershed Cell, Yavatmal",
+    hydrologyNote: "Direct recharge shaft siting along lineament intersection zone",
   },
   {
-    id: "JSA2-SOL-006",
-    grNumber: "GR-WCD-2026/JSA-2/CR-311/Solapur",
-    scheme: "Jalyukt Shivar 2.0",
+    id: "SITE-SOL-006",
+    modelRunId: "SIM-WCD-2026-W311",
+    programCategory: "Watershed Recharge Modeling",
     region: "Solapur",
-    division: "Pune (Western Rain-Shadow)",
+    division: "Western Rain-Shadow Region",
     taluka: "Sangola",
     village: "Watambare",
     watershedCode: "BM-22-MAN-08",
@@ -172,11 +168,11 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     catchmentAreaHa: 92.0,
     estStorageM3: 16800,
     benefitedHouseholds: 82,
-    sanctionedOutlayLakhs: 24.0,
+    estimatedCostLakhs: 24.0,
     slopePct: 5.6,
     strahlerOrder: 1,
     coords: [17.4321, 75.1983],
-    executingAgency: "District Water Conservation Officer, Solapur",
+    hydrologyNote: "Hill-slope contour trenching to arrest sheet erosion and boost soil moisture",
   },
 ];
 
@@ -192,17 +188,17 @@ export default function InterventionsPage() {
   const totalStorageM3 = MOCK_INTERVENTIONS.reduce((acc, s) => acc + s.estStorageM3, 0);
   const totalTCM = (totalStorageM3 / 1000).toFixed(1);
   const totalHouseholds = MOCK_INTERVENTIONS.reduce((acc, s) => acc + s.benefitedHouseholds, 0);
-  const totalOutlayCr = (
-    MOCK_INTERVENTIONS.reduce((acc, s) => acc + s.sanctionedOutlayLakhs, 0) / 100
+  const totalCostCr = (
+    MOCK_INTERVENTIONS.reduce((acc, s) => acc + s.estimatedCostLakhs, 0) / 100
   ).toFixed(2);
 
   const exportCSV = () => {
     const headers =
-      "SiteID,GR_Number,Scheme,District,Taluka,Village,WatershedCode,Type,Status,PriorityScore,CatchmentAreaHa,EstStorageM3,BenefitedHH,OutlayLakhs,Lat,Lon\n";
+      "SiteID,ModelRunID,Category,District,Taluka,Village,WatershedCode,Type,Stage,PriorityScore,CatchmentAreaHa,EstStorageM3,BenefitedHH,EstCostLakhs,Lat,Lon\n";
     const rows = filtered
       .map(
         (s) =>
-          `${s.id},"${s.grNumber}","${s.scheme}","${s.region}","${s.taluka}","${s.village}","${s.watershedCode}",${s.type},${s.status},${s.priorityScore},${s.catchmentAreaHa},${s.estStorageM3},${s.benefitedHouseholds},${s.sanctionedOutlayLakhs},${s.coords[0]},${s.coords[1]}`
+          `${s.id},"${s.modelRunId}","${s.programCategory}","${s.region}","${s.taluka}","${s.village}","${s.watershedCode}",${s.type},${s.status},${s.priorityScore},${s.catchmentAreaHa},${s.estStorageM3},${s.benefitedHouseholds},${s.estimatedCostLakhs},${s.coords[0]},${s.coords[1]}`
       )
       .join("\n");
     const blob = new Blob([headers + rows], { type: "text/csv;charset=utf-8;" });
@@ -211,7 +207,7 @@ export default function InterventionsPage() {
     link.href = url;
     link.setAttribute(
       "download",
-      `GoM_JalyuktShivar2_MGNREGA_Works_${new Date().toISOString().slice(0, 10)}.csv`
+      `MDIAS_Watershed_Siting_Candidates_${new Date().toISOString().slice(0, 10)}.csv`
     );
     document.body.appendChild(link);
     link.click();
@@ -219,123 +215,123 @@ export default function InterventionsPage() {
   };
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
-      {/* Official Government Institutional Header */}
-      <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-amber-500 rounded-xl p-6 shadow-xl">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+      {/* Decision-Support Prototype Header */}
+      <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-amber-400">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300 font-semibold">
-                <Landmark className="w-3.5 h-3.5" />
-                GOVERNMENT OF MAHARASHTRA • WATER CONSERVATION DEPT. & GSDA
+            <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+                <Cpu className="w-3.5 h-3.5" />
+                MDIAS — DECISION-SUPPORT PROTOTYPE • WATERSHED SITING MODEL
               </span>
-              <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
-                SRTM 30m DEM • D8 ROUTING • SENTINEL-2 VERIFIED
+              <span className="px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+                SRTM 30m DEM • D8 ROUTING • SENTINEL-2 NDWI
               </span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-white flex items-center gap-3 tracking-tight">
-              <Compass className="w-7 h-7 text-emerald-400 shrink-0" />
-              Jalyukt Shivar Abhiyan 2.0 & MGNREGA Watershed Engineering Command
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#0A2540] flex items-center gap-3 tracking-tight">
+              <Compass className="w-7 h-7 text-[#635BFF] shrink-0" />
+              AI-Prioritised Watershed Siting & Recharge Engineering Model
             </h1>
-            <p className="text-sm text-slate-400 max-w-4xl">
-              Soil & Water Conservation Commissionerate • Groundwater Surveys and Development Agency (GSDA) — Hydrological D8 stream-order prioritization, percolation structure siting, and administrative sanction registry.
+            <p className="text-sm text-slate-600 max-w-4xl">
+              Automated hydrological D8 stream-order prioritization, percolation structure siting, and cost-benefit estimation for check dams, farm ponds, and aquifer recharge zones.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3.5 py-2.5 rounded-lg border border-slate-700 transition-all"
+              className="inline-flex items-center gap-2 bg-white hover:bg-[#EFF6FF] text-[#0A2540] text-xs font-semibold px-3.5 py-2.5 rounded-lg border border-slate-200 shadow-sm transition-all"
             >
-              <Printer className="w-4 h-4 text-amber-400" />
-              Print DPR Summary
+              <Printer className="w-4 h-4 text-[#635BFF]" />
+              Print Siting Brief
             </button>
             <button
               onClick={exportCSV}
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all"
+              className="inline-flex items-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all"
             >
               <Download className="w-4 h-4" />
-              Export Geo-Sanction CSV
+              Export Candidate Geo-CSV
             </button>
           </div>
         </div>
       </div>
 
-      {/* Executive KPI Summary Strip */}
+      {/* KPI Summary Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-cyan-500 rounded-xl p-4 flex items-start justify-between">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-              Candidate & Sanctioned Works
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+              Modeled Candidate Sites
             </span>
-            <div className="text-2xl font-bold text-white mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
               {MOCK_INTERVENTIONS.length} Structures
             </div>
-            <span className="text-xs text-cyan-400 mt-1 inline-block">
-              3 Revenue Divisions • 6 Districts
+            <span className="text-xs text-[#635BFF] font-medium mt-1 inline-block">
+              3 Regions • 6 Priority Districts
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+          <div className="p-2.5 rounded-lg bg-[#EFF6FF] border border-blue-100 text-[#635BFF]">
             <Layers className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-emerald-500 rounded-xl p-4 flex items-start justify-between">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#0D9488] rounded-xl p-4 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
               Est. Percolation Storage
             </span>
-            <div className="text-2xl font-bold text-emerald-400 mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#0D9488] mt-1 font-mono">
               {totalTCM} TCM{" "}
-              <span className="text-xs font-normal text-slate-400">
+              <span className="text-xs font-normal text-slate-500">
                 ({totalStorageM3.toLocaleString()} m³)
               </span>
             </div>
-            <span className="text-xs text-slate-400 mt-1 inline-block">
-               Decentralized Aquifer Recharge
+            <span className="text-xs text-slate-500 mt-1 inline-block">
+              Decentralized Aquifer Recharge
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+          <div className="p-2.5 rounded-lg bg-[#0D9488]/10 border border-[#0D9488]/25 text-[#0D9488]">
             <Droplets className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-amber-500 rounded-xl p-4 flex items-start justify-between">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#C7A84B] rounded-xl p-4 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-              Benefited Rural Households
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+              Projected Rural Impact
             </span>
-            <div className="text-2xl font-bold text-white mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
               {totalHouseholds.toLocaleString()} HH
             </div>
-            <span className="text-xs text-amber-400 mt-1 inline-block">
+            <span className="text-xs text-[#8A6D1F] font-medium mt-1 inline-block">
               Protective Rabi & Kharif Irrigation
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">
+          <div className="p-2.5 rounded-lg bg-[#C7A84B]/15 border border-[#C7A84B]/40 text-[#8A6D1F]">
             <Users className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 border-t-2 border-t-purple-500 rounded-xl p-4 flex items-start justify-between">
+        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-start justify-between shadow-sm">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-              Sanctioned Engineering Outlay
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+              Estimated Civil Outlay
             </span>
-            <div className="text-2xl font-bold text-white mt-1 font-mono">
-              ₹ {totalOutlayCr} Cr
+            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
+              ₹ {totalCostCr} Cr
             </div>
-            <span className="text-xs text-purple-300 mt-1 inline-block">
-              JSA 2.0 + MGNREGA Convergence
+            <span className="text-xs text-slate-500 mt-1 inline-block">
+              Parametric SSR Cost Model
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
+          <div className="p-2.5 rounded-lg bg-[#EFF6FF] border border-blue-100 text-[#635BFF]">
             <IndianRupee className="w-5 h-5" />
           </div>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-slate-800 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-slate-200 pb-3">
         <div className="flex flex-wrap gap-2">
           {[
             "ALL",
@@ -349,86 +345,86 @@ export default function InterventionsPage() {
             <button
               key={t}
               onClick={() => setFilterType(t)}
-              className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition-colors ${
                 filterType === t
-                  ? "bg-amber-500 text-slate-950 font-semibold shadow-sm"
-                  : "bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800"
+                  ? "bg-[#635BFF] text-white shadow-sm"
+                  : "bg-white text-slate-600 hover:bg-[#EFF6FF] hover:text-[#0A2540] border border-slate-200"
               }`}
             >
               {t.replace(/_/g, " ")}
             </button>
           ))}
         </div>
-        <span className="text-xs font-mono text-slate-400">
-          Showing {filtered.length} of {MOCK_INTERVENTIONS.length} DPR-verified sites
+        <span className="text-xs font-mono text-slate-500">
+          Showing {filtered.length} of {MOCK_INTERVENTIONS.length} modeled candidate sites
         </span>
       </div>
 
       {/* Main Table + Detail Drawer */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
-          <div className="px-5 py-3.5 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold">
-              Watershed Structure Registry & Administrative Sanctions
+        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+          <div className="px-5 py-3.5 bg-[#EFF6FF] border-b border-blue-100 flex items-center justify-between">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#0A2540] font-semibold">
+              Watershed Siting Model Registry
             </span>
-            <span className="text-[11px] font-mono text-emerald-400">
-              GSDA Technical Clearance: ACTIVE
+            <span className="text-[11px] font-mono text-[#0D9488] font-semibold">
+              D8 Stream Network & DEM Analysis: READY
             </span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-300">
-              <thead className="bg-slate-950/60 text-[11px] font-mono uppercase tracking-wider text-slate-400 border-b border-slate-800">
+            <table className="w-full text-left text-sm text-[#0A2540]">
+              <thead className="bg-[#F8FAFC] text-[11px] font-mono uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="px-4 py-3.5 font-semibold">Village / Watershed</th>
-                  <th className="px-4 py-3.5 font-semibold">Engineering Type & Scheme</th>
-                  <th className="px-4 py-3.5 font-semibold">Sanction (GR) & Outlay</th>
+                  <th className="px-4 py-3.5 font-semibold">Village / Sub-Basin</th>
+                  <th className="px-4 py-3.5 font-semibold">Structure & Category</th>
+                  <th className="px-4 py-3.5 font-semibold">Model Run & Est. Cost</th>
                   <th className="px-4 py-3.5 font-semibold">Hydro Score</th>
-                  <th className="px-4 py-3.5 font-semibold">Stage</th>
+                  <th className="px-4 py-3.5 font-semibold">Review Stage</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-200">
                 {filtered.map((site) => (
                   <tr
                     key={site.id}
                     onClick={() => setSelectedSite(site)}
-                    className={`hover:bg-slate-800/50 cursor-pointer transition-colors ${
+                    className={`hover:bg-[#EFF6FF]/60 cursor-pointer transition-colors ${
                       selectedSite?.id === site.id
-                        ? "bg-slate-800/80 border-l-4 border-l-amber-500"
+                        ? "bg-[#EFF6FF] border-l-4 border-l-[#635BFF]"
                         : ""
                     }`}
                   >
                     <td className="px-4 py-4">
-                      <div className="font-semibold text-white flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <div className="font-semibold text-[#0A2540] flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />
                         {site.village}, {site.taluka}
                       </div>
-                      <div className="text-xs text-slate-400 pl-5">{site.region}</div>
-                      <div className="text-[10px] font-mono text-cyan-400 pl-5 mt-0.5">
+                      <div className="text-xs text-slate-500 pl-5">{site.region}</div>
+                      <div className="text-[10px] font-mono text-[#0D9488] pl-5 mt-0.5 font-medium">
                         WS: {site.watershedCode}
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700 inline-block">
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#F8FAFC] text-[#0A2540] border border-slate-200 inline-block font-semibold">
                         {site.type.replace(/_/g, " ")}
                       </span>
-                      <div className="text-[11px] text-amber-300/90 mt-1 font-medium">
-                        {site.scheme}
+                      <div className="text-[11px] text-slate-600 mt-1 font-medium">
+                        {site.programCategory}
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-[11px] font-mono text-slate-300">
-                        {site.grNumber}
+                      <div className="text-[11px] font-mono text-slate-600">
+                        {site.modelRunId}
                       </div>
-                      <div className="text-xs font-mono font-semibold text-emerald-400 mt-0.5">
-                        ₹ {site.sanctionedOutlayLakhs.toFixed(1)} Lakhs •{" "}
+                      <div className="text-xs font-mono font-semibold text-[#0D9488] mt-0.5">
+                        ₹ {site.estimatedCostLakhs.toFixed(1)} Lakhs •{" "}
                         {(site.estStorageM3 / 1000).toFixed(1)} TCM
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="font-mono font-bold text-emerald-400">
+                      <div className="font-mono font-bold text-[#0D9488]">
                         {site.priorityScore.toFixed(1)}/100
                       </div>
-                      <div className="text-[11px] font-mono text-slate-400">
+                      <div className="text-[11px] font-mono text-slate-500">
                         {site.catchmentAreaHa} ha • S-{site.strahlerOrder}
                       </div>
                     </td>
@@ -436,12 +432,12 @@ export default function InterventionsPage() {
                       <span
                         className={`text-[10px] font-mono font-semibold tracking-wider px-2.5 py-1 rounded-full ${
                           site.status === "IMPLEMENTED"
-                            ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                            ? "bg-[#0D9488]/15 text-[#0D9488] border border-[#0D9488]/30"
                             : site.status === "APPROVED"
-                            ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                            ? "bg-[#EFF6FF] text-[#635BFF] border border-[#635BFF]/30"
                             : site.status === "VERIFIED"
-                            ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                            : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                            ? "bg-purple-50 text-purple-700 border border-purple-200"
+                            : "bg-[#C7A84B]/15 text-[#8A6D1F] border border-[#C7A84B]/40"
                         }`}
                       >
                         {site.status}
@@ -454,114 +450,118 @@ export default function InterventionsPage() {
           </div>
         </div>
 
-        {/* Selected Site Executive Dossier Card */}
-        <div className="bg-slate-900 border border-slate-800 border-t-2 border-t-emerald-500 rounded-xl p-6 h-fit space-y-5 shadow-xl">
+        {/* Selected Site Candidate Card */}
+        <div className="bg-white border border-slate-200 border-t-4 border-t-[#0D9488] rounded-xl p-6 h-fit space-y-5 shadow-sm">
           {selectedSite ? (
             <>
-              <div className="flex items-start justify-between border-b border-slate-800 pb-4">
+              <div className="flex items-start justify-between border-b border-slate-200 pb-4">
                 <div>
-                  <span className="text-[11px] font-mono text-amber-400 tracking-wider uppercase block">
-                    DPR ID: {selectedSite.id}
+                  <span className="text-[11px] font-mono text-[#635BFF] font-semibold tracking-wider uppercase block">
+                    CANDIDATE ID: {selectedSite.id}
                   </span>
-                  <h3 className="text-lg font-bold text-white mt-0.5">
+                  <h3 className="text-lg font-bold text-[#0A2540] mt-0.5">
                     {selectedSite.village}, Tal. {selectedSite.taluka}
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500">
                     {selectedSite.region} • {selectedSite.division}
                   </p>
                 </div>
-                <div className="text-right bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
-                  <div className="text-2xl font-black font-mono text-emerald-400">
+                <div className="text-right bg-[#EFF6FF] px-3 py-2 rounded-lg border border-blue-100">
+                  <div className="text-2xl font-black font-mono text-[#0D9488]">
                     {selectedSite.priorityScore}
                   </div>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">
-                    GSDA Rank
+                  <div className="text-[10px] font-mono uppercase text-slate-500">
+                    Suitability
                   </div>
                 </div>
               </div>
 
-              {/* Administrative Sanction Metadata */}
-              <div className="bg-slate-950/90 border border-slate-800 rounded-lg p-3.5 space-y-2 text-xs">
+              {/* Siting Simulation Metadata */}
+              <div className="bg-[#F8FAFC] border border-slate-200 rounded-lg p-3.5 space-y-2 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Govt. Resolution (GR):</span>
-                  <span className="font-mono text-amber-300 font-medium">
-                    {selectedSite.grNumber}
+                  <span className="text-slate-500">Model Simulation ID:</span>
+                  <span className="font-mono text-[#635BFF] font-semibold">
+                    {selectedSite.modelRunId}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Convergence Scheme:</span>
-                  <span className="font-semibold text-white">{selectedSite.scheme}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Sanctioned Outlay:</span>
-                  <span className="font-mono font-bold text-emerald-400">
-                    ₹ {selectedSite.sanctionedOutlayLakhs.toFixed(2)} Lakhs
+                  <span className="text-slate-500">Siting Category:</span>
+                  <span className="font-semibold text-[#0A2540]">
+                    {selectedSite.programCategory}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Executing Agency:</span>
-                  <span className="text-slate-200 text-right">
-                    {selectedSite.executingAgency}
+                  <span className="text-slate-500">Estimated Civil Cost:</span>
+                  <span className="font-mono font-bold text-[#0D9488]">
+                    ₹ {selectedSite.estimatedCostLakhs.toFixed(2)} Lakhs
                   </span>
+                </div>
+                <div className="pt-1 border-t border-slate-200 text-slate-600">
+                  <span className="text-[10px] font-mono uppercase text-slate-400 block">
+                    Hydrological Siting Rationale:
+                  </span>
+                  {selectedSite.hydrologyNote}
                 </div>
               </div>
 
               {/* Hydrological & Geotechnical Parameters */}
               <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                  <span className="text-slate-400 block mb-1">Catchment Area</span>
-                  <span className="text-sm font-mono font-semibold text-white">
+                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
+                  <span className="text-slate-500 block mb-1">Catchment Area</span>
+                  <span className="text-sm font-mono font-semibold text-[#0A2540]">
                     {selectedSite.catchmentAreaHa} ha
                   </span>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                  <span className="text-slate-400 block mb-1">Percolation Storage</span>
-                  <span className="text-sm font-mono font-semibold text-emerald-400">
+                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
+                  <span className="text-slate-500 block mb-1">Percolation Storage</span>
+                  <span className="text-sm font-mono font-semibold text-[#0D9488]">
                     {(selectedSite.estStorageM3 / 1000).toFixed(1)} TCM (
                     {selectedSite.estStorageM3.toLocaleString()} m³)
                   </span>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                  <span className="text-slate-400 block mb-1">SRTM Terrain Slope</span>
-                  <span className="text-sm font-mono font-semibold text-white">
+                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
+                  <span className="text-slate-500 block mb-1">SRTM Terrain Slope</span>
+                  <span className="text-sm font-mono font-semibold text-[#0A2540]">
                     {selectedSite.slopePct}% Gradient
                   </span>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                  <span className="text-slate-400 block mb-1">Strahler Stream Order</span>
-                  <span className="text-sm font-mono font-semibold text-cyan-400">
+                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
+                  <span className="text-slate-500 block mb-1">Strahler Stream Order</span>
+                  <span className="text-sm font-mono font-semibold text-[#635BFF]">
                     Order {selectedSite.strahlerOrder} Drainage
                   </span>
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs space-y-1">
-                <div className="text-slate-400 font-mono uppercase text-[10px]">
-                  GSDA Hydrogeological Formation & Watershed Code
+              <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200 text-xs space-y-1">
+                <div className="text-slate-500 font-mono uppercase text-[10px]">
+                  Hydrogeological Formation & Sub-Basin Code
                 </div>
-                <div className="text-slate-200 font-medium">{selectedSite.aquiferType}</div>
-                <div className="text-cyan-400 font-mono text-[11px]">
+                <div className="text-[#0A2540] font-medium">{selectedSite.aquiferType}</div>
+                <div className="text-[#635BFF] font-mono text-[11px]">
                   Sub-Basin Code: {selectedSite.watershedCode}
                 </div>
               </div>
 
-              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-xs text-emerald-200 flex items-start gap-2.5">
-                <Sparkles className="w-4 h-4 shrink-0 text-emerald-400 mt-0.5" />
+              <div className="bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg p-3 text-xs text-[#0A2540] flex items-start gap-2.5">
+                <Sparkles className="w-4 h-4 shrink-0 text-[#0D9488] mt-0.5" />
                 <span>
-                  Projected to stabilize drinking water & protective irrigation for{" "}
-                  <strong className="text-white">
-                    ~{selectedSite.benefitedHouseholds} farming households
+                  Modeled to support groundwater recharge & protective irrigation for{" "}
+                  <strong className="text-[#0D9488]">
+                    ~{selectedSite.benefitedHouseholds} rural households
                   </strong>{" "}
                   within a 1.5 km downstream command radius.
                 </span>
               </div>
 
               <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>WGS84 Differential GPS Coordinates:</span>
-                  <span className="font-mono text-[11px] text-emerald-400">Geo-Tagged</span>
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span>WGS84 Centroid Coordinates:</span>
+                  <span className="font-mono text-[11px] text-[#0D9488] font-semibold">
+                    DEM Derived
+                  </span>
                 </div>
-                <div className="font-mono text-xs text-slate-200 bg-slate-950 px-3 py-2 rounded border border-slate-800 flex items-center justify-between">
+                <div className="font-mono text-xs text-[#0A2540] bg-[#F8FAFC] px-3 py-2 rounded border border-slate-200 flex items-center justify-between">
                   <span>
                     {selectedSite.coords[0].toFixed(4)}° N,{" "}
                     {selectedSite.coords[1].toFixed(4)}° E
@@ -574,7 +574,7 @@ export default function InterventionsPage() {
               <div className="pt-2">
                 <Link
                   href={`/dashboard/map?lat=${selectedSite.coords[0]}&lon=${selectedSite.coords[1]}&site=${selectedSite.id}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold px-4 py-3 rounded-lg shadow-md transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-semibold px-4 py-3 rounded-lg shadow-sm transition-all"
                 >
                   <Satellite className="w-4 h-4" />
                   Inspect Site on Optical Satellite Map
@@ -583,10 +583,10 @@ export default function InterventionsPage() {
               </div>
             </>
           ) : (
-            <div className="text-center py-12 text-slate-400 space-y-2">
-              <Compass className="w-8 h-8 mx-auto text-slate-600 mb-2" />
+            <div className="text-center py-12 text-slate-500 space-y-2">
+              <Compass className="w-8 h-8 mx-auto text-slate-400 mb-2" />
               <p className="text-sm font-medium">Select a candidate site from the table</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 View detailed catchment, storage volume, and topological metrics.
               </p>
             </div>

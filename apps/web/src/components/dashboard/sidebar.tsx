@@ -15,7 +15,7 @@ import {
   ChevronRight,
   LogOut,
   Trees,
-  Landmark,
+  Compass,
   Radio,
 } from "lucide-react";
 import { useClerk, useUser } from "@clerk/nextjs";
@@ -36,10 +36,10 @@ interface NavSection {
 
 const navSections: NavSection[] = [
   {
-    title: "SITUATION ROOM",
+    title: "EARTH OBSERVATION & RISK",
     items: [
       {
-        label: "Executive Command",
+        label: "Platform Overview",
         href: "/dashboard",
         icon: LayoutDashboard,
         exact: true,
@@ -51,17 +51,17 @@ const navSections: NavSection[] = [
         icon: Map,
       },
       {
-        label: "Forest, ESZ & Mining",
+        label: "Forest, ESZ & Quarrying",
         href: "/dashboard/wildlife",
         icon: Trees,
       },
     ],
   },
   {
-    title: "OPERATIONS & FIELD",
+    title: "HYDROLOGY & MODELING",
     items: [
       {
-        label: "Early Warning Alerts",
+        label: "Early Warning Rules",
         href: "/dashboard/alerts",
         icon: AlertTriangle,
       },
@@ -71,22 +71,22 @@ const navSections: NavSection[] = [
         icon: BarChart3,
       },
       {
-        label: "Jalyukt Shivar Works",
+        label: "Watershed Siting Model",
         href: "/dashboard/interventions",
         icon: Wrench,
       },
     ],
   },
   {
-    title: "ADMINISTRATION",
+    title: "REPORTS & SYSTEM",
     items: [
       {
-        label: "Collectorate Briefings",
+        label: "Regional Summary Reports",
         href: "/dashboard/reports",
         icon: FileText,
       },
       {
-        label: "System & API Governance",
+        label: "Data Feeds & Settings",
         href: "/dashboard/settings",
         icon: Settings,
       },
@@ -106,35 +106,35 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex flex-col h-screen bg-slate-950 border-r border-slate-800/90 transition-all duration-300 shrink-0 select-none relative z-30",
+        "flex flex-col h-screen bg-white border-r border-slate-200 transition-all duration-300 shrink-0 select-none relative z-30 shadow-sm",
         collapsed ? "w-16" : "w-64"
       )}
     >
-      {/* Top Tricolor / State Accent Hairline */}
-      <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-white/80 to-emerald-500 shrink-0" />
+      {/* Top Palette 4 Gold & Indigo Accent Hairline */}
+      <div className="h-1 w-full bg-gradient-to-r from-[#635BFF] via-[#C7A84B] to-[#0D9488] shrink-0" />
 
-      {/* Official Crest / Emblem Header */}
+      {/* Platform Brand Header */}
       <div
         className={cn(
-          "flex items-center px-3.5 py-3.5 border-b border-slate-800/90 bg-slate-900/60 shrink-0",
+          "flex items-center px-3.5 py-3.5 border-b border-slate-200 bg-[#EFF6FF]/60 shrink-0",
           collapsed ? "justify-center" : "gap-3"
         )}
       >
-        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500/20 via-slate-900 to-emerald-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 shadow-inner">
-          <Landmark className="w-4 h-4 text-amber-400" />
+        <div className="w-9 h-9 rounded-lg bg-[#0A2540] border border-[#C7A84B]/50 flex items-center justify-center shrink-0 shadow-sm">
+          <Compass className="w-4 h-4 text-[#C7A84B]" />
         </div>
         {!collapsed && (
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-bold tracking-[0.16em] text-amber-400/95 uppercase leading-tight truncate">
-              GOVT. OF MAHARASHTRA
+            <p className="text-[9px] font-bold tracking-[0.14em] text-[#635BFF] uppercase leading-tight truncate">
+              RESEARCH &amp; EO PROTOTYPE
             </p>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <p className="text-sm font-extrabold text-white tracking-tight leading-none">
-                MDIAS • SDMC
+              <p className="text-sm font-extrabold text-[#0A2540] tracking-tight leading-none">
+                MDIAS • Maharashtra
               </p>
             </div>
-            <p className="text-[10px] text-slate-400 leading-none mt-1 truncate font-mono">
-              State Drought &amp; EO Command
+            <p className="text-[10px] text-slate-500 leading-none mt-1 truncate font-mono">
+              Drought &amp; EO Intelligence
             </p>
           </div>
         )}
@@ -145,7 +145,7 @@ export function Sidebar() {
         {navSections.map((section) => (
           <div key={section.title} className="space-y-1">
             {!collapsed && (
-              <p className="px-2.5 pb-1 text-[10px] font-bold tracking-[0.14em] text-slate-500 uppercase font-mono">
+              <p className="px-2.5 pb-1 text-[10px] font-bold tracking-[0.14em] text-slate-400 uppercase font-mono">
                 {section.title}
               </p>
             )}
@@ -157,30 +157,30 @@ export function Sidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 px-2.5 py-2 rounded-lg text-xs font-medium transition-all duration-150 group relative",
+                    "flex items-center gap-3 px-2.5 py-2 rounded-lg text-xs font-semibold transition-all duration-150 group relative",
                     active
-                      ? "bg-gradient-to-r from-cyan-500/15 to-slate-900/40 text-white border border-cyan-500/30 shadow-sm"
-                      : "text-slate-400 hover:text-slate-100 hover:bg-slate-900/80 border border-transparent",
+                      ? "bg-[#EFF6FF] text-[#0A2540] border border-[#635BFF]/30 shadow-sm"
+                      : "text-slate-600 hover:text-[#0A2540] hover:bg-[#F8FAFC] border border-transparent",
                     collapsed && "justify-center px-2"
                   )}
                   title={collapsed ? item.label : undefined}
                 >
                   {active && (
-                    <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r bg-amber-400" />
+                    <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r bg-[#635BFF]" />
                   )}
                   <Icon
                     className={cn(
                       "w-4 h-4 shrink-0 transition-colors",
                       active
-                        ? "text-cyan-400"
-                        : "text-slate-500 group-hover:text-slate-300"
+                        ? "text-[#635BFF]"
+                        : "text-slate-400 group-hover:text-[#0A2540]"
                     )}
                   />
                   {!collapsed && (
                     <>
                       <span className="truncate flex-1">{item.label}</span>
                       {item.badge && (
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[#0D9488]/15 text-[#0D9488] border border-[#0D9488]/30">
                           {item.badge}
                         </span>
                       )}
@@ -193,25 +193,25 @@ export function Sidebar() {
         ))}
       </nav>
 
-      {/* Live Mantralaya Control Room Sync Badge */}
+      {/* Open Telemetry Pipeline Status Card */}
       {!collapsed ? (
-        <div className="mx-2.5 mb-2 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800/90">
+        <div className="mx-2.5 mb-2 p-2.5 rounded-lg bg-[#EFF6FF] border border-blue-200/80">
           <div className="flex items-center gap-2">
-            <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse shrink-0" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400 truncate">
-              MANTRALAYA SYNC ACTIVE
+            <Radio className="w-3.5 h-3.5 text-[#0D9488] animate-pulse shrink-0" />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0D9488] truncate">
+              OPEN EO FEEDS CONNECTED
             </span>
           </div>
-          <p className="text-[10px] text-slate-400 mt-1 leading-tight">
-            Control Room Status • SEOC Mumbai &amp; 6 Divisional Commissionerates
+          <p className="text-[10px] text-slate-600 mt-1 leading-tight">
+            ERA5-Land • Sentinel-2 STAC • 35 Districts &amp; 11 River Basins
           </p>
         </div>
       ) : (
         <div
-          className="mx-auto mb-2 w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center"
-          title="Control Room Status: MANTRALAYA SYNC ACTIVE"
+          className="mx-auto mb-2 w-9 h-9 rounded-lg bg-[#EFF6FF] border border-blue-200 flex items-center justify-center"
+          title="Open EO Feeds Connected: ERA5-Land + Sentinel-2 STAC"
         >
-          <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <Radio className="w-3.5 h-3.5 text-[#0D9488] animate-pulse" />
         </div>
       )}
 
@@ -219,7 +219,7 @@ export function Sidebar() {
       <div className="px-2.5 pb-2">
         <button
           onClick={() => setCollapsed((c) => !c)}
-          className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-slate-500 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 text-xs font-medium transition-colors"
+          className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-slate-500 hover:text-[#0A2540] hover:bg-[#F8FAFC] border border-transparent hover:border-slate-200 text-xs font-medium transition-colors"
         >
           {collapsed ? (
             <ChevronRight className="w-4 h-4" />
@@ -227,7 +227,7 @@ export function Sidebar() {
             <>
               <ChevronLeft className="w-3.5 h-3.5" />
               <span className="text-[11px] font-mono uppercase tracking-wider">
-                Collapse Dock
+                Collapse Sidebar
               </span>
             </>
           )}
@@ -235,42 +235,42 @@ export function Sidebar() {
       </div>
 
       {/* User Profile Footer */}
-      <div className="border-t border-slate-800/90 bg-slate-900/50 p-3 shrink-0">
+      <div className="border-t border-slate-200 bg-[#F8FAFC] p-3 shrink-0">
         {collapsed ? (
           <button
             onClick={() => signOut()}
-            className="w-full flex items-center justify-center p-2 rounded-lg hover:bg-slate-800 transition-colors"
+            className="w-full flex items-center justify-center p-2 rounded-lg hover:bg-slate-200/70 transition-colors"
             title="Sign out"
           >
-            <LogOut className="w-4 h-4 text-slate-400" />
+            <LogOut className="w-4 h-4 text-slate-500" />
           </button>
         ) : (
           <div className="flex items-center gap-2.5">
             {user?.imageUrl ? (
               <img
                 src={user.imageUrl}
-                alt={user.fullName ?? "Officer"}
-                className="w-8 h-8 rounded-full border border-amber-500/40 shrink-0"
+                alt={user.fullName ?? "Researcher"}
+                className="w-8 h-8 rounded-full border border-[#C7A84B] shrink-0"
               />
             ) : (
-              <div className="w-8 h-8 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center shrink-0">
-                <span className="text-xs text-amber-300 font-bold">
-                  {user?.firstName?.[0] ?? "I"}
+              <div className="w-8 h-8 rounded-full bg-[#0A2540] border border-[#C7A84B] flex items-center justify-center shrink-0">
+                <span className="text-xs text-[#C7A84B] font-bold">
+                  {user?.firstName?.[0] ?? "M"}
                 </span>
               </div>
             )}
             <div className="min-w-0 flex-1">
-              <p className="text-xs text-white font-semibold truncate">
-                {user?.fullName ?? "IAS Duty Officer"}
+              <p className="text-xs text-[#0A2540] font-bold truncate">
+                {user?.fullName ?? "Project Presenter"}
               </p>
-              <p className="text-[10px] text-slate-400 font-mono truncate">
+              <p className="text-[10px] text-slate-500 font-mono truncate">
                 {user?.primaryEmailAddress?.emailAddress ??
-                  "seoc.mantralaya@maharashtra.gov.in"}
+                  "research@mdias-platform.org"}
               </p>
             </div>
             <button
               onClick={() => signOut()}
-              className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors shrink-0"
+              className="p-1.5 rounded-lg hover:bg-slate-200/70 text-slate-500 hover:text-[#0A2540] transition-colors shrink-0"
               title="Sign out"
             >
               <LogOut className="w-3.5 h-3.5" />
