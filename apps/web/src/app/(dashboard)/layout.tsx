@@ -15,11 +15,11 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC] text-[#0A2540] overflow-hidden">
+    <div className="flex h-screen bg-[#09090B] text-[#FAFAFA] overflow-hidden">
       <Sidebar />
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden bg-[#F8FAFC]">
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden bg-[#09090B]">
         <Header />
-        <main className="flex-1 overflow-y-auto p-6 bg-[#F8FAFC]">{children}</main>
+        <main className="flex-1 overflow-y-auto p-6 bg-[#09090B]">{children}</main>
       </div>
     </div>
   );

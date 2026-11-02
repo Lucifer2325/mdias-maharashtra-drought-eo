@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 
 export default function MapPage() {
   return (
-    <div className="-m-6 flex flex-col h-[calc(100vh-5.75rem)] relative overflow-hidden bg-[#F8FAFC]">
-      <div className="flex items-center justify-between px-5 py-2.5 border-b border-slate-200 bg-white shrink-0 z-10 shadow-sm">
+    <div className="-m-6 flex flex-col h-[calc(100vh-5.75rem)] relative overflow-hidden bg-[#09090B]">
+      <div className="flex items-center justify-between px-5 py-2.5 border-b border-[#3F3F46] bg-[#18181B] shrink-0 z-10 shadow-sm">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#0D9488] animate-pulse shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#A855F7] animate-pulse shrink-0" />
           <div className="min-w-0">
-            <h1 className="text-sm sm:text-base font-bold text-[#0A2540] tracking-tight truncate">
+            <h1 className="text-sm sm:text-base font-bold text-[#FAFAFA] tracking-tight truncate">
               Maharashtra Earth Observation &amp; Riverbed Intelligence Map
             </h1>
           </div>
         </div>
-        <p className="hidden lg:block text-xs text-slate-500 font-medium shrink-0">
+        <p className="hidden lg:block text-xs text-[#A1A1AA] font-medium shrink-0">
           Maxar 0.5m Optical • Copernicus Sentinel-2 L2A STAC • NASA GIBS VIIRS/MODIS • ERA5-Land
         </p>
       </div>

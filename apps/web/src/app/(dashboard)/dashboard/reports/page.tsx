@@ -156,41 +156,41 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Decision-Support Prototype Header */}
-      <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
+      <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] font-semibold">
                 <Cpu className="w-3.5 h-3.5" />
                 MDIAS — DECISION-SUPPORT PROTOTYPE • REGIONAL SUMMARY DOSSIERS
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1] font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 SCIENTIFIC DROUGHT MANUAL METHODOLOGY
               </span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-[#0A2540] flex items-center gap-3 tracking-tight">
-              <FileText className="w-7 h-7 text-[#635BFF] shrink-0" />
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#FAFAFA] flex items-center gap-3 tracking-tight">
+              <FileText className="w-7 h-7 text-[#A855F7] shrink-0" />
               Regional Summary Dossiers & Drought Assessment Repository
             </h1>
-            <p className="text-sm text-slate-600 max-w-4xl">
-              Automated analytical dossiers synthesizing satellite NDVI departures, SPI-3M rainfall deficits, crop vigor indices (<span className="font-mono text-[#8A6D1F] font-semibold">&lt; 0.50 threshold</span>), and watershed siting recommendations.
+            <p className="text-sm text-[#A1A1AA] max-w-4xl">
+              Automated analytical dossiers synthesizing satellite NDVI departures, SPI-3M rainfall deficits, crop vigor indices (<span className="font-mono text-[#A855F7] font-semibold">&lt; 0.50 threshold</span>), and watershed siting recommendations.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#EFF6FF] text-[#0A2540] text-xs font-semibold px-4 py-2.5 rounded-lg border border-slate-200 shadow-sm transition-all"
+              className="inline-flex items-center gap-2 bg-[#27272A] hover:bg-[#3F3F46] text-[#FAFAFA] text-xs font-semibold px-4 py-2.5 rounded-lg border border-[#3F3F46] transition-all"
             >
-              <Printer className="w-4 h-4 text-[#635BFF]" />
+              <Printer className="w-4 h-4 text-[#A855F7]" />
               Print / Export Summary Brief
             </button>
             <button
               onClick={handleGenerate}
               disabled={isGenerating}
-              className="inline-flex items-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] disabled:opacity-50 text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg shadow-sm transition-all"
+              className="inline-flex items-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] disabled:opacity-50 text-[#FAFAFA] text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg shadow-md transition-all"
             >
               {isGenerating ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -207,30 +207,30 @@ export default function ReportsPage() {
 
       {/* Methodology Standards Strip */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#C7A84B] rounded-xl p-4 space-y-1.5 shadow-sm">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[#8A6D1F] font-semibold flex items-center gap-1.5">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-[#A855F7] font-semibold flex items-center gap-1.5">
             <Award className="w-3.5 h-3.5" />
             Crop Vigor & Paisewari Proxy Modeling
           </div>
-          <div className="text-xs text-slate-600 leading-relaxed">
+          <div className="text-xs text-[#A1A1AA] leading-relaxed">
             Settlements with modeled Kharif/Rabi crop yield index below{" "}
-            <strong className="text-[#0A2540]">0.50 (50%)</strong> are flagged as high-priority zones for drought mitigation planning.
+            <strong className="text-[#FAFAFA]">0.50 (50%)</strong> are flagged as high-priority zones for drought mitigation planning.
           </div>
         </div>
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 space-y-1.5 shadow-sm">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[#635BFF] font-semibold">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-[#6366F1] font-semibold">
             Multi-Sensor Earth Observation Fusion
           </div>
-          <div className="text-xs text-slate-600 leading-relaxed">
+          <div className="text-xs text-[#A1A1AA] leading-relaxed">
             Combines CHIRPS rainfall departure, Sentinel-2 L2A NDVI/NDWI, NASA SMAP root-zone soil moisture, and GRACE-FO groundwater trends.
           </div>
         </div>
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#0D9488] rounded-xl p-4 space-y-1.5 shadow-sm">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[#0D9488] font-semibold">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 space-y-1.5">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-[#A855F7] font-semibold">
             Exportable Decision-Support Formats
           </div>
-          <div className="text-xs text-slate-600 leading-relaxed">
-            Every regional summary dossier is indexed (<span className="font-mono text-[#0D9488]">MDIAS-DOSSIER-2026/...</span>) and exportable in print-ready PDF, CSV, and structured JSON formats.
+          <div className="text-xs text-[#A1A1AA] leading-relaxed">
+            Every regional summary dossier is indexed (<span className="font-mono text-[#A855F7]">MDIAS-DOSSIER-2026/...</span>) and exportable in print-ready PDF, CSV, and structured JSON formats.
           </div>
         </div>
       </div>
@@ -238,16 +238,16 @@ export default function ReportsPage() {
       {/* Main Repository + Active Briefing Sheet Preview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Dossier List */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="px-5 py-3.5 bg-[#EFF6FF] border-b border-blue-100 flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#0A2540] font-semibold">
+        <div className="lg:col-span-2 bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
+          <div className="px-5 py-3.5 bg-[#09090B] border-b border-[#3F3F46] flex items-center justify-between">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#FAFAFA] font-semibold">
               Regional Summary Dossier Repository ({reports.length})
             </span>
-            <span className="text-[11px] font-mono text-[#635BFF] font-semibold">
+            <span className="text-[11px] font-mono text-[#A855F7] font-semibold">
               Multi-Sensor Synthesis • Ready for Export
             </span>
           </div>
-          <div className="divide-y divide-slate-200">
+          <div className="divide-y divide-[#3F3F46]/60">
             {reports.map((r) => {
               const isSelected = selectedReport?.id === r.id;
               return (
@@ -256,37 +256,37 @@ export default function ReportsPage() {
                   onClick={() => setSelectedReport(r)}
                   className={`p-5 flex flex-col gap-4 cursor-pointer transition-colors ${
                     isSelected
-                      ? "bg-[#EFF6FF] border-l-4 border-l-[#635BFF]"
-                      : "hover:bg-[#EFF6FF]/40"
+                      ? "bg-[#27272A] border-l-4 border-l-[#A855F7]"
+                      : "hover:bg-[#27272A]/60"
                   }`}
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
                     <div className="flex items-start gap-3.5">
-                      <div className="p-3 bg-[#EFF6FF] border border-blue-200 text-[#635BFF] rounded-lg shrink-0 mt-0.5">
+                      <div className="p-3 bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] rounded-lg shrink-0 mt-0.5">
                         <FileCheck className="w-5 h-5" />
                       </div>
                       <div className="space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-white text-[#0A2540] border border-slate-200">
+                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-[#09090B] text-[#FAFAFA] border border-[#3F3F46]">
                             {r.refCode}
                           </span>
-                          <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#0D9488]/10 text-[#0D9488] border border-[#0D9488]/25 font-semibold">
+                          <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/40 font-semibold">
                             {r.type}
                           </span>
                         </div>
-                        <h3 className="text-base font-bold text-[#0A2540] leading-snug">
+                        <h3 className="text-base font-bold text-[#FAFAFA] leading-snug">
                           {r.title}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-0.5">
+                        <div className="flex flex-wrap items-center gap-4 text-xs text-[#A1A1AA] pt-0.5">
                           <span className="flex items-center gap-1">
-                            <MapPin className="w-3.5 h-3.5 text-[#635BFF]" />{" "}
+                            <MapPin className="w-3.5 h-3.5 text-[#A855F7]" />{" "}
                             {r.region}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-[#0D9488]" />{" "}
+                            <Calendar className="w-3.5 h-3.5 text-[#6366F1]" />{" "}
                             {r.dateRange}
                           </span>
-                          <span className="font-mono text-slate-600">
+                          <span className="font-mono text-[#FAFAFA]">
                             {r.fileSize}
                           </span>
                         </div>
@@ -295,17 +295,17 @@ export default function ReportsPage() {
                   </div>
 
                   {/* Action Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200 pl-12">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#3F3F46] pl-12">
                     <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                      <span className="text-[#B91C1C]">
+                      <span className="text-red-400">
                         Crop Index: <strong>{r.yieldIndexAvg}</strong>
                       </span>
-                      <span className="text-slate-400">•</span>
-                      <span className="text-[#0A2540]">
+                      <span className="text-[#3F3F46]">•</span>
+                      <span className="text-[#FAFAFA]">
                         {r.modeledVillages.toLocaleString()} Settlements
                       </span>
-                      <span className="text-slate-400">•</span>
-                      <span className="text-[#0D9488] font-semibold">
+                      <span className="text-[#3F3F46]">•</span>
+                      <span className="text-[#A855F7] font-semibold">
                         Est. Scope: ₹ {r.estMitigationBudgetCr.toLocaleString()} Cr
                       </span>
                     </div>
@@ -319,26 +319,26 @@ export default function ReportsPage() {
                           setSelectedReport(r);
                           window.print();
                         }}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-[#EFF6FF] text-xs font-mono text-[#0A2540] border border-slate-200 shadow-sm transition-colors"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] text-xs font-mono text-[#FAFAFA] border border-[#3F3F46] transition-colors"
                         title="Print Summary Brief"
                       >
-                        <Printer className="w-3.5 h-3.5 text-[#635BFF]" />
+                        <Printer className="w-3.5 h-3.5 text-[#A855F7]" />
                         Print PDF
                       </button>
                       <button
                         onClick={() => exportCSV(r)}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-[#EFF6FF] text-xs font-mono text-[#0D9488] border border-slate-200 shadow-sm transition-colors"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] text-xs font-mono text-[#FAFAFA] border border-[#3F3F46] transition-colors"
                         title="Download CSV Annex"
                       >
-                        <FileSpreadsheet className="w-3.5 h-3.5 text-[#0D9488]" />
+                        <FileSpreadsheet className="w-3.5 h-3.5 text-[#6366F1]" />
                         CSV
                       </button>
                       <button
                         onClick={() => exportJSON(r)}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-[#EFF6FF] text-xs font-mono text-[#635BFF] border border-slate-200 shadow-sm transition-colors"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] text-xs font-mono text-[#FAFAFA] border border-[#3F3F46] transition-colors"
                         title="Download JSON Dossier"
                       >
-                        <FileJson className="w-3.5 h-3.5 text-[#635BFF]" />
+                        <FileJson className="w-3.5 h-3.5 text-[#A855F7]" />
                         JSON
                       </button>
                     </div>
@@ -350,65 +350,65 @@ export default function ReportsPage() {
         </div>
 
         {/* Selected Dossier Summary Preview Sheet */}
-        <div className="bg-white border border-slate-200 border-t-4 border-t-[#C7A84B] rounded-xl p-6 h-fit space-y-5 shadow-sm">
-          <div className="border-b border-slate-200 pb-4 space-y-1">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-6 h-fit space-y-5 shadow-xl">
+          <div className="border-b border-[#3F3F46] pb-4 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#8A6D1F] font-semibold">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#A855F7] font-semibold">
                 REGIONAL SUMMARY BRIEFING SHEET
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0D9488]/10 text-[#0D9488] border border-[#0D9488]/25 font-semibold">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/40 font-semibold">
                 MODEL VERIFIED
               </span>
             </div>
-            <div className="text-xs font-mono text-slate-500">
+            <div className="text-xs font-mono text-[#A1A1AA]">
               Ref: {selectedReport.refCode}
             </div>
-            <h3 className="text-base font-bold text-[#0A2540] pt-1">
+            <h3 className="text-base font-bold text-[#FAFAFA] pt-1">
               {selectedReport.title}
             </h3>
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-              <span className="text-slate-500 block mb-0.5">Modeled Crop Index</span>
-              <span className="font-mono font-bold text-[#B91C1C]">
+            <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block mb-0.5">Modeled Crop Index</span>
+              <span className="font-mono font-bold text-red-400">
                 {selectedReport.yieldIndexAvg}
               </span>
             </div>
-            <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-              <span className="text-slate-500 block mb-0.5">Modeled Villages</span>
-              <span className="font-mono font-bold text-[#0A2540]">
+            <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block mb-0.5">Modeled Villages</span>
+              <span className="font-mono font-bold text-[#FAFAFA]">
                 {selectedReport.modeledVillages.toLocaleString()} Settlements
               </span>
             </div>
-            <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-              <span className="text-slate-500 block mb-0.5">Est. Mitigation Scope</span>
-              <span className="font-mono font-bold text-[#0D9488]">
+            <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block mb-0.5">Est. Mitigation Scope</span>
+              <span className="font-mono font-bold text-[#A855F7]">
                 ₹ {selectedReport.estMitigationBudgetCr.toLocaleString()} Cr
               </span>
             </div>
-            <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-              <span className="text-slate-500 block mb-0.5">Generated Timestamp</span>
-              <span className="font-mono text-[#0A2540]">
+            <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block mb-0.5">Generated Timestamp</span>
+              <span className="font-mono text-[#FAFAFA]">
                 {selectedReport.generatedAt}
               </span>
             </div>
           </div>
 
-          <div className="bg-[#EFF6FF]/60 p-4 rounded-lg border border-blue-100 space-y-2 text-xs">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-[#635BFF] font-semibold">
+          <div className="bg-[#27272A] p-4 rounded-lg border border-[#3F3F46] space-y-2 text-xs">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-[#A855F7] font-semibold">
               Executive Synthesis & Recommended Actions
             </div>
-            <p className="text-slate-700 leading-relaxed">
+            <p className="text-[#FAFAFA]/90 leading-relaxed">
               {selectedReport.executiveSummary}
             </p>
           </div>
 
-          <div className="bg-[#F8FAFC] p-3.5 rounded-lg border border-slate-200 space-y-1 text-xs">
-            <span className="text-[10px] font-mono uppercase text-slate-500 block">
+          <div className="bg-[#27272A] p-3.5 rounded-lg border border-[#3F3F46] space-y-1 text-xs">
+            <span className="text-[10px] font-mono uppercase text-[#A1A1AA] block">
               Compiled By
             </span>
-            <span className="text-[#0A2540] font-medium block">
+            <span className="text-[#FAFAFA] font-medium block">
               {selectedReport.researchTeam}
             </span>
           </div>
@@ -416,7 +416,7 @@ export default function ReportsPage() {
           <div className="flex flex-col gap-2 pt-1">
             <button
               onClick={() => window.print()}
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-sm transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-md transition-all"
             >
               <Printer className="w-4 h-4" />
               Print / Export Summary Brief
@@ -424,16 +424,16 @@ export default function ReportsPage() {
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => exportCSV(selectedReport)}
-                className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#EFF6FF] text-[#0A2540] text-xs font-mono font-semibold px-3 py-2.5 rounded-lg border border-slate-200 shadow-sm transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#27272A] hover:bg-[#3F3F46] text-[#FAFAFA] text-xs font-mono font-semibold px-3 py-2.5 rounded-lg border border-[#3F3F46] transition-colors"
               >
-                <Download className="w-3.5 h-3.5 text-[#0D9488]" />
+                <Download className="w-3.5 h-3.5 text-[#6366F1]" />
                 Download CSV
               </button>
               <button
                 onClick={() => exportJSON(selectedReport)}
-                className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#EFF6FF] text-[#0A2540] text-xs font-mono font-semibold px-3 py-2.5 rounded-lg border border-slate-200 shadow-sm transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#27272A] hover:bg-[#3F3F46] text-[#FAFAFA] text-xs font-mono font-semibold px-3 py-2.5 rounded-lg border border-[#3F3F46] transition-colors"
               >
-                <Download className="w-3.5 h-3.5 text-[#635BFF]" />
+                <Download className="w-3.5 h-3.5 text-[#A855F7]" />
                 Download JSON
               </button>
             </div>

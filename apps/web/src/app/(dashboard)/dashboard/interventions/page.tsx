@@ -215,39 +215,39 @@ export default function InterventionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Decision-Support Prototype Header */}
-      <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
+      <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] font-semibold">
                 <Cpu className="w-3.5 h-3.5" />
                 MDIAS — DECISION-SUPPORT PROTOTYPE • WATERSHED SITING MODEL
               </span>
-              <span className="px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+              <span className="px-2.5 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1] font-semibold">
                 SRTM 30m DEM • D8 ROUTING • SENTINEL-2 NDWI
               </span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-[#0A2540] flex items-center gap-3 tracking-tight">
-              <Compass className="w-7 h-7 text-[#635BFF] shrink-0" />
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#FAFAFA] flex items-center gap-3 tracking-tight">
+              <Compass className="w-7 h-7 text-[#A855F7] shrink-0" />
               AI-Prioritised Watershed Siting & Recharge Engineering Model
             </h1>
-            <p className="text-sm text-slate-600 max-w-4xl">
+            <p className="text-sm text-[#A1A1AA] max-w-4xl">
               Automated hydrological D8 stream-order prioritization, percolation structure siting, and cost-benefit estimation for check dams, farm ponds, and aquifer recharge zones.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#EFF6FF] text-[#0A2540] text-xs font-semibold px-3.5 py-2.5 rounded-lg border border-slate-200 shadow-sm transition-all"
+              className="inline-flex items-center gap-2 bg-[#27272A] hover:bg-[#3F3F46] text-[#FAFAFA] text-xs font-semibold px-3.5 py-2.5 rounded-lg border border-[#3F3F46] transition-all"
             >
-              <Printer className="w-4 h-4 text-[#635BFF]" />
+              <Printer className="w-4 h-4 text-[#A855F7]" />
               Print Siting Brief
             </button>
             <button
               onClick={exportCSV}
-              className="inline-flex items-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all"
+              className="inline-flex items-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] text-[#FAFAFA] text-xs font-semibold px-4 py-2.5 rounded-lg shadow-md transition-all"
             >
               <Download className="w-4 h-4" />
               Export Candidate Geo-CSV
@@ -258,80 +258,80 @@ export default function InterventionsPage() {
 
       {/* KPI Summary Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-start justify-between shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 flex items-start justify-between">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA]">
               Modeled Candidate Sites
             </span>
-            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#FAFAFA] mt-1 font-mono">
               {MOCK_INTERVENTIONS.length} Structures
             </div>
-            <span className="text-xs text-[#635BFF] font-medium mt-1 inline-block">
+            <span className="text-xs text-[#A855F7] font-medium mt-1 inline-block">
               3 Regions • 6 Priority Districts
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-[#EFF6FF] border border-blue-100 text-[#635BFF]">
+          <div className="p-2.5 rounded-lg bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7]">
             <Layers className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#0D9488] rounded-xl p-4 flex items-start justify-between shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-4 flex items-start justify-between">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA]">
               Est. Percolation Storage
             </span>
-            <div className="text-2xl font-bold text-[#0D9488] mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#6366F1] mt-1 font-mono">
               {totalTCM} TCM{" "}
-              <span className="text-xs font-normal text-slate-500">
+              <span className="text-xs font-normal text-[#A1A1AA]">
                 ({totalStorageM3.toLocaleString()} m³)
               </span>
             </div>
-            <span className="text-xs text-slate-500 mt-1 inline-block">
+            <span className="text-xs text-[#A1A1AA] mt-1 inline-block">
               Decentralized Aquifer Recharge
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-[#0D9488]/10 border border-[#0D9488]/25 text-[#0D9488]">
+          <div className="p-2.5 rounded-lg bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1]">
             <Droplets className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#C7A84B] rounded-xl p-4 flex items-start justify-between shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 flex items-start justify-between">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA]">
               Projected Rural Impact
             </span>
-            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#FAFAFA] mt-1 font-mono">
               {totalHouseholds.toLocaleString()} HH
             </div>
-            <span className="text-xs text-[#8A6D1F] font-medium mt-1 inline-block">
+            <span className="text-xs text-[#A855F7] font-medium mt-1 inline-block">
               Protective Rabi & Kharif Irrigation
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-[#C7A84B]/15 border border-[#C7A84B]/40 text-[#8A6D1F]">
+          <div className="p-2.5 rounded-lg bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7]">
             <Users className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-start justify-between shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-4 flex items-start justify-between">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA]">
               Estimated Civil Outlay
             </span>
-            <div className="text-2xl font-bold text-[#0A2540] mt-1 font-mono">
+            <div className="text-2xl font-bold text-[#FAFAFA] mt-1 font-mono">
               ₹ {totalCostCr} Cr
             </div>
-            <span className="text-xs text-slate-500 mt-1 inline-block">
+            <span className="text-xs text-[#A1A1AA] mt-1 inline-block">
               Parametric SSR Cost Model
             </span>
           </div>
-          <div className="p-2.5 rounded-lg bg-[#EFF6FF] border border-blue-100 text-[#635BFF]">
+          <div className="p-2.5 rounded-lg bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1]">
             <IndianRupee className="w-5 h-5" />
           </div>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-slate-200 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-[#3F3F46] pb-3">
         <div className="flex flex-wrap gap-2">
           {[
             "ALL",
@@ -347,33 +347,33 @@ export default function InterventionsPage() {
               onClick={() => setFilterType(t)}
               className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition-colors ${
                 filterType === t
-                  ? "bg-[#635BFF] text-white shadow-sm"
-                  : "bg-white text-slate-600 hover:bg-[#EFF6FF] hover:text-[#0A2540] border border-slate-200"
+                  ? "bg-[#A855F7] text-[#FAFAFA] shadow-sm"
+                  : "bg-[#18181B] text-[#A1A1AA] hover:bg-[#27272A] hover:text-[#FAFAFA] border border-[#3F3F46]"
               }`}
             >
               {t.replace(/_/g, " ")}
             </button>
           ))}
         </div>
-        <span className="text-xs font-mono text-slate-500">
+        <span className="text-xs font-mono text-[#A1A1AA]">
           Showing {filtered.length} of {MOCK_INTERVENTIONS.length} modeled candidate sites
         </span>
       </div>
 
       {/* Main Table + Detail Drawer */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="px-5 py-3.5 bg-[#EFF6FF] border-b border-blue-100 flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#0A2540] font-semibold">
+        <div className="lg:col-span-2 bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
+          <div className="px-5 py-3.5 bg-[#09090B] border-b border-[#3F3F46] flex items-center justify-between">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#FAFAFA] font-semibold">
               Watershed Siting Model Registry
             </span>
-            <span className="text-[11px] font-mono text-[#0D9488] font-semibold">
+            <span className="text-[11px] font-mono text-[#A855F7] font-semibold">
               D8 Stream Network & DEM Analysis: READY
             </span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-[#0A2540]">
-              <thead className="bg-[#F8FAFC] text-[11px] font-mono uppercase tracking-wider text-slate-500 border-b border-slate-200">
+            <table className="w-full text-left text-sm text-[#FAFAFA]">
+              <thead className="bg-[#09090B]/60 text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA] border-b border-[#3F3F46]">
                 <tr>
                   <th className="px-4 py-3.5 font-semibold">Village / Sub-Basin</th>
                   <th className="px-4 py-3.5 font-semibold">Structure & Category</th>
@@ -382,49 +382,49 @@ export default function InterventionsPage() {
                   <th className="px-4 py-3.5 font-semibold">Review Stage</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-[#3F3F46]/60">
                 {filtered.map((site) => (
                   <tr
                     key={site.id}
                     onClick={() => setSelectedSite(site)}
-                    className={`hover:bg-[#EFF6FF]/60 cursor-pointer transition-colors ${
+                    className={`hover:bg-[#27272A]/60 cursor-pointer transition-colors ${
                       selectedSite?.id === site.id
-                        ? "bg-[#EFF6FF] border-l-4 border-l-[#635BFF]"
+                        ? "bg-[#27272A] border-l-4 border-l-[#A855F7]"
                         : ""
                     }`}
                   >
                     <td className="px-4 py-4">
-                      <div className="font-semibold text-[#0A2540] flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />
+                      <div className="font-semibold text-[#FAFAFA] flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#A855F7] shrink-0" />
                         {site.village}, {site.taluka}
                       </div>
-                      <div className="text-xs text-slate-500 pl-5">{site.region}</div>
-                      <div className="text-[10px] font-mono text-[#0D9488] pl-5 mt-0.5 font-medium">
+                      <div className="text-xs text-[#A1A1AA] pl-5">{site.region}</div>
+                      <div className="text-[10px] font-mono text-[#6366F1] pl-5 mt-0.5 font-medium">
                         WS: {site.watershedCode}
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#F8FAFC] text-[#0A2540] border border-slate-200 inline-block font-semibold">
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#27272A] text-[#FAFAFA] border border-[#3F3F46] inline-block font-semibold">
                         {site.type.replace(/_/g, " ")}
                       </span>
-                      <div className="text-[11px] text-slate-600 mt-1 font-medium">
+                      <div className="text-[11px] text-[#A1A1AA] mt-1 font-medium">
                         {site.programCategory}
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-[11px] font-mono text-slate-600">
+                      <div className="text-[11px] font-mono text-[#A1A1AA]">
                         {site.modelRunId}
                       </div>
-                      <div className="text-xs font-mono font-semibold text-[#0D9488] mt-0.5">
+                      <div className="text-xs font-mono font-semibold text-[#A855F7] mt-0.5">
                         ₹ {site.estimatedCostLakhs.toFixed(1)} Lakhs •{" "}
                         {(site.estStorageM3 / 1000).toFixed(1)} TCM
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="font-mono font-bold text-[#0D9488]">
+                      <div className="font-mono font-bold text-[#A855F7]">
                         {site.priorityScore.toFixed(1)}/100
                       </div>
-                      <div className="text-[11px] font-mono text-slate-500">
+                      <div className="text-[11px] font-mono text-[#A1A1AA]">
                         {site.catchmentAreaHa} ha • S-{site.strahlerOrder}
                       </div>
                     </td>
@@ -432,12 +432,12 @@ export default function InterventionsPage() {
                       <span
                         className={`text-[10px] font-mono font-semibold tracking-wider px-2.5 py-1 rounded-full ${
                           site.status === "IMPLEMENTED"
-                            ? "bg-[#0D9488]/15 text-[#0D9488] border border-[#0D9488]/30"
+                            ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"
                             : site.status === "APPROVED"
-                            ? "bg-[#EFF6FF] text-[#635BFF] border border-[#635BFF]/30"
+                            ? "bg-[#A855F7]/15 text-[#A855F7] border border-[#A855F7]/40"
                             : site.status === "VERIFIED"
-                            ? "bg-purple-50 text-purple-700 border border-purple-200"
-                            : "bg-[#C7A84B]/15 text-[#8A6D1F] border border-[#C7A84B]/40"
+                            ? "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/40"
+                            : "bg-amber-500/15 text-amber-300 border border-amber-500/30"
                         }`}
                       >
                         {site.status}
@@ -451,53 +451,53 @@ export default function InterventionsPage() {
         </div>
 
         {/* Selected Site Candidate Card */}
-        <div className="bg-white border border-slate-200 border-t-4 border-t-[#0D9488] rounded-xl p-6 h-fit space-y-5 shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-6 h-fit space-y-5 shadow-xl">
           {selectedSite ? (
             <>
-              <div className="flex items-start justify-between border-b border-slate-200 pb-4">
+              <div className="flex items-start justify-between border-b border-[#3F3F46] pb-4">
                 <div>
-                  <span className="text-[11px] font-mono text-[#635BFF] font-semibold tracking-wider uppercase block">
+                  <span className="text-[11px] font-mono text-[#A855F7] font-semibold tracking-wider uppercase block">
                     CANDIDATE ID: {selectedSite.id}
                   </span>
-                  <h3 className="text-lg font-bold text-[#0A2540] mt-0.5">
+                  <h3 className="text-lg font-bold text-[#FAFAFA] mt-0.5">
                     {selectedSite.village}, Tal. {selectedSite.taluka}
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[#A1A1AA]">
                     {selectedSite.region} • {selectedSite.division}
                   </p>
                 </div>
-                <div className="text-right bg-[#EFF6FF] px-3 py-2 rounded-lg border border-blue-100">
-                  <div className="text-2xl font-black font-mono text-[#0D9488]">
+                <div className="text-right bg-[#27272A] px-3 py-2 rounded-lg border border-[#3F3F46]">
+                  <div className="text-2xl font-black font-mono text-[#A855F7]">
                     {selectedSite.priorityScore}
                   </div>
-                  <div className="text-[10px] font-mono uppercase text-slate-500">
+                  <div className="text-[10px] font-mono uppercase text-[#A1A1AA]">
                     Suitability
                   </div>
                 </div>
               </div>
 
               {/* Siting Simulation Metadata */}
-              <div className="bg-[#F8FAFC] border border-slate-200 rounded-lg p-3.5 space-y-2 text-xs">
+              <div className="bg-[#27272A] border border-[#3F3F46] rounded-lg p-3.5 space-y-2 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Model Simulation ID:</span>
-                  <span className="font-mono text-[#635BFF] font-semibold">
+                  <span className="text-[#A1A1AA]">Model Simulation ID:</span>
+                  <span className="font-mono text-[#A855F7] font-semibold">
                     {selectedSite.modelRunId}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Siting Category:</span>
-                  <span className="font-semibold text-[#0A2540]">
+                  <span className="text-[#A1A1AA]">Siting Category:</span>
+                  <span className="font-semibold text-[#FAFAFA]">
                     {selectedSite.programCategory}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Estimated Civil Cost:</span>
-                  <span className="font-mono font-bold text-[#0D9488]">
+                  <span className="text-[#A1A1AA]">Estimated Civil Cost:</span>
+                  <span className="font-mono font-bold text-[#6366F1]">
                     ₹ {selectedSite.estimatedCostLakhs.toFixed(2)} Lakhs
                   </span>
                 </div>
-                <div className="pt-1 border-t border-slate-200 text-slate-600">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block">
+                <div className="pt-1 border-t border-[#3F3F46] text-[#A1A1AA]">
+                  <span className="text-[10px] font-mono uppercase text-[#FAFAFA] block">
                     Hydrological Siting Rationale:
                   </span>
                   {selectedSite.hydrologyNote}
@@ -506,48 +506,48 @@ export default function InterventionsPage() {
 
               {/* Hydrological & Geotechnical Parameters */}
               <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block mb-1">Catchment Area</span>
-                  <span className="text-sm font-mono font-semibold text-[#0A2540]">
+                <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+                  <span className="text-[#A1A1AA] block mb-1">Catchment Area</span>
+                  <span className="text-sm font-mono font-semibold text-[#FAFAFA]">
                     {selectedSite.catchmentAreaHa} ha
                   </span>
                 </div>
-                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block mb-1">Percolation Storage</span>
-                  <span className="text-sm font-mono font-semibold text-[#0D9488]">
+                <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+                  <span className="text-[#A1A1AA] block mb-1">Percolation Storage</span>
+                  <span className="text-sm font-mono font-semibold text-[#A855F7]">
                     {(selectedSite.estStorageM3 / 1000).toFixed(1)} TCM (
                     {selectedSite.estStorageM3.toLocaleString()} m³)
                   </span>
                 </div>
-                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block mb-1">SRTM Terrain Slope</span>
-                  <span className="text-sm font-mono font-semibold text-[#0A2540]">
+                <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+                  <span className="text-[#A1A1AA] block mb-1">SRTM Terrain Slope</span>
+                  <span className="text-sm font-mono font-semibold text-[#FAFAFA]">
                     {selectedSite.slopePct}% Gradient
                   </span>
                 </div>
-                <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block mb-1">Strahler Stream Order</span>
-                  <span className="text-sm font-mono font-semibold text-[#635BFF]">
+                <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46]">
+                  <span className="text-[#A1A1AA] block mb-1">Strahler Stream Order</span>
+                  <span className="text-sm font-mono font-semibold text-[#6366F1]">
                     Order {selectedSite.strahlerOrder} Drainage
                   </span>
                 </div>
               </div>
 
-              <div className="bg-[#F8FAFC] p-3 rounded-lg border border-slate-200 text-xs space-y-1">
-                <div className="text-slate-500 font-mono uppercase text-[10px]">
+              <div className="bg-[#27272A] p-3 rounded-lg border border-[#3F3F46] text-xs space-y-1">
+                <div className="text-[#A1A1AA] font-mono uppercase text-[10px]">
                   Hydrogeological Formation & Sub-Basin Code
                 </div>
-                <div className="text-[#0A2540] font-medium">{selectedSite.aquiferType}</div>
-                <div className="text-[#635BFF] font-mono text-[11px]">
+                <div className="text-[#FAFAFA] font-medium">{selectedSite.aquiferType}</div>
+                <div className="text-[#6366F1] font-mono text-[11px]">
                   Sub-Basin Code: {selectedSite.watershedCode}
                 </div>
               </div>
 
-              <div className="bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg p-3 text-xs text-[#0A2540] flex items-start gap-2.5">
-                <Sparkles className="w-4 h-4 shrink-0 text-[#0D9488] mt-0.5" />
+              <div className="bg-[#A855F7]/15 border border-[#A855F7]/40 rounded-lg p-3 text-xs text-[#FAFAFA] flex items-start gap-2.5">
+                <Sparkles className="w-4 h-4 shrink-0 text-[#A855F7] mt-0.5" />
                 <span>
                   Modeled to support groundwater recharge & protective irrigation for{" "}
-                  <strong className="text-[#0D9488]">
+                  <strong className="text-[#A855F7]">
                     ~{selectedSite.benefitedHouseholds} rural households
                   </strong>{" "}
                   within a 1.5 km downstream command radius.
@@ -555,18 +555,18 @@ export default function InterventionsPage() {
               </div>
 
               <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between text-xs text-slate-500">
+                <div className="flex items-center justify-between text-xs text-[#A1A1AA]">
                   <span>WGS84 Centroid Coordinates:</span>
-                  <span className="font-mono text-[11px] text-[#0D9488] font-semibold">
+                  <span className="font-mono text-[11px] text-[#A855F7] font-semibold">
                     DEM Derived
                   </span>
                 </div>
-                <div className="font-mono text-xs text-[#0A2540] bg-[#F8FAFC] px-3 py-2 rounded border border-slate-200 flex items-center justify-between">
+                <div className="font-mono text-xs text-[#FAFAFA] bg-[#27272A] px-3 py-2 rounded border border-[#3F3F46] flex items-center justify-between">
                   <span>
                     {selectedSite.coords[0].toFixed(4)}° N,{" "}
                     {selectedSite.coords[1].toFixed(4)}° E
                   </span>
-                  <span className="text-[10px] text-slate-500">EPSG:4326</span>
+                  <span className="text-[10px] text-[#A1A1AA]">EPSG:4326</span>
                 </div>
               </div>
 
@@ -574,7 +574,7 @@ export default function InterventionsPage() {
               <div className="pt-2">
                 <Link
                   href={`/dashboard/map?lat=${selectedSite.coords[0]}&lon=${selectedSite.coords[1]}&site=${selectedSite.id}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-semibold px-4 py-3 rounded-lg shadow-sm transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] text-[#FAFAFA] text-xs font-semibold px-4 py-3 rounded-lg shadow-md transition-all"
                 >
                   <Satellite className="w-4 h-4" />
                   Inspect Site on Optical Satellite Map
@@ -583,10 +583,10 @@ export default function InterventionsPage() {
               </div>
             </>
           ) : (
-            <div className="text-center py-12 text-slate-500 space-y-2">
-              <Compass className="w-8 h-8 mx-auto text-slate-400 mb-2" />
+            <div className="text-center py-12 text-[#A1A1AA] space-y-2">
+              <Compass className="w-8 h-8 mx-auto text-[#A1A1AA] mb-2" />
               <p className="text-sm font-medium">Select a candidate site from the table</p>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#A1A1AA]">
                 View detailed catchment, storage volume, and topological metrics.
               </p>
             </div>

@@ -147,23 +147,23 @@ function getProtocolBadgeStyle(protocol: TriggerCategoryType) {
   switch (protocol) {
     case "Critical Reservoir Reserve Trigger":
       return {
-        cls: "bg-[#B91C1C]/10 text-[#B91C1C] border-[#B91C1C]/30",
-        icon: <Siren className="w-3.5 h-3.5 text-[#B91C1C] shrink-0" />,
+        cls: "bg-red-500/15 text-red-300 border-red-500/30",
+        icon: <Siren className="w-3.5 h-3.5 text-red-400 shrink-0" />,
       };
     case "Water Tanker Demand Advisory":
       return {
-        cls: "bg-[#EFF6FF] text-[#635BFF] border-[#635BFF]/30",
-        icon: <Truck className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />,
+        cls: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
+        icon: <Truck className="w-3.5 h-3.5 text-[#A855F7] shrink-0" />,
       };
     case "SAR Riverbed Excavation Anomaly":
       return {
-        cls: "bg-[#C7A84B]/15 text-[#8A6D1F] border-[#C7A84B]/40",
-        icon: <Pickaxe className="w-3.5 h-3.5 text-[#8A6D1F] shrink-0" />,
+        cls: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+        icon: <Pickaxe className="w-3.5 h-3.5 text-amber-400 shrink-0" />,
       };
     case "Forest Canopy & Waterhole Stress":
       return {
-        cls: "bg-[#0D9488]/10 text-[#0D9488] border-[#0D9488]/30",
-        icon: <Flame className="w-3.5 h-3.5 text-[#0D9488] shrink-0" />,
+        cls: "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
+        icon: <Flame className="w-3.5 h-3.5 text-[#6366F1] shrink-0" />,
       };
   }
 }
@@ -197,32 +197,32 @@ export default function AlertsPage() {
         });
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA] p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Decision-Support Prototype Header */}
-      <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
+      <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] font-semibold">
                 <Cpu className="w-3.5 h-3.5" />
                 MDIAS — DECISION-SUPPORT PROTOTYPE • EARLY WARNING ENGINE
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1] font-semibold">
                 <Radio className="w-3.5 h-3.5" />
                 MULTI-SENSOR THRESHOLD MONITOR
               </span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-[#0A2540] flex items-center gap-3 tracking-tight">
-              <Bell className="w-7 h-7 text-[#635BFF] shrink-0" />
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#FAFAFA] flex items-center gap-3 tracking-tight">
+              <Bell className="w-7 h-7 text-[#A855F7] shrink-0" />
               Recommended Mitigation Triggers & Early Warning Rules
             </h1>
-            <p className="text-sm text-slate-600 max-w-4xl">
+            <p className="text-sm text-[#A1A1AA] max-w-4xl">
               Configurable rule-based alerts connecting Earth Observation indicators (SPI-3M, Sentinel-2 NDVI, Reservoir Storage, GRACE-FO & Sentinel-1 SAR) to recommended drought mitigation workflows.
             </p>
           </div>
           <button
             onClick={() => setIsDialogOpen(true)}
-            className="inline-flex items-center gap-2 bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-sm transition-all shrink-0"
+            className="inline-flex items-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-md transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
             Create Trigger Rule
@@ -264,10 +264,10 @@ export default function AlertsPage() {
               onClick={() =>
                 setSelectedProtocol(isSelected ? "ALL" : item.protocol)
               }
-              className={`text-left p-3.5 rounded-xl border transition-all shadow-sm ${
+              className={`text-left p-3.5 rounded-xl border transition-all ${
                 isSelected
-                  ? "bg-[#EFF6FF] border-[#635BFF]"
-                  : "bg-white border-slate-200 hover:bg-[#EFF6FF]/50"
+                  ? "bg-[#27272A] border-[#A855F7] shadow-lg"
+                  : "bg-[#18181B] border-[#3F3F46] hover:bg-[#27272A]/60"
               }`}
             >
               <div className="flex items-center justify-between gap-2">
@@ -278,8 +278,8 @@ export default function AlertsPage() {
                   {item.protocol}
                 </span>
               </div>
-              <p className="text-xs text-[#0A2540] mt-2 font-semibold">{item.sub}</p>
-              <p className="text-[11px] font-mono text-slate-500 mt-1">
+              <p className="text-xs text-[#FAFAFA] mt-2 font-semibold">{item.sub}</p>
+              <p className="text-[11px] font-mono text-[#A1A1AA] mt-1">
                 {item.count} • Click to filter
               </p>
             </button>
@@ -289,39 +289,39 @@ export default function AlertsPage() {
 
       {/* KPI stats bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#635BFF] rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#EFF6FF] border border-blue-100 rounded-lg text-[#635BFF]">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-[#A855F7]/15 border border-[#A855F7]/40 rounded-lg text-[#A855F7]">
             <Bell className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#0A2540] font-mono">{alerts.length}</div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-2xl font-bold text-[#FAFAFA] font-mono">{alerts.length}</div>
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Configured Threshold Rules
             </div>
           </div>
         </div>
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#0D9488] rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg text-[#0D9488]">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#6366F1] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-[#6366F1]/15 border border-[#6366F1]/40 rounded-lg text-[#6366F1]">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#0D9488] font-mono">
+            <div className="text-2xl font-bold text-[#6366F1] font-mono">
               {alerts.filter((a) => a.active).length}
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Active Indicator Subscriptions
             </div>
           </div>
         </div>
-        <div className="bg-white border border-slate-200 border-t-2 border-t-[#B91C1C] rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/25 rounded-lg text-[#B91C1C]">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-amber-500/15 border border-amber-500/30 rounded-lg text-amber-400">
             <ShieldAlert className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#B91C1C] font-mono">
+            <div className="text-2xl font-bold text-amber-400 font-mono">
               {alerts.filter((a) => a.lastTriggeredAt).length}
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Thresholds Breached (Past 7 Days)
             </div>
           </div>
@@ -329,23 +329,23 @@ export default function AlertsPage() {
       </div>
 
       {/* Alerts Table */}
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div className="px-6 py-3.5 bg-[#EFF6FF] border-b border-blue-100 flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-[#0A2540] font-semibold">
+      <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
+        <div className="px-6 py-3.5 bg-[#09090B] border-b border-[#3F3F46] flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#FAFAFA] font-semibold">
             Recommended Mitigation Trigger Matrix
           </span>
           {selectedProtocol !== "ALL" && (
             <button
               onClick={() => setSelectedProtocol("ALL")}
-              className="text-xs font-mono text-[#635BFF] font-semibold hover:underline"
+              className="text-xs font-mono text-[#A855F7] font-semibold hover:underline"
             >
               Clear Filter ({selectedProtocol})
             </button>
           )}
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-[#0A2540]">
-            <thead className="bg-[#F8FAFC] text-[11px] font-mono uppercase tracking-wider text-slate-500 border-b border-slate-200">
+          <table className="w-full text-left text-sm text-[#FAFAFA]">
+            <thead className="bg-[#09090B]/60 text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA] border-b border-[#3F3F46]">
               <tr>
                 <th className="px-5 py-4 font-semibold">Region / Basin</th>
                 <th className="px-5 py-4 font-semibold">Recommended Mitigation Trigger</th>
@@ -356,25 +356,25 @@ export default function AlertsPage() {
                 <th className="px-5 py-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-[#3F3F46]/60">
               {filteredAlerts.map((alert) => {
                 const meta = TRIGGER_BY_ALERT_ID[alert.id] ?? DEFAULT_TRIGGER;
                 const badge = getProtocolBadgeStyle(meta.protocol);
                 return (
                   <tr
                     key={alert.id}
-                    className="hover:bg-[#EFF6FF]/50 transition-colors"
+                    className="hover:bg-[#27272A]/60 transition-colors"
                   >
                     <td className="px-5 py-4">
-                      <div className="font-semibold text-[#0A2540] flex items-center gap-2">
+                      <div className="font-semibold text-[#FAFAFA] flex items-center gap-2">
                         <span
                           className={`w-2 h-2 rounded-full ${
-                            alert.active ? "bg-[#0D9488]" : "bg-slate-400"
+                            alert.active ? "bg-[#A855F7]" : "bg-[#3F3F46]"
                           }`}
                         />
                         {alert.regionName}
                       </div>
-                      <div className="text-[11px] font-mono text-slate-500 pl-4 mt-0.5">
+                      <div className="text-[11px] font-mono text-[#A1A1AA] pl-4 mt-0.5">
                         {meta.ruleCode}
                       </div>
                     </td>
@@ -385,12 +385,12 @@ export default function AlertsPage() {
                         {badge.icon}
                         {meta.protocol}
                       </span>
-                      <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                      <p className="text-xs text-[#A1A1AA] mt-1.5 leading-relaxed">
                         {meta.actionSummary}
                       </p>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#F8FAFC] text-xs font-mono font-semibold text-[#0A2540] border border-slate-200">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#27272A] text-xs font-mono font-semibold text-[#FAFAFA] border border-[#3F3F46]">
                         {alert.metric}{" "}
                         {alert.operator === "lte"
                           ? "≤"
@@ -399,25 +399,25 @@ export default function AlertsPage() {
                           : "="}{" "}
                         {alert.threshold}
                       </span>
-                      <div className="text-[11px] font-mono text-slate-500 mt-1">
+                      <div className="text-[11px] font-mono text-[#A1A1AA] mt-1">
                         Window: {meta.leadTimeWindow}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="text-xs font-medium text-[#0A2540] mb-1">
+                      <div className="text-xs font-medium text-[#FAFAFA] mb-1">
                         {meta.stakeholderGroup}
                       </div>
                       <div className="flex items-center gap-2 text-xs">
                         {alert.channel === "EMAIL" && (
-                          <Mail className="w-3.5 h-3.5 text-[#635BFF] shrink-0" />
+                          <Mail className="w-3.5 h-3.5 text-[#A855F7] shrink-0" />
                         )}
                         {alert.channel === "SMS" && (
-                          <Phone className="w-3.5 h-3.5 text-[#0D9488] shrink-0" />
+                          <Phone className="w-3.5 h-3.5 text-[#6366F1] shrink-0" />
                         )}
                         {alert.channel === "WEBHOOK" && (
-                          <Globe className="w-3.5 h-3.5 text-[#8A6D1F] shrink-0" />
+                          <Globe className="w-3.5 h-3.5 text-[#A855F7] shrink-0" />
                         )}
-                        <span className="font-mono text-xs text-slate-500 truncate max-w-[210px]">
+                        <span className="font-mono text-xs text-[#A1A1AA] truncate max-w-[210px]">
                           {alert.destination}
                         </span>
                       </div>
@@ -426,7 +426,7 @@ export default function AlertsPage() {
                       <button
                         onClick={() => toggleAlert(alert.id)}
                         className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                          alert.active ? "bg-[#0D9488]" : "bg-slate-300"
+                          alert.active ? "bg-[#A855F7]" : "bg-[#3F3F46]"
                         }`}
                       >
                         <span
@@ -436,7 +436,7 @@ export default function AlertsPage() {
                         />
                       </button>
                     </td>
-                    <td className="px-5 py-4 text-xs font-mono text-slate-600">
+                    <td className="px-5 py-4 text-xs font-mono text-[#A1A1AA]">
                       {alert.lastTriggeredAt
                         ? new Date(alert.lastTriggeredAt).toLocaleDateString(
                             "en-IN",
@@ -452,7 +452,7 @@ export default function AlertsPage() {
                     <td className="px-5 py-4 text-right">
                       <button
                         onClick={() => deleteAlert(alert.id)}
-                        className="text-slate-400 hover:text-[#B91C1C] transition-colors p-1"
+                        className="text-[#A1A1AA] hover:text-red-400 transition-colors p-1"
                         title="Delete trigger rule"
                       >
                         <Trash2 className="w-4 h-4" />

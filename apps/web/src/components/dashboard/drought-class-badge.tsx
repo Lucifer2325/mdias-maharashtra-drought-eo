@@ -15,28 +15,28 @@ const classConfig: Record<
 > = {
   NONE: {
     label: "Normal",
-    className: "bg-[#0D9488]/10 text-[#0D9488] border border-[#0D9488]/30",
-    dotClassName: "bg-[#0D9488]",
+    className: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30",
+    dotClassName: "bg-emerald-400",
   },
   WATCH: {
     label: "Watch",
-    className: "bg-amber-50 text-amber-800 border border-amber-300",
-    dotClassName: "bg-amber-500",
+    className: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+    dotClassName: "bg-amber-400",
   },
   WARNING: {
     label: "Warning",
-    className: "bg-orange-50 text-orange-800 border border-orange-300",
-    dotClassName: "bg-orange-500",
+    className: "bg-orange-500/15 text-orange-300 border border-orange-500/30",
+    dotClassName: "bg-orange-400",
   },
   ALERT: {
     label: "Alert",
-    className: "bg-red-50 text-[#B91C1C] border border-red-200",
-    dotClassName: "bg-[#B91C1C]",
+    className: "bg-red-500/15 text-red-300 border border-red-500/30",
+    dotClassName: "bg-red-400",
   },
   EMERGENCY: {
     label: "Critical",
-    className: "bg-[#B91C1C] text-white border border-[#991B1B]",
-    dotClassName: "bg-white animate-pulse",
+    className: "bg-red-950/80 text-red-300 border border-red-500/50",
+    dotClassName: "bg-red-400 animate-pulse",
   },
 };
 

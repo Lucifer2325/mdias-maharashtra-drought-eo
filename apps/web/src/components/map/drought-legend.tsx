@@ -4,11 +4,11 @@ import { useMapStore } from "@/store/map-store";
 import { MAP_LAYER_CONFIGS } from "@/lib/map-layers";
 
 const DROUGHT_STOPS: { label: string; color: string; pct: number }[] = [
-  { label: "Normal", color: "#0D9488", pct: 0 },
+  { label: "Normal", color: "#22c55e", pct: 0 },
   { label: "Watch", color: "#facc15", pct: 30 },
   { label: "Warning", color: "#f97316", pct: 60 },
   { label: "Alert", color: "#ef4444", pct: 80 },
-  { label: "Critical", color: "#B91C1C", pct: 100 },
+  { label: "Critical", color: "#991b1b", pct: 100 },
 ];
 
 function buildGradient(colorScale: [number, string][], min: number, max: number): string {
@@ -28,15 +28,15 @@ export function DroughtLegend() {
   const gradient = buildGradient(config.colorScale, config.min, config.max);
 
   return (
-    <div className="bg-white/95 backdrop-blur-xl border border-slate-200 rounded-xl shadow-xl p-3 w-64 select-none">
-      <p className="text-xs font-bold text-[#0A2540] uppercase tracking-wider mb-2">
+    <div className="bg-[#18181B]/95 backdrop-blur-xl border border-[#3F3F46] rounded-xl shadow-2xl p-3 w-64 select-none">
+      <p className="text-xs font-bold text-[#FAFAFA] uppercase tracking-wider mb-2">
         {config.label}
         {config.unit ? ` (${config.unit.replace("/", "")})` : ""}
       </p>
 
       {/* Gradient bar */}
       <div
-        className="h-3 w-full rounded-full border border-slate-200"
+        className="h-3 w-full rounded-full border border-[#3F3F46]"
         style={{ background: gradient }}
         aria-hidden="true"
       />
@@ -50,7 +50,7 @@ export function DroughtLegend() {
                 className="w-0.5 h-1.5 rounded-full"
                 style={{ backgroundColor: stop.color }}
               />
-              <span className="text-[10px] font-semibold text-slate-600 whitespace-nowrap">
+              <span className="text-[10px] font-semibold text-[#A1A1AA] whitespace-nowrap">
                 {stop.label}
               </span>
             </div>
@@ -58,15 +58,15 @@ export function DroughtLegend() {
         </div>
       ) : (
         <div className="flex justify-between mt-1.5">
-          <span className="text-[10px] font-semibold text-slate-600">
+          <span className="text-[10px] font-semibold text-[#A1A1AA]">
             {config.min}
             {config.unit}
           </span>
-          <span className="text-[10px] font-semibold text-slate-600">
+          <span className="text-[10px] font-semibold text-[#A1A1AA]">
             {((config.min + config.max) / 2).toFixed(0)}
             {config.unit}
           </span>
-          <span className="text-[10px] font-semibold text-slate-600">
+          <span className="text-[10px] font-semibold text-[#A1A1AA]">
             {config.max}
             {config.unit}
           </span>

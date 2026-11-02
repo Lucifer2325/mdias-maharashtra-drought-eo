@@ -93,12 +93,12 @@ function makeSpiBar(spiArr: { date: string; value: number | null }[]) {
 }
 
 function spiBarColor(v: number | null) {
-  if (v === null) return "#94A3B8";
-  if (v <= -2.0) return "#B91C1C";
-  if (v <= -1.5) return "#D97706";
-  if (v <= -1.0) return "#C7A84B";
-  if (v >= 1.5) return "#0D9488";
-  return "#635BFF";
+  if (v === null) return "#3F3F46";
+  if (v <= -2.0) return "#EF4444";
+  if (v <= -1.5) return "#F97316";
+  if (v <= -1.0) return "#EAB308";
+  if (v >= 1.5) return "#A855F7";
+  return "#6366F1";
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -111,12 +111,12 @@ function SpiBarChart({
   label: string;
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-4 shadow-md">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-mono uppercase tracking-wider font-semibold text-[#0A2540]">
+        <p className="text-xs font-mono uppercase tracking-wider font-semibold text-[#FAFAFA]">
           {label}
         </p>
-        <span className="text-[10px] font-mono text-slate-500">CHIRPS v2.0 / ERA5</span>
+        <span className="text-[10px] font-mono text-[#A1A1AA]">CHIRPS v2.0 / ERA5</span>
       </div>
       <ResponsiveContainer width="100%" height={160}>
         <BarChart
@@ -124,15 +124,15 @@ function SpiBarChart({
           margin={{ top: 4, right: 8, left: -16, bottom: 0 }}
           barCategoryGap="25%"
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
           <XAxis
             dataKey="month"
-            tick={{ fill: "#0A2540", fontSize: 9 }}
+            tick={{ fill: "#A1A1AA", fontSize: 9 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#0A2540", fontSize: 9 }}
+            tick={{ fill: "#A1A1AA", fontSize: 9 }}
             axisLine={false}
             tickLine={false}
             domain={["auto", "auto"]}
@@ -140,14 +140,13 @@ function SpiBarChart({
           <Tooltip
             formatter={(v: number) => [v.toFixed(2), label]}
             contentStyle={{
-              backgroundColor: "#FFFFFF",
-              border: "1px solid #E2E8F0",
+              backgroundColor: "#18181B",
+              border: "1px solid #3F3F46",
               borderRadius: 8,
               fontSize: 12,
-              boxShadow: "0 4px 12px rgba(10,37,64,0.08)",
             }}
-            itemStyle={{ color: "#0A2540", fontWeight: 600 }}
-            labelStyle={{ color: "#475569" }}
+            itemStyle={{ color: "#FAFAFA", fontWeight: 600 }}
+            labelStyle={{ color: "#A1A1AA" }}
           />
           <Bar dataKey="value" radius={[3, 3, 0, 0]}>
             {data.map((entry, i) => (
@@ -179,24 +178,24 @@ function StatCard({
 }) {
   const trendColor =
     trend === "up"
-      ? "text-[#0D9488]"
+      ? "text-[#A855F7]"
       : trend === "down"
-      ? "text-[#B91C1C]"
-      : "text-[#8A6D1F]";
+      ? "text-red-400"
+      : "text-[#6366F1]";
 
   return (
-    <div className="rounded-xl border border-slate-200 border-t-2 border-t-[#635BFF] bg-white px-4 py-3.5 shadow-sm">
+    <div className="rounded-xl border border-[#3F3F46] border-t-2 border-t-[#A855F7] bg-[#18181B] px-4 py-3.5 shadow-md">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-medium text-slate-600">{label}</p>
+        <p className="text-xs font-medium text-[#A1A1AA]">{label}</p>
         {sensor && (
-          <span className="text-[10px] font-mono text-[#635BFF] bg-[#EFF6FF] px-1.5 py-0.5 rounded border border-blue-200">
+          <span className="text-[10px] font-mono text-[#A855F7] bg-[#A855F7]/15 px-1.5 py-0.5 rounded border border-[#A855F7]/40">
             {sensor}
           </span>
         )}
       </div>
       <p className={`mt-1.5 text-2xl font-mono font-bold ${trendColor}`}>
         {value}
-        <span className="ml-1 text-xs font-normal text-slate-500">{unit}</span>
+        <span className="ml-1 text-xs font-normal text-[#A1A1AA]">{unit}</span>
       </p>
     </div>
   );
@@ -212,7 +211,7 @@ const BASIN_FORECASTS = [
     spi3m: "-1.88",
     gwDepletionM: "-3.65 m",
     scarcityOutlook: "CRITICAL • High Water Stress",
-    badgeCls: "bg-[#B91C1C]/10 text-[#B91C1C] border-[#B91C1C]/30",
+    badgeCls: "bg-red-500/15 text-red-300 border-red-500/30",
   },
   {
     basin: "Sina & Bhima Rain-Shadow",
@@ -221,7 +220,7 @@ const BASIN_FORECASTS = [
     spi3m: "-1.62",
     gwDepletionM: "-3.10 m",
     scarcityOutlook: "SEVERE • Soil Moisture Deficit",
-    badgeCls: "bg-[#C7A84B]/15 text-[#8A6D1F] border-[#C7A84B]/40",
+    badgeCls: "bg-amber-500/15 text-amber-300 border-amber-500/30",
   },
   {
     basin: "Upper & Middle Godavari",
@@ -230,7 +229,7 @@ const BASIN_FORECASTS = [
     spi3m: "-1.24",
     gwDepletionM: "-2.15 m",
     scarcityOutlook: "WARNING • Storage Drawdown Watch",
-    badgeCls: "bg-[#C7A84B]/15 text-[#8A6D1F] border-[#C7A84B]/40",
+    badgeCls: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
   },
   {
     basin: "Wardha–Wainganga (Penganga)",
@@ -239,7 +238,7 @@ const BASIN_FORECASTS = [
     spi3m: "-0.95",
     gwDepletionM: "-1.40 m",
     scarcityOutlook: "WATCH • Dry-Spell Crop Stress",
-    badgeCls: "bg-[#EFF6FF] text-[#635BFF] border-[#635BFF]/30",
+    badgeCls: "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
   },
 ];
 
@@ -257,11 +256,11 @@ const DISTRICT_TABLE = [
 ];
 
 const CLASS_BADGE: Record<string, string> = {
-  EMERGENCY: "bg-[#B91C1C]/15 text-[#B91C1C] border-[#B91C1C]/30",
-  ALERT:     "bg-[#B91C1C]/10 text-[#B91C1C] border-[#B91C1C]/25",
-  WARNING:   "bg-[#C7A84B]/15 text-[#8A6D1F] border-[#C7A84B]/40",
-  WATCH:     "bg-[#EFF6FF] text-[#635BFF] border-[#635BFF]/30",
-  NONE:      "bg-slate-100 text-slate-600 border-slate-200",
+  EMERGENCY: "bg-red-500/20 text-red-300 border-red-500/40",
+  ALERT:     "bg-red-500/15 text-red-300 border-red-500/30",
+  WARNING:   "bg-amber-500/15 text-amber-300 border-amber-500/30",
+  WATCH:     "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
+  NONE:      "bg-[#27272A] text-[#A1A1AA] border-[#3F3F46]",
 };
 
 const REGIONS = [
@@ -276,26 +275,26 @@ export default function AnalyticsPage() {
   const [region, setRegion] = useState(REGIONS[0].id);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540]">
+    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA]">
       <div className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         {/* ── Decision-Support Prototype Header ── */}
-        <div className="bg-white border border-slate-200 border-t-4 border-t-[#635BFF] rounded-xl p-6 shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] rounded-xl p-6 shadow-xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[#635BFF] font-semibold">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] font-semibold">
                   <Cpu className="w-3.5 h-3.5" />
                   MDIAS — DECISION-SUPPORT PROTOTYPE • EARTH OBSERVATION ANALYTICS
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] font-semibold">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1] font-semibold">
                   <Satellite className="w-3.5 h-3.5" />
                   COPERNICUS SENTINEL-2 • CHIRPS • GRACE-FO • ECMWF ERA5-LAND
                 </span>
               </div>
-              <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-[#0A2540]">
+              <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-[#FAFAFA]">
                 Hydro-Meteorological & Satellite Earth Observation Analytics
               </h1>
-              <p className="text-sm text-slate-600 max-w-4xl">
+              <p className="text-sm text-[#A1A1AA] max-w-4xl">
                 24-month multi-sensor climatological anomalies, Standardized Precipitation Index (SPI-1M/3M/6M), GRACE-FO aquifer storage trends, and surface reservoir depletion curves.
               </p>
             </div>
@@ -303,7 +302,7 @@ export default function AnalyticsPage() {
               <select
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
-                className="rounded-lg border border-slate-200 bg-[#F8FAFC] px-3.5 py-2.5 text-xs font-mono font-medium text-[#0A2540] focus:outline-none focus:ring-2 focus:ring-[#635BFF]"
+                className="rounded-lg border border-[#3F3F46] bg-[#27272A] px-3.5 py-2.5 text-xs font-mono font-medium text-[#FAFAFA] focus:outline-none focus:ring-2 focus:ring-[#A855F7]"
               >
                 {REGIONS.map((r) => (
                   <option key={r.id} value={r.id}>
@@ -313,9 +312,9 @@ export default function AnalyticsPage() {
               </select>
               <button
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white hover:bg-[#EFF6FF] px-3.5 py-2.5 text-xs font-semibold text-[#0A2540] shadow-sm transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-[#3F3F46] bg-[#27272A] hover:bg-[#3F3F46] px-3.5 py-2.5 text-xs font-semibold text-[#FAFAFA] transition-colors"
               >
-                <Printer className="w-4 h-4 text-[#635BFF]" />
+                <Printer className="w-4 h-4 text-[#A855F7]" />
                 Print Analytics Summary
               </button>
             </div>
@@ -323,15 +322,15 @@ export default function AnalyticsPage() {
         </div>
 
         {/* ── Seasonal Scarcity Forecast Callout Bar ── */}
-        <div className="bg-white border border-slate-200 border-l-4 border-l-[#C7A84B] rounded-xl p-5 space-y-4 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+        <div className="bg-[#18181B] border border-[#3F3F46] border-l-4 border-l-[#A855F7] rounded-xl p-5 space-y-4 shadow-lg">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-[#3F3F46] pb-3">
             <div className="flex items-center gap-2.5">
-              <AlertTriangle className="w-5 h-5 text-[#8A6D1F] shrink-0" />
-              <h2 className="text-sm font-bold uppercase tracking-wider text-[#0A2540] font-mono">
+              <AlertTriangle className="w-5 h-5 text-[#A855F7] shrink-0" />
+              <h2 className="text-sm font-bold uppercase tracking-wider text-[#FAFAFA] font-mono">
                 Hydro-Climatic Insights & Rabi 2026–27 Seasonal Water Stress Forecast (Sub-Basin Matrix)
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-[#0D9488] font-semibold">
+            <span className="text-[11px] font-mono text-[#6366F1] font-semibold">
               ECMWF Seasonal Ensemble + Piezometer Baseline Model
             </span>
           </div>
@@ -340,26 +339,26 @@ export default function AnalyticsPage() {
             {BASIN_FORECASTS.map((b) => (
               <div
                 key={b.basin}
-                className="bg-[#F8FAFC] border border-slate-200 rounded-lg p-3.5 space-y-2"
+                className="bg-[#27272A] border border-[#3F3F46] rounded-lg p-3.5 space-y-2"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <div className="text-xs font-bold text-[#0A2540]">{b.basin}</div>
-                    <div className="text-[11px] text-slate-500">{b.districts}</div>
+                    <div className="text-xs font-bold text-[#FAFAFA]">{b.basin}</div>
+                    <div className="text-[11px] text-[#A1A1AA]">{b.districts}</div>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-1 pt-1 text-[11px] font-mono border-t border-slate-200">
+                <div className="grid grid-cols-3 gap-1 pt-1 text-[11px] font-mono border-t border-[#3F3F46]">
                   <div>
-                    <span className="text-slate-500 block">Storage</span>
-                    <span className="text-[#635BFF] font-semibold">{b.liveStoragePct}</span>
+                    <span className="text-[#A1A1AA] block">Storage</span>
+                    <span className="text-[#6366F1] font-semibold">{b.liveStoragePct}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block">SPI-3M</span>
-                    <span className="text-[#8A6D1F] font-semibold">{b.spi3m}</span>
+                    <span className="text-[#A1A1AA] block">SPI-3M</span>
+                    <span className="text-[#A855F7] font-semibold">{b.spi3m}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block">GW Trend</span>
-                    <span className="text-[#B91C1C] font-semibold">{b.gwDepletionM}</span>
+                    <span className="text-[#A1A1AA] block">GW Trend</span>
+                    <span className="text-red-400 font-semibold">{b.gwDepletionM}</span>
                   </div>
                 </div>
                 <div className="pt-1">
@@ -376,7 +375,7 @@ export default function AnalyticsPage() {
 
         {/* ── Multi-Sensor Telemetry Tabs ── */}
         <Tabs defaultValue="vegetation" className="space-y-6">
-          <TabsList className="inline-flex flex-wrap rounded-xl border border-slate-200 bg-white p-1.5 gap-1.5 shadow-sm">
+          <TabsList className="inline-flex flex-wrap rounded-xl border border-[#3F3F46] bg-[#18181B] p-1.5 gap-1.5 shadow-md">
             {(
               [
                 { value: "vegetation",    label: "Sentinel-2 / MODIS NDVI", icon: Sprout },
@@ -390,7 +389,7 @@ export default function AnalyticsPage() {
                 <TabsTrigger
                   key={tab.value}
                   value={tab.value}
-                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-mono font-semibold text-slate-600 transition-colors data-[state=active]:bg-[#635BFF] data-[state=active]:text-white"
+                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-mono font-semibold text-[#A1A1AA] transition-colors data-[state=active]:bg-[#A855F7] data-[state=active]:text-[#FAFAFA]"
                 >
                   <Icon className="w-3.5 h-3.5" />
                   {tab.label}
@@ -408,28 +407,28 @@ export default function AnalyticsPage() {
               <StatCard label="Rabi Canopy Vigor" value="Recovering" unit="" trend="up" sensor="Crop Mask" />
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-                <h2 className="text-sm font-semibold text-[#0A2540]">
+                <h2 className="text-sm font-semibold text-[#FAFAFA]">
                   Normalized Difference Vegetation Index (NDVI) Anomaly — 24-Month Horizon
                 </h2>
-                <span className="text-[11px] font-mono text-[#0D9488] font-semibold">
+                <span className="text-[11px] font-mono text-[#A855F7] font-semibold">
                   10m Optical Composite • Cloud-Masked (SCL)
                 </span>
               </div>
-              <p className="mb-4 text-xs text-slate-600">
+              <p className="mb-4 text-xs text-[#A1A1AA]">
                 Deviation from 2001–2020 climatological baseline across Kharif & Rabi cropping zones. Negative values indicate canopy moisture stress.
               </p>
               <TimeSeriesChart
                 data={ndviData}
                 metric="NDVI Anomaly"
                 unit=""
-                color="#0D9488"
+                color="#A855F7"
                 height={300}
                 referenceLines={[
-                  { value: -0.1, label: "Mild stress (-0.10)", color: "#C7A84B" },
-                  { value: -0.2, label: "Severe stress (-0.20)", color: "#D97706" },
-                  { value: -0.3, label: "Extreme stress (-0.30)", color: "#B91C1C" },
+                  { value: -0.1, label: "Mild stress (-0.10)", color: "#EAB308" },
+                  { value: -0.2, label: "Severe stress (-0.20)", color: "#F97316" },
+                  { value: -0.3, label: "Extreme stress (-0.30)", color: "#EF4444" },
                 ]}
               />
             </div>
@@ -450,21 +449,21 @@ export default function AnalyticsPage() {
               <StatCard label="Dry-Spell Duration" value="47" unit="days" trend="down" sensor="Anomaly Model" />
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="mb-1 text-sm font-semibold text-[#0A2540]">
+            <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
+              <h2 className="mb-1 text-sm font-semibold text-[#FAFAFA]">
                 Monthly Cumulative Precipitation (mm) — Blended Gridded & Satellite Rainfall
               </h2>
-              <p className="mb-4 text-xs text-slate-600">
+              <p className="mb-4 text-xs text-[#A1A1AA]">
                 Gridded rain-gauge observations blended with CHIRPS infrared cold-cloud duration estimates.
               </p>
               <TimeSeriesChart
                 data={precipData}
                 metric="Rainfall"
                 unit="mm"
-                color="#635BFF"
+                color="#6366F1"
                 height={300}
                 referenceLines={[
-                  { value: 50, label: "Long-Period Average (50mm)", color: "#64748B" },
+                  { value: 50, label: "Long-Period Average (50mm)", color: "#A1A1AA" },
                 ]}
               />
             </div>
@@ -485,22 +484,22 @@ export default function AnalyticsPage() {
               <StatCard label="Static Water Level Drop" value="-2.85" unit="m YoY" trend="down" sensor="Aquifer Series" />
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="mb-1 text-sm font-semibold text-[#0A2540]">
+            <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
+              <h2 className="mb-1 text-sm font-semibold text-[#FAFAFA]">
                 Groundwater Storage Anomaly (GRACE-FO Liquid Water Equivalent)
               </h2>
-              <p className="mb-4 text-xs text-slate-600">
+              <p className="mb-4 text-xs text-[#A1A1AA]">
                 Deccan Trap hard-rock aquifer mass deviation relative to 2004–2009 climatological baseline (cm water equivalent).
               </p>
               <TimeSeriesChart
                 data={groundwaterData}
                 metric="GW Anomaly"
                 unit="cm"
-                color="#635BFF"
+                color="#A855F7"
                 height={300}
                 referenceLines={[
-                  { value: -2, label: "Moderate Depletion (-2cm)", color: "#C7A84B" },
-                  { value: -4, label: "Severe Depletion (-4cm)", color: "#B91C1C" },
+                  { value: -2, label: "Moderate Depletion (-2cm)", color: "#F97316" },
+                  { value: -4, label: "Severe Depletion (-4cm)", color: "#EF4444" },
                 ]}
               />
             </div>
@@ -515,22 +514,22 @@ export default function AnalyticsPage() {
               <StatCard label="YoY Storage Deficit" value="-14" unit="percentage pts" trend="down" sensor="Multi-Year" />
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="mb-1 text-sm font-semibold text-[#0A2540]">
+            <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
+              <h2 className="mb-1 text-sm font-semibold text-[#FAFAFA]">
                 Major & Medium Irrigation Reservoirs — Live Storage % of Full Reservoir Level (FRL)
               </h2>
-              <p className="mb-4 text-xs text-slate-600">
+              <p className="mb-4 text-xs text-[#A1A1AA]">
                 Combined live storage trajectory across Jayakwadi, Majalgaon, Manjara, Lower Terna, Sina-Kolegaon, and Upper Penganga sub-basins.
               </p>
               <TimeSeriesChart
                 data={reservoirData}
                 metric="Reservoir Fill"
                 unit="%"
-                color="#0D9488"
+                color="#6366F1"
                 height={300}
                 referenceLines={[
-                  { value: 20, label: "Critical Buffer Threshold (20%)", color: "#B91C1C" },
-                  { value: 40, label: "Conservation Watch (40%)", color: "#C7A84B" },
+                  { value: 20, label: "Critical Buffer Threshold (20%)", color: "#EF4444" },
+                  { value: 40, label: "Conservation Watch (40%)", color: "#F97316" },
                 ]}
               />
             </div>
@@ -541,20 +540,20 @@ export default function AnalyticsPage() {
         <section className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h2 className="text-lg font-bold text-[#0A2540]">
+              <h2 className="text-lg font-bold text-[#FAFAFA]">
                 Regional Composite Vulnerability Ledger — Marathwada Study Region
               </h2>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-[#A1A1AA]">
                 Multi-indicator matrix integrating satellite NDVI, SPI-3M, Surface Reservoir Storage, and modeled crop yield index.
               </p>
             </div>
-            <span className="text-xs font-mono text-[#8A6D1F] font-semibold">
+            <span className="text-xs font-mono text-[#A855F7] font-semibold">
               Benchmark: Crop Yield Index &lt; 0.50 indicates severe agricultural stress
             </span>
           </div>
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-x-auto rounded-xl border border-[#3F3F46] bg-[#18181B] shadow-lg">
             <table className="w-full text-sm">
-              <thead className="border-b border-blue-100 bg-[#EFF6FF]">
+              <thead className="border-b border-[#3F3F46] bg-[#09090B]">
                 <tr>
                   {[
                     "District",
@@ -568,32 +567,32 @@ export default function AnalyticsPage() {
                   ].map((h) => (
                     <th
                       key={h}
-                      className="px-4 py-3.5 text-left text-[11px] font-mono font-semibold uppercase tracking-wider text-[#0A2540]"
+                      className="px-4 py-3.5 text-left text-[11px] font-mono font-semibold uppercase tracking-wider text-[#A1A1AA]"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white">
+              <tbody className="divide-y divide-[#3F3F46]/60 bg-[#18181B]">
                 {DISTRICT_TABLE.map((row) => (
                   <tr
                     key={row.name}
-                    className="transition-colors hover:bg-[#EFF6FF]/50"
+                    className="transition-colors hover:bg-[#27272A]/60"
                   >
-                    <td className="px-4 py-3.5 font-semibold text-[#0A2540]">
+                    <td className="px-4 py-3.5 font-semibold text-[#FAFAFA]">
                       {row.name}
                     </td>
-                    <td className="px-4 py-3.5 text-xs font-mono text-[#635BFF] font-medium">
+                    <td className="px-4 py-3.5 text-xs font-mono text-[#6366F1] font-medium">
                       {row.basin}
                     </td>
                     <td
                       className={`px-4 py-3.5 font-mono font-semibold ${
                         row.ndviAnomaly < -0.15
-                          ? "text-[#B91C1C]"
+                          ? "text-red-400"
                           : row.ndviAnomaly < -0.08
-                          ? "text-[#8A6D1F]"
-                          : "text-slate-700"
+                          ? "text-amber-400"
+                          : "text-[#FAFAFA]"
                       }`}
                     >
                       {row.ndviAnomaly.toFixed(2)}
@@ -601,23 +600,23 @@ export default function AnalyticsPage() {
                     <td
                       className={`px-4 py-3.5 font-mono font-semibold ${
                         row.spi3m < -1.5
-                          ? "text-[#B91C1C]"
+                          ? "text-red-400"
                           : row.spi3m < -1.0
-                          ? "text-[#8A6D1F]"
-                          : "text-slate-700"
+                          ? "text-amber-400"
+                          : "text-[#FAFAFA]"
                       }`}
                     >
                       {row.spi3m.toFixed(1)}
                     </td>
-                    <td className="px-4 py-3.5 font-mono text-slate-700">
+                    <td className="px-4 py-3.5 font-mono text-[#FAFAFA]">
                       {row.reservoir}%
                     </td>
                     <td className="px-4 py-3.5 font-mono">
                       <span
                         className={`px-2 py-0.5 rounded text-xs font-bold ${
                           row.yieldIndex < 50
-                            ? "bg-[#B91C1C]/10 text-[#B91C1C] border border-[#B91C1C]/25"
-                            : "bg-[#0D9488]/10 text-[#0D9488] border border-[#0D9488]/25"
+                            ? "bg-red-500/15 text-red-300 border border-red-500/30"
+                            : "bg-[#A855F7]/15 text-[#A855F7] border border-[#A855F7]/40"
                         }`}
                       >
                         0.{row.yieldIndex} ({row.yieldIndex}%)
@@ -625,13 +624,13 @@ export default function AnalyticsPage() {
                     </td>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2">
-                        <div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-200">
+                        <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[#27272A]">
                           <div
-                            className="h-full rounded-full bg-gradient-to-r from-[#0D9488] via-[#C7A84B] to-[#B91C1C]"
+                            className="h-full rounded-full bg-gradient-to-r from-[#6366F1] via-[#A855F7] to-red-500"
                             style={{ width: `${row.risk}%` }}
                           />
                         </div>
-                        <span className="font-mono text-xs font-bold text-[#0A2540]">
+                        <span className="font-mono text-xs font-bold text-[#FAFAFA]">
                           {row.risk}/100
                         </span>
                       </div>
@@ -655,14 +654,14 @@ export default function AnalyticsPage() {
         {/* ── District Comparison Chart ── */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0A2540]">
+            <h2 className="text-lg font-bold text-[#FAFAFA]">
               Composite Drought Vulnerability Index — Inter-District Comparison
             </h2>
-            <span className="text-xs font-mono text-slate-500">
+            <span className="text-xs font-mono text-[#A1A1AA]">
               Weighted Model: 30% SPI + 25% NDVI + 25% Surface Storage + 20% Aquifer Anomaly
             </span>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
             <DistrictComparisonChart />
           </div>
         </section>

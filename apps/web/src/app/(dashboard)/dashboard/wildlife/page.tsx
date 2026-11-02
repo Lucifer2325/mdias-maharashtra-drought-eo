@@ -54,24 +54,24 @@ export default function WildlifeZonesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0A2540] p-4 sm:p-6 max-w-[1600px] mx-auto space-y-6">
+    <div className="min-h-screen bg-[#09090B] text-[#FAFAFA] p-4 sm:p-6 max-w-[1600px] mx-auto space-y-6">
       {/* Decision-Support Prototype Ecological & ESZ Header */}
-      <div className="relative rounded-2xl bg-white border border-slate-200 border-t-4 border-t-[#635BFF] p-6 shadow-sm">
+      <div className="relative rounded-2xl bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded bg-[#EFF6FF] border border-blue-200 text-[11px] font-mono font-bold uppercase tracking-wider text-[#635BFF]">
+              <span className="px-2.5 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[11px] font-mono font-bold uppercase tracking-wider text-[#A855F7]">
                 MDIAS — DECISION-SUPPORT PROTOTYPE • ECOLOGICAL & ESZ THREAT ANALYSIS
               </span>
-              <span className="px-2.5 py-0.5 rounded bg-[#C7A84B]/15 border border-[#C7A84B]/40 text-[11px] font-mono font-bold uppercase tracking-wider text-[#8A6D1F]">
+              <span className="px-2.5 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[11px] font-mono font-bold uppercase tracking-wider text-[#6366F1]">
                 SENTINEL-2 & SENTINEL-1 SAR CHANGE DETECTION
               </span>
             </div>
-            <h1 className="text-2xl font-bold text-[#0A2540] flex items-center gap-2.5 tracking-tight">
-              <ShieldAlert className="w-6 h-6 text-[#B91C1C] shrink-0" />
+            <h1 className="text-2xl font-bold text-[#FAFAFA] flex items-center gap-2.5 tracking-tight">
+              <ShieldAlert className="w-6 h-6 text-[#A855F7] shrink-0" />
               Protected Forest, Wildlife & Eco-Sensitive Threat Zones (ESZ)
             </h1>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-[#A1A1AA] mt-1">
               Multi-spectral satellite modeling for riverbed sand disturbance, basalt slope excavation, aquifer drawdown, wildlife waterhole depletion & canopy fire risk
             </p>
           </div>
@@ -79,16 +79,16 @@ export default function WildlifeZonesPage() {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               href="/dashboard/map"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#635BFF] hover:bg-[#5249E5] text-white text-xs font-semibold shadow-sm transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#A855F7] hover:bg-[#9333EA] text-[#FAFAFA] text-xs font-semibold shadow-md transition-colors"
             >
               <Satellite className="w-4 h-4" />
               Inspect ESZs on Optical Satellite Map
             </Link>
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white hover:bg-[#EFF6FF] border border-slate-200 text-[#0A2540] text-xs font-semibold shadow-sm transition-colors"
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-[#FAFAFA] text-xs font-semibold transition-colors"
             >
-              <FileCheck2 className="w-4 h-4 text-[#0D9488]" />
+              <FileCheck2 className="w-4 h-4 text-[#A855F7]" />
               Print Ecological Threat Brief
             </button>
           </div>
@@ -97,55 +97,55 @@ export default function WildlifeZonesPage() {
 
       {/* Ecological & Surface Disturbance KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg text-[#0D9488]">
+        <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-[#A855F7]/15 border border-[#A855F7]/40 rounded-lg text-[#A855F7]">
             <Trees className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#0A2540]">
+            <div className="text-2xl font-bold text-[#FAFAFA]">
               {MAHARASHTRA_WILDLIFE_ZONES.length} Zones
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               {totalEszVillages} Modeled ESZ Buffer Villages
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-[#B91C1C]/25 rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/25 rounded-lg text-[#B91C1C]">
+        <div className="bg-[#18181B] border border-red-500/40 rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-red-500/15 border border-red-500/30 rounded-lg text-red-400">
             <Pickaxe className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#B91C1C]">
+            <div className="text-2xl font-bold text-red-400">
               {totalIllegalExcavationSites} Hotspots
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Detected Excavation & Sand Disturbance ({totalQuarryingHa} ha)
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#C7A84B]/15 border border-[#C7A84B]/40 rounded-lg text-[#8A6D1F]">
+        <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-[#6366F1]/15 border border-[#6366F1]/40 rounded-lg text-[#6366F1]">
             <Droplets className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#0A2540]">
+            <div className="text-2xl font-bold text-[#FAFAFA]">
               {dryWaterholes} / {totalWaterholes}
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Natural Waterholes Dry (
               {Math.round((dryWaterholes / totalWaterholes) * 100)}%)
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-[#B91C1C]/10 border border-[#B91C1C]/25 rounded-lg text-[#B91C1C]">
+        <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-4 flex items-center gap-4">
+          <div className="p-3 bg-amber-500/15 border border-amber-500/30 rounded-lg text-amber-400">
             <Flame className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-[#B91C1C]">
+            <div className="text-2xl font-bold text-amber-400">
               {
                 MAHARASHTRA_WILDLIFE_ZONES.filter(
                   (z) => z.threatLevel === "EXTREME" || z.threatLevel === "CRITICAL"
@@ -153,7 +153,7 @@ export default function WildlifeZonesPage() {
               }{" "}
               Zones
             </div>
-            <div className="text-xs text-slate-600 font-medium">
+            <div className="text-xs text-[#A1A1AA] font-medium">
               Extreme / Critical Compounding Stress
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function WildlifeZonesPage() {
       </div>
 
       {/* Category Filter */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
+      <div className="flex flex-wrap gap-2 border-b border-[#3F3F46] pb-3">
         {[
           { id: "ALL", label: "All ESZ & Protected Areas (12)" },
           {
@@ -176,8 +176,8 @@ export default function WildlifeZonesPage() {
             onClick={() => setSelectedCategory(cat.id)}
             className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               selectedCategory === cat.id
-                ? "bg-[#635BFF] text-white shadow-sm"
-                : "bg-white text-slate-600 hover:bg-[#EFF6FF] hover:text-[#0A2540] border border-slate-200"
+                ? "bg-[#A855F7] text-[#FAFAFA] shadow-sm"
+                : "bg-[#18181B] text-[#A1A1AA] hover:bg-[#27272A] hover:text-[#FAFAFA] border border-[#3F3F46]"
             }`}
           >
             {cat.label}
@@ -187,10 +187,10 @@ export default function WildlifeZonesPage() {
 
       {/* Main Grid: Table + Threat Dossier */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <div className="lg:col-span-2 bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-[#0A2540]">
-              <thead className="bg-[#EFF6FF] text-xs uppercase tracking-wider text-slate-600 border-b border-blue-100">
+            <table className="w-full text-left text-sm text-[#FAFAFA]">
+              <thead className="bg-[#09090B] text-xs uppercase tracking-wider text-[#A1A1AA] border-b border-[#3F3F46]">
                 <tr>
                   <th className="px-4 py-3.5 font-semibold">
                     Eco-Sensitive / Protected Zone
@@ -203,7 +203,7 @@ export default function WildlifeZonesPage() {
                   <th className="px-4 py-3.5 font-semibold">Threat Level</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-[#3F3F46]/60">
                 {filteredZones.map((zone) => {
                   const dryPct = Math.round(
                     (zone.naturalWaterholesDry / zone.naturalWaterholesTotal) *
@@ -213,48 +213,48 @@ export default function WildlifeZonesPage() {
                     <tr
                       key={zone.id}
                       onClick={() => setSelectedZone(zone)}
-                      className={`hover:bg-[#EFF6FF]/60 cursor-pointer transition-colors ${
+                      className={`hover:bg-[#27272A]/60 cursor-pointer transition-colors ${
                         selectedZone.id === zone.id
-                          ? "bg-[#EFF6FF] border-l-4 border-l-[#635BFF]"
+                          ? "bg-[#27272A] border-l-4 border-l-[#A855F7]"
                           : ""
                       }`}
                     >
                       <td className="px-4 py-4">
-                        <div className="font-semibold text-[#0A2540] flex items-center gap-1.5">
+                        <div className="font-semibold text-[#FAFAFA] flex items-center gap-1.5">
                           {zone.category === "ECO_SENSITIVE_ZONE" ? (
-                            <AlertOctagon className="w-3.5 h-3.5 text-[#B91C1C] shrink-0" />
+                            <AlertOctagon className="w-3.5 h-3.5 text-red-400 shrink-0" />
                           ) : (
-                            <Trees className="w-3.5 h-3.5 text-[#0D9488] shrink-0" />
+                            <Trees className="w-3.5 h-3.5 text-[#A855F7] shrink-0" />
                           )}
                           {zone.name}
                         </div>
-                        <div className="text-xs text-slate-500 pl-5">
+                        <div className="text-xs text-[#A1A1AA] pl-5">
                           {zone.districtName} • {zone.areaKm2} km² •{" "}
                           {zone.forestCanopyPct}% canopy
                         </div>
                       </td>
                       <td className="px-3 py-4">
-                        <div className="font-mono text-xs text-[#B91C1C] font-bold">
+                        <div className="font-mono text-xs text-red-400 font-bold">
                           ⛏ {zone.illegalExcavationSites} sites
                         </div>
-                        <div className="font-mono text-[11px] text-slate-500">
+                        <div className="font-mono text-[11px] text-[#A1A1AA]">
                           {zone.unauthorizedQuarryingHa} ha disturbed
                         </div>
                       </td>
                       <td className="px-3 py-4">
-                        <div className="font-mono text-xs text-[#8A6D1F] font-semibold">
+                        <div className="font-mono text-xs text-amber-300 font-semibold">
                           {zone.naturalWaterholesDry}/
                           {zone.naturalWaterholesTotal} ({dryPct}%)
                         </div>
-                        <div className="text-[11px] text-[#0D9488] font-medium">
+                        <div className="text-[11px] text-[#6366F1] font-medium">
                           {zone.solarPumpsActive} solar waterholes
                         </div>
                       </td>
                       <td className="px-3 py-4">
-                        <div className="font-mono text-xs text-[#635BFF] font-semibold">
+                        <div className="font-mono text-xs text-[#A855F7] font-semibold">
                           {zone.eszBufferKm} km radius
                         </div>
-                        <div className="text-[11px] text-slate-500">
+                        <div className="text-[11px] text-[#A1A1AA]">
                           {zone.eszVillagesCount} villages
                         </div>
                       </td>
@@ -262,12 +262,12 @@ export default function WildlifeZonesPage() {
                         <span
                           className={`text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full ${
                             zone.threatLevel === "EXTREME"
-                              ? "bg-[#B91C1C]/15 text-[#B91C1C] border border-[#B91C1C]/30"
+                              ? "bg-red-500/20 text-red-300 border border-red-500/40"
                               : zone.threatLevel === "CRITICAL"
-                                ? "bg-red-50 text-[#B91C1C] border border-red-200"
+                                ? "bg-red-500/15 text-red-400 border border-red-500/30"
                                 : zone.threatLevel === "HIGH"
-                                  ? "bg-[#C7A84B]/15 text-[#8A6D1F] border border-[#C7A84B]/40"
-                                  : "bg-[#0D9488]/15 text-[#0D9488] border border-[#0D9488]/30"
+                                  ? "bg-amber-500/15 text-amber-300 border border-amber-500/30"
+                                  : "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/40"
                           }`}
                         >
                           {zone.threatLevel} ({zone.compositeThreatScore})
@@ -282,50 +282,50 @@ export default function WildlifeZonesPage() {
         </div>
 
         {/* Right-Hand Dossier: Ecological & Surface Disturbance Analysis */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 h-fit space-y-4 shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-5 h-fit space-y-4 shadow-lg">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono text-[#635BFF] uppercase tracking-wider font-bold">
+              <span className="text-[10px] font-mono text-[#A855F7] uppercase tracking-wider font-bold">
                 {selectedZone.category.replace(/_/g, " ")} •{" "}
                 {selectedZone.threatLevel} RISK
               </span>
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#B91C1C]/10 text-[#B91C1C] border border-[#B91C1C]/25">
+              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#A855F7]/15 text-[#A855F7] border border-[#A855F7]/40">
                 Score: {selectedZone.compositeThreatScore}/100
               </span>
             </div>
-            <h3 className="text-lg font-bold text-[#0A2540] mt-1">
+            <h3 className="text-lg font-bold text-[#FAFAFA] mt-1">
               {selectedZone.name}
             </h3>
-            <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
+            <p className="text-xs text-[#A1A1AA] flex items-center gap-1 mt-0.5">
+              <MapPin className="w-3.5 h-3.5 text-[#A1A1AA]" />
               {selectedZone.districtName} ({selectedZone.division})
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-2 text-xs">
-            <div className="bg-[#EFF6FF] p-2.5 rounded-lg border border-blue-100">
-              <span className="text-slate-500 block text-[10px]">
+            <div className="bg-[#27272A] p-2.5 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block text-[10px]">
                 ESZ Buffer
               </span>
-              <span className="text-xs font-semibold text-[#635BFF]">
+              <span className="text-xs font-semibold text-[#A855F7]">
                 {selectedZone.eszBufferKm} km ({selectedZone.eszVillagesCount}{" "}
                 villages)
               </span>
             </div>
-            <div className="bg-red-50/70 p-2.5 rounded-lg border border-red-200">
-              <span className="text-slate-500 block text-[10px]">
+            <div className="bg-[#27272A] p-2.5 rounded-lg border border-red-500/40">
+              <span className="text-[#A1A1AA] block text-[10px]">
                 Disturbance
               </span>
-              <span className="text-xs font-semibold text-[#B91C1C]">
+              <span className="text-xs font-semibold text-red-400">
                 {selectedZone.illegalExcavationSites} sites (
                 {selectedZone.unauthorizedQuarryingHa} ha)
               </span>
             </div>
-            <div className="bg-[#F8FAFC] p-2.5 rounded-lg border border-slate-200">
-              <span className="text-slate-500 block text-[10px]">
+            <div className="bg-[#27272A] p-2.5 rounded-lg border border-[#3F3F46]">
+              <span className="text-[#A1A1AA] block text-[10px]">
                 Fire & Canopy
               </span>
-              <span className="text-xs font-semibold text-[#8A6D1F]">
+              <span className="text-xs font-semibold text-amber-400">
                 Fire {selectedZone.fireRiskIndex} •{" "}
                 {selectedZone.forestCanopyPct}%
               </span>
@@ -333,15 +333,15 @@ export default function WildlifeZonesPage() {
           </div>
 
           {/* Detected Surface Excavation, Sand Disturbance & Quarrying Hotspots */}
-          <div className="bg-red-50/60 border border-[#B91C1C]/25 rounded-xl p-3.5 space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#B91C1C] flex items-center gap-1.5">
+          <div className="bg-[#27272A]/70 border border-red-500/30 rounded-xl p-3.5 space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-red-400 flex items-center gap-1.5">
               <Pickaxe className="w-3.5 h-3.5" />
               SAR-Detected Excavation, Sand Disturbance & Quarrying
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-700">
+            <ul className="space-y-1.5 text-xs text-[#FAFAFA]/90">
               {selectedZone.excavationHotspots.map((hotspot) => (
                 <li key={hotspot} className="flex items-start gap-1.5">
-                  <span className="text-[#B91C1C] font-bold">•</span>
+                  <span className="text-red-400 font-bold">•</span>
                   <span>{hotspot}</span>
                 </li>
               ))}
@@ -349,15 +349,15 @@ export default function WildlifeZonesPage() {
           </div>
 
           {/* Compounding Ecological Threats */}
-          <div className="bg-[#C7A84B]/10 border border-[#C7A84B]/40 rounded-xl p-3.5 space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#8A6D1F] flex items-center gap-1.5">
+          <div className="bg-[#27272A]/70 border border-[#6366F1]/40 rounded-xl p-3.5 space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#6366F1] flex items-center gap-1.5">
               <AlertOctagon className="w-3.5 h-3.5" />
               Hydrological & Ecological Stress Indicators
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-700">
+            <ul className="space-y-1.5 text-xs text-[#FAFAFA]/90">
               {selectedZone.massiveThreats.map((threat) => (
                 <li key={threat} className="flex items-start gap-1.5">
-                  <span className="text-[#8A6D1F] font-bold">•</span>
+                  <span className="text-[#6366F1] font-bold">•</span>
                   <span>{threat}</span>
                 </li>
               ))}
@@ -366,14 +366,14 @@ export default function WildlifeZonesPage() {
 
           {/* Key Wildlife Species */}
           <div>
-            <h4 className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+            <h4 className="text-[11px] font-semibold uppercase tracking-wider text-[#A1A1AA] mb-1.5">
               Key Fauna Impacted
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {selectedZone.keySpecies.map((species) => (
                 <span
                   key={species}
-                  className="px-2 py-0.5 rounded bg-[#EFF6FF] border border-blue-100 text-[11px] font-medium text-[#0A2540]"
+                  className="px-2 py-0.5 rounded bg-[#27272A] border border-[#3F3F46] text-[11px] font-medium text-[#FAFAFA]"
                 >
                   {species}
                 </span>
@@ -383,16 +383,16 @@ export default function WildlifeZonesPage() {
 
           {/* Recommended Mitigation & Watershed Restoration Actions */}
           <div className="space-y-1.5 pt-1">
-            <h4 className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <h4 className="text-[11px] font-semibold uppercase tracking-wider text-[#A1A1AA]">
               Recommended Ecological & Watershed Interventions
             </h4>
             <ul className="space-y-1.5">
               {selectedZone.recommendedInterventions.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 text-xs bg-[#0D9488]/10 border border-[#0D9488]/25 rounded-lg p-2.5 text-[#0A2540]"
+                  className="flex items-start gap-2 text-xs bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-lg p-2.5 text-[#FAFAFA]"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#0D9488] shrink-0 mt-0.5" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#A855F7] shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}

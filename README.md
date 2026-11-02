@@ -12,27 +12,38 @@
 
 ---
 
-## 📸 Platform UI Showcase (Palette 4 High-Trust Light Theme & Live EO Captures)
+## 📸 Platform UI Showcase — Dual-Theme Architecture (Palette 3 Purple-Accent Dark ⇄ Palette 4 High-Trust Light)
 
-### 1. Platform Overview — Statewide Risk & Hydro-Meteorological Matrix (`/dashboard`)
+The platform features a built-in **1-Click Light/Dark Theme Toggle** (`🌙 Dark • P3` ⇄ `☀️ Light • P4`) in the header and sidebar, persisted in `localStorage` (`mdias-theme`):
+- **Dark Mode — Palette 3 (AI / Innovation Purple-Accent Dark)**: `#09090B` main canvas, `#18181B` cards, `#27272A` hover/tertiary surfaces, `#FAFAFA` primary typography (`19.1:1 AAA`), `#A855F7` primary purple interactive CTAs, `#6366F1` secondary indigo tags, and `#3F3F46` hairlines.
+- **Light Mode — Palette 4 (High-Trust Light)**: `#F8FAFC` warm-cool slate canvas, `#FFFFFF` / `#EFF6FF` cards, `#0A2540` primary typography (`16.7:1 AAA`), `#635BFF` interactive CTAs, and `#C7A84B` accent indicators.
+
+### 1. Platform Overview — Statewide Risk & Hydro-Meteorological Matrix (`/dashboard` • Palette 3 Dark)
 Real-time ECMWF ERA5-Land volumetric soil moisture (`0–28 cm`), 60-day precipitation vs. FAO `ET0` water-balance deficit, 5-region scarcity breakdown, recommended mitigation scenarios (`SIM-...`), and the 35-District Survey GeoJSON & 11-Riverbed risk map.
 
-![Platform Overview](./docs/screenshots/01-executive-situation-room.png)
+![Platform Overview — Palette 3 Dark](./docs/screenshots/01-executive-situation-room.png)
 
-### 2. Multi-Sensor Optical Satellite & Riverbed EO Map (`/dashboard/map`)
-Interactive MapLibre GL Earth Observation workbench with 5 switchable satellite sensors (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Light Topo**, **35-District GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Dry Bed` & sand-dredging alerts, a **1-Click Ground Zoom Bar** (`14x–15x` auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & GeoTIFF links.
+### 2. Multi-Sensor Optical Satellite & Riverbed EO Map (`/dashboard/map` • Palette 3 Dark)
+Interactive MapLibre GL Earth Observation workbench with 5 switchable satellite sensors (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Topo Reference**, **35-District GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Dry Bed` & sand-dredging alerts, a **1-Click Ground Zoom Bar** (`14x–15x` auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & GeoTIFF links.
 
-![Multi-Sensor Optical Satellite & Riverbed EO Map](./docs/screenshots/02-satellite-riverbed-eo-map.png)
+![Multi-Sensor Optical Satellite & Riverbed EO Map — Palette 3 Dark](./docs/screenshots/02-satellite-riverbed-eo-map.png)
 
-### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife`)
+### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife` • Palette 3 Dark)
 Monitoring across **12 Protected Areas & Eco-Sensitive Zones (ESZs)** tracking **199 unauthorized riverbed sand-dredging & basalt/laterite hill-excavation hotspots**, dry forest waterholes, solar borewell pumps, and ecological restoration recommendations.
 
-![Protected Forest, Wildlife & Eco-Sensitive Threat Zones](./docs/screenshots/03-forest-wildlife-esz-threats.png)
+![Protected Forest, Wildlife & Eco-Sensitive Threat Zones — Palette 3 Dark](./docs/screenshots/03-forest-wildlife-esz-threats.png)
 
-### 4. Watershed Siting & Sub-Basin Hydrology Model (`/dashboard/interventions`)
+### 4. Watershed Siting & Sub-Basin Hydrology Model (`/dashboard/interventions` • Palette 3 Dark)
 SRTM 30m D8 flow-accumulation and Strahler stream-order siting model for check dams, percolation tanks, farm ponds, and recharge shafts, complete with *Paisewari* sub-basin metrics and simulation reference codes (`SIM-WCD-...`).
 
-![Watershed Siting & Sub-Basin Hydrology Model](./docs/screenshots/04-jalyukt-shivar-analytics.png)
+![Watershed Siting & Sub-Basin Hydrology Model — Palette 3 Dark](./docs/screenshots/04-jalyukt-shivar-analytics.png)
+
+### 5. Light Mode Toggle View — Palette 4 High-Trust Light (`☀️ Light • P4`)
+Instant 1-click toggle to **Palette 4 (`#F8FAFC` / `#EFF6FF` / `#0A2540` / `#635BFF`)** for sunlit rooms and projector presentations:
+
+| Platform Overview (`☀️ Light • P4`) | Satellite & Riverbed EO Map (`☀️ Light • P4`) |
+| :---: | :---: |
+| ![Palette 4 Light Overview](./docs/screenshots/palette4-light-overview.png) | ![Palette 4 Light Map](./docs/screenshots/palette4-light-map.png) |
 
 ---
 

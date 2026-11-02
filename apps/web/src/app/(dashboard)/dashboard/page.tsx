@@ -58,21 +58,21 @@ const ingestionLog = [
 function StatusDot({ status }: { status: string }) {
   const color =
     status === "OK"
-      ? "bg-[#0D9488]"
+      ? "bg-emerald-400"
       : status === "PARTIAL"
-        ? "bg-[#C7A84B]"
-        : "bg-[#B91C1C]";
+        ? "bg-amber-400"
+        : "bg-red-400";
   return (
     <span className={`inline-block w-2 h-2 rounded-full ${color} mr-1.5`} />
   );
 }
 
 function getRiskFill(score: number): string {
-  if (score >= 80) return "#991b1b";
-  if (score >= 65) return "#dc2626";
+  if (score >= 80) return "#7f1d1d";
+  if (score >= 65) return "#ef4444";
   if (score >= 45) return "#f97316";
   if (score >= 28) return "#eab308";
-  return "#0D9488";
+  return "#10b981";
 }
 
 interface DivisionSummary {
@@ -231,7 +231,7 @@ export default function DashboardPage() {
       title: "GPS-Optimized Tanker Allocation & Fodder Readiness Simulation",
       target: topRiskNames || "Latur, Dharashiv, Solapur, Beed",
       priority: "HIGH PRIORITY • 24H LEAD",
-      priorityColor: "bg-[#B91C1C]/10 text-[#B91C1C] border-[#B91C1C]/30",
+      priorityColor: "bg-red-500/15 text-red-400 border-red-500/30",
       icon: Truck,
       actionText:
         "Identifies Watch/Warning talukas where soil moisture deficit and groundwater drawdown indicate immediate need for supplementary water tanker routing within a 3 km radius.",
@@ -243,7 +243,7 @@ export default function DashboardPage() {
       title: "Exposed Riverbed Bare-Sand Spectral Detection",
       target: "Manjara, Sina, Bhima, Godavari & Penganga Reaches",
       priority: "SATELLITE ANOMALY WATCH",
-      priorityColor: "bg-[#C7A84B]/15 text-[#92751F] border-[#C7A84B]/40",
+      priorityColor: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
       icon: Scale,
       actionText:
         "Flags dry riverbed stretches with high bare-sand reflectance in Sentinel-2 L2A imagery to assist environmental researchers and local teams in monitoring riverbed disturbance.",
@@ -255,7 +255,7 @@ export default function DashboardPage() {
       title: "Reservoir Dead-Storage Buffer & Demand Forecasting",
       target: "Jayakwadi, Ujani, Manjara & Upper Wardha Basins",
       priority: "STORAGE THRESHOLD",
-      priorityColor: "bg-[#635BFF]/10 text-[#635BFF] border-[#635BFF]/30",
+      priorityColor: "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
       icon: Waves,
       actionText:
         "Models remaining live storage against 60-day Penman-Monteith evapotranspiration (ET0) rates to estimate domestic water supply buffer duration.",
@@ -267,7 +267,7 @@ export default function DashboardPage() {
       title: "Solar Waterhole & Fire-Line Vulnerability Assessment",
       target: "Tadoba-Andhari, Melghat, Great Indian Bustard & Navegaon",
       priority: "HABITAT RESILIENCE",
-      priorityColor: "bg-[#0D9488]/10 text-[#0D9488] border-[#0D9488]/30",
+      priorityColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
       icon: Sun,
       actionText:
         "Combines FSI canopy cover baselines with surface temperature anomalies to prioritize artificial waterhole replenishment in wildlife buffer corridors.",
@@ -276,30 +276,30 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-6 max-w-[1600px] bg-[#F8FAFC] text-[#0A2540]">
+    <div className="space-y-6 max-w-[1600px] bg-[#09090B] text-[#FAFAFA]">
       {/* Decision-Support Prototype Overview Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 border-t-4 border-t-[#635BFF] p-5 sm:p-6 shadow-sm">
+      <div className="relative overflow-hidden rounded-2xl bg-[#18181B] border border-[#3F3F46] border-t-2 border-t-[#A855F7] p-5 sm:p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-2 max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#C7A84B]/15 border border-[#C7A84B]/40 text-[#8A6D1B] text-[10px] font-mono font-bold uppercase tracking-widest">
-                <Compass className="w-3 h-3 text-[#C7A84B]" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7] text-[10px] font-mono font-bold uppercase tracking-widest">
+                <Compass className="w-3 h-3 text-[#A855F7]" />
                 DECISION-SUPPORT PROTOTYPE • INDEPENDENT RESEARCH PLATFORM
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#0D9488]/10 border border-[#0D9488]/30 text-[#0D9488] text-[10px] font-mono font-semibold">
-                <Radio className="w-3 h-3 text-[#0D9488] animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#6366F1]/15 border border-[#6366F1]/40 text-[#6366F1] text-[10px] font-mono font-semibold">
+                <Radio className="w-3 h-3 text-[#6366F1] animate-pulse" />
                 35 DISTRICTS • 11 RIVER BASINS • 10 WILDLIFE CORRIDORS
               </span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-extrabold text-[#0A2540] tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#FAFAFA] tracking-tight">
               MDIAS — Maharashtra Drought &amp; Earth Observation Intelligence Platform
             </h1>
 
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
               Multi-sensor hydrological, soil-moisture, and satellite earth-observation decision-support prototype designed for drought risk analysis, watershed intervention planning, and ecological monitoring across Maharashtra.
               {fetchedAt ? (
-                <span className="ml-2 font-mono text-xs text-[#635BFF] font-semibold">
+                <span className="ml-2 font-mono text-xs text-[#A855F7] font-semibold">
                   [Live Telemetry Sync: {fetchedAt} IST]
                 </span>
               ) : null}
@@ -310,33 +310,33 @@ export default function DashboardPage() {
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             <Link
               href="/dashboard/map"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#635BFF] hover:bg-[#5249e6] text-xs font-semibold text-white transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#A855F7] hover:bg-[#9333EA] text-xs font-semibold text-[#FAFAFA] transition-colors shadow-sm"
             >
-              <Map className="w-3.5 h-3.5 text-white" />
+              <Map className="w-3.5 h-3.5 text-[#FAFAFA]" />
               Optical Satellite &amp; Riverbed Map
             </Link>
             <Link
               href="/dashboard/wildlife"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#EFF6FF] hover:bg-blue-100/80 border border-blue-200 text-xs font-semibold text-[#0A2540] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-xs font-semibold text-[#FAFAFA] transition-colors"
             >
-              <Trees className="w-3.5 h-3.5 text-[#0D9488]" />
+              <Trees className="w-3.5 h-3.5 text-[#6366F1]" />
               ESZ &amp; Riverbed Analysis
             </Link>
             <Link
               href="/dashboard/reports"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-[#0A2540] transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-xs font-semibold text-[#FAFAFA] transition-colors"
             >
-              <FileText className="w-3.5 h-3.5 text-[#C7A84B]" />
+              <FileText className="w-3.5 h-3.5 text-[#A855F7]" />
               Export Analytical Summary
             </Link>
             <button
               onClick={loadLive}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs font-mono font-medium text-[#0A2540] transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-xs font-mono font-medium text-[#FAFAFA] transition-colors"
               title="Refresh Open-Meteo ERA5-Land Telemetry"
             >
               <RefreshCw
-                className={`w-3.5 h-3.5 ${loading ? "animate-spin text-[#635BFF]" : "text-slate-600"}`}
+                className={`w-3.5 h-3.5 ${loading ? "animate-spin text-[#A855F7]" : "text-[#A1A1AA]"}`}
               />
               Sync
             </button>
@@ -350,7 +350,7 @@ export default function DashboardPage() {
           title="Watch / Warning Districts"
           value={loading ? "…" : `${affectedCount} / 35`}
           deltaLabel="Risk score ≥ 40"
-          icon={<Map className="w-4 h-4 text-[#B91C1C]" />}
+          icon={<Map className="w-4 h-4 text-[#A855F7]" />}
           trend="up"
         />
         <KpiCard
@@ -358,14 +358,14 @@ export default function DashboardPage() {
           value={loading ? "…" : avgSoilMoisture}
           unit="%"
           deltaLabel="0–28cm ERA5-Land"
-          icon={<Droplets className="w-4 h-4 text-[#635BFF]" />}
+          icon={<Droplets className="w-4 h-4 text-[#6366F1]" />}
           trend="stable"
         />
         <KpiCard
           title="Statewide SPI-3M"
           value={loading ? "…" : avgSpi3m}
           deltaLabel="60d P - ET0 balance"
-          icon={<BarChart3 className="w-4 h-4 text-[#0D9488]" />}
+          icon={<BarChart3 className="w-4 h-4 text-[#A855F7]" />}
           trend="down"
         />
         <KpiCard
@@ -373,37 +373,37 @@ export default function DashboardPage() {
           value={loading ? "…" : avgLst}
           unit="°C"
           deltaLabel="0–7cm soil temp"
-          icon={<Activity className="w-4 h-4 text-[#C7A84B]" />}
+          icon={<Activity className="w-4 h-4 text-[#6366F1]" />}
           trend="up"
         />
         <KpiCard
           title="Protected Wildlife Zones"
           value="10"
           deltaLabel="8,217 km² ESZ monitored"
-          icon={<Trees className="w-4 h-4 text-[#0D9488]" />}
+          icon={<Trees className="w-4 h-4 text-emerald-400" />}
           trend="stable"
         />
         <KpiCard
           title="Candidate Worksites"
           value={loading ? "…" : totalCandidates}
           deltaLabel="Watershed / Recharge"
-          icon={<Wrench className="w-4 h-4 text-[#635BFF]" />}
+          icon={<Wrench className="w-4 h-4 text-[#A855F7]" />}
           trend="stable"
         />
       </div>
 
       {/* Regional Summary Matrix Strip */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-200">
+      <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-4 shadow-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-[#3F3F46]">
           <div>
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#635BFF]">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#A855F7]">
               REGIONAL SUMMARY MATRIX • 5 HYDRO-CLIMATIC CLUSTERS
             </h2>
-            <p className="text-xs text-slate-600 mt-0.5">
+            <p className="text-xs text-[#A1A1AA] mt-0.5">
               Aggregated live soil moisture, 60-day cumulative rainfall, and composite drought index across Maharashtra regions
             </p>
           </div>
-          <span className="text-[11px] font-mono text-slate-500">
+          <span className="text-[11px] font-mono text-[#A1A1AA]">
             5 Regional Clusters • 35 Districts
           </span>
         </div>
@@ -414,46 +414,46 @@ export default function DashboardPage() {
             return (
               <div
                 key={div.key}
-                className="rounded-lg bg-[#EFF6FF]/60 border border-blue-100 p-3.5 flex flex-col justify-between hover:border-[#635BFF]/40 transition-colors"
+                className="rounded-lg bg-[#27272A] border border-[#3F3F46] p-3.5 flex flex-col justify-between hover:border-[#A855F7]/50 transition-colors"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-[#0A2540] truncate">
+                    <span className="text-xs font-bold text-[#FAFAFA] truncate">
                       {div.label}
                     </span>
                     <span
                       className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
                         isElevated
-                          ? "bg-[#B91C1C]/10 text-[#B91C1C] border border-[#B91C1C]/30"
-                          : "bg-[#0D9488]/10 text-[#0D9488] border border-[#0D9488]/30"
+                          ? "bg-red-500/15 text-red-400 border border-red-500/30"
+                          : "bg-[#A855F7]/15 text-[#A855F7] border border-[#A855F7]/40"
                       }`}
                     >
                       Risk {div.avgRisk}
                     </span>
                   </div>
-                  <p className="text-[10px] font-mono text-slate-500 mt-0.5">
+                  <p className="text-[10px] font-mono text-[#A1A1AA] mt-0.5">
                     {div.subregion} • {div.count || "—"} Districts
                   </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-blue-100 text-center">
+                <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-[#3F3F46] text-center">
                   <div>
-                    <p className="text-[10px] text-slate-500 font-mono">SOIL</p>
-                    <p className="text-xs font-mono font-bold text-[#635BFF]">
+                    <p className="text-[10px] text-[#A1A1AA] font-mono">SOIL</p>
+                    <p className="text-xs font-mono font-bold text-[#6366F1]">
                       {div.avgSoil}%
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-500 font-mono">60D RAIN</p>
-                    <p className="text-xs font-mono font-bold text-[#0A2540]">
+                    <p className="text-[10px] text-[#A1A1AA] font-mono">60D RAIN</p>
+                    <p className="text-xs font-mono font-bold text-[#FAFAFA]">
                       {div.avgRain60d}mm
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-500 font-mono">WARNING+</p>
+                    <p className="text-[10px] text-[#A1A1AA] font-mono">WARNING+</p>
                     <p
                       className={`text-xs font-mono font-bold ${
-                        div.criticalCount > 0 ? "text-[#B91C1C]" : "text-[#0D9488]"
+                        div.criticalCount > 0 ? "text-amber-400" : "text-emerald-400"
                       }`}
                     >
                       {div.criticalCount} Dist
@@ -469,30 +469,30 @@ export default function DashboardPage() {
       {/* Two-column: Live mini GeoJSON map + Priority District Watchlist */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Embedded Live 35-District GeoJSON Map Preview */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-4 flex flex-col justify-between shadow-sm">
+        <div className="lg:col-span-2 bg-[#18181B] rounded-xl border border-[#3F3F46] p-4 flex flex-col justify-between shadow-lg">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-[#635BFF]/10 border border-[#635BFF]/30 text-[10px] font-mono font-bold text-[#635BFF] uppercase">
+                <span className="px-2 py-0.5 rounded bg-[#6366F1]/15 border border-[#6366F1]/40 text-[10px] font-mono font-bold text-[#6366F1] uppercase">
                   SURVEY GEOJSON + HYDROGRAPHY
                 </span>
-                <h2 className="text-sm font-bold text-[#0A2540]">
+                <h2 className="text-sm font-bold text-[#FAFAFA]">
                   Maharashtra 35-District &amp; 11-Riverbed Live Composite Risk Map
                 </h2>
               </div>
-              <p className="text-xs text-slate-600 mt-0.5">
+              <p className="text-xs text-[#A1A1AA] mt-0.5">
                 District polygons shaded by live Open-Meteo ERA5 composite drought score; overlaid with 11 major river channels
               </p>
             </div>
             <Link
               href="/dashboard/map"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EFF6FF] hover:bg-blue-100 border border-blue-200 text-xs font-semibold text-[#635BFF] shrink-0 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-xs font-semibold text-[#A855F7] shrink-0 transition-colors"
             >
               Launch Full Interactive EO Map <ExternalLink className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="relative flex-1 flex items-center justify-center min-h-[320px] bg-[#EFF6FF] rounded-lg border border-slate-200 overflow-hidden">
+          <div className="relative flex-1 flex items-center justify-center min-h-[320px] bg-[#09090B] rounded-lg border border-[#3F3F46] overflow-hidden">
             <svg viewBox="20 15 760 570" className="w-full h-full max-h-[360px]">
               {districtPaths.map((geo) => {
                 const live = byId[geo.id];
@@ -503,21 +503,14 @@ export default function DashboardPage() {
                       d={geo.svgPath}
                       fill={getRiskFill(score)}
                       fillOpacity={0.78}
-                      stroke="#FFFFFF"
-                      strokeWidth={1.2}
+                      stroke="#09090B"
+                      strokeWidth={1.1}
                     />
                     <text
                       x={geo.labelX}
                       y={geo.labelY}
                       textAnchor="middle"
-                      className="fill-[#0A2540] text-[8px] font-bold pointer-events-none"
-                      style={{
-                        paintOrder: "stroke",
-                        stroke: "#FFFFFF",
-                        strokeWidth: "2.2px",
-                        strokeLinecap: "round",
-                        strokeLinejoin: "round",
-                      }}
+                      className="fill-[#FAFAFA] text-[8px] font-medium pointer-events-none"
                     >
                       {geo.district}
                     </text>
@@ -532,12 +525,12 @@ export default function DashboardPage() {
                   fill="none"
                   stroke={
                     river.waterStatus === "DRY_BED"
-                      ? "#B91C1C"
+                      ? "#f87171"
                       : river.waterStatus === "CRITICAL_DEPLETION"
-                        ? "#C7A84B"
-                        : "#0284c7"
+                        ? "#fbbf24"
+                        : "#A855F7"
                   }
-                  strokeWidth={2.2}
+                  strokeWidth={2}
                   strokeLinecap="round"
                   strokeDasharray={
                     river.waterStatus === "DRY_BED" ? "4 2" : undefined
@@ -547,10 +540,10 @@ export default function DashboardPage() {
             </svg>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 mt-3 pt-2.5 border-t border-slate-200 text-xs text-slate-600">
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-3 pt-2.5 border-t border-[#3F3F46] text-xs text-[#A1A1AA]">
             <div className="flex flex-wrap gap-3.5">
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#0D9488]" /> Normal (&lt;28)
+                <span className="w-2.5 h-2.5 rounded-sm bg-emerald-500" /> Normal (&lt;28)
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-yellow-500" /> Watch (28–44)
@@ -559,49 +552,49 @@ export default function DashboardPage() {
                 <span className="w-2.5 h-2.5 rounded-sm bg-orange-500" /> Warning (45–64)
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-red-600" /> Alert (65–79)
+                <span className="w-2.5 h-2.5 rounded-sm bg-red-500" /> Alert (65–79)
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-red-800" /> Emergency (80+)
+                <span className="w-2.5 h-2.5 rounded-sm bg-red-900" /> Emergency (80+)
               </span>
             </div>
-            <span className="font-mono text-[11px] text-[#0D9488] font-semibold">
+            <span className="font-mono text-[11px] text-[#A855F7] font-semibold">
               Telemetry: Open-Meteo ERA5-Land + FSI ISFR
             </span>
           </div>
         </div>
 
         {/* Priority District Watchlist — 1/3 width */}
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between shadow-sm">
+        <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden flex flex-col justify-between shadow-lg">
           <div>
-            <div className="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+            <div className="px-5 py-4 border-b border-[#3F3F46] flex items-center justify-between">
               <div>
-                <h2 className="text-sm font-bold text-[#0A2540]">
+                <h2 className="text-sm font-bold text-[#FAFAFA]">
                   Priority District Watchlist (Live)
                 </h2>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-[#A1A1AA] mt-0.5">
                   Ranked by ERA5 soil moisture deficit &amp; 60-day P–ET0 balance
                 </p>
               </div>
-              <ShieldAlert className="w-4 h-4 text-[#B91C1C] shrink-0" />
+              <ShieldAlert className="w-4 h-4 text-[#A855F7] shrink-0" />
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-[#EFF6FF]/60">
-                    <th className="text-left px-4 py-2.5 text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider">
+                  <tr className="border-b border-[#3F3F46] bg-[#09090B]">
+                    <th className="text-left px-4 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       District
                     </th>
-                    <th className="text-left px-2 py-2.5 text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider">
+                    <th className="text-left px-2 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       Class
                     </th>
-                    <th className="text-right px-2 py-2.5 text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider">
+                    <th className="text-right px-2 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       Score
                     </th>
-                    <th className="text-right px-2 py-2.5 text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider">
+                    <th className="text-right px-2 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       Soil %
                     </th>
-                    <th className="text-right px-3 py-2.5 text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider">
+                    <th className="text-right px-3 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       60d Rain
                     </th>
                   </tr>
@@ -610,13 +603,13 @@ export default function DashboardPage() {
                   {sortedByRisk.slice(0, 8).map((d) => (
                     <tr
                       key={d.id}
-                      className="border-b border-slate-100 last:border-0 hover:bg-[#EFF6FF]/50 transition-colors"
+                      className="border-b border-[#3F3F46]/60 last:border-0 hover:bg-[#27272A] transition-colors"
                     >
                       <td className="px-4 py-2.5">
-                        <p className="text-[#0A2540] text-xs font-semibold">
+                        <p className="text-[#FAFAFA] text-xs font-semibold">
                           {d.name}
                         </p>
-                        <p className="text-slate-500 text-[10px] font-mono">
+                        <p className="text-[#A1A1AA] text-[10px] font-mono">
                           {d.division}
                         </p>
                       </td>
@@ -626,13 +619,13 @@ export default function DashboardPage() {
                           size="sm"
                         />
                       </td>
-                      <td className="px-2 py-2.5 text-right text-xs font-bold text-[#0A2540] font-mono">
+                      <td className="px-2 py-2.5 text-right text-xs font-bold text-[#FAFAFA] font-mono">
                         {d.riskScore}
                       </td>
-                      <td className="px-2 py-2.5 text-right text-xs text-[#635BFF] font-semibold font-mono">
+                      <td className="px-2 py-2.5 text-right text-xs text-[#6366F1] font-semibold font-mono">
                         {d.soilMoisture}%
                       </td>
-                      <td className="px-3 py-2.5 text-right text-xs text-slate-600 font-mono">
+                      <td className="px-3 py-2.5 text-right text-xs text-[#A1A1AA] font-mono">
                         {d.rainfall60dMm} mm
                       </td>
                     </tr>
@@ -642,13 +635,13 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="px-4 py-3 border-t border-slate-200 bg-[#F8FAFC] flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-mono text-[11px]">
+          <div className="px-4 py-3 border-t border-[#3F3F46] bg-[#09090B] flex items-center justify-between text-xs">
+            <span className="text-[#A1A1AA] font-mono text-[11px]">
               Showing Top 8 of 35 Districts
             </span>
             <Link
               href="/dashboard/alerts"
-              className="text-[#635BFF] hover:underline font-semibold inline-flex items-center gap-1"
+              className="text-[#A855F7] hover:underline font-semibold inline-flex items-center gap-1"
             >
               View All Early Warnings <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
@@ -657,24 +650,24 @@ export default function DashboardPage() {
       </div>
 
       {/* Recommended Mitigation Protocols & Decision-Support Matrix */}
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div className="px-5 py-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
+        <div className="px-5 py-4 border-b border-[#3F3F46] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-[#C7A84B]/15 border border-[#C7A84B]/40 text-[10px] font-mono font-bold text-[#8A6D1B] uppercase">
+              <span className="px-2 py-0.5 rounded bg-[#A855F7]/15 border border-[#A855F7]/40 text-[10px] font-mono font-bold text-[#A855F7] uppercase">
                 DECISION-SUPPORT SIMULATIONS
               </span>
-              <h2 className="text-sm font-bold text-[#0A2540]">
+              <h2 className="text-sm font-bold text-[#FAFAFA]">
                 Recommended Mitigation Protocols &amp; Field Planning Scenarios
               </h2>
             </div>
-            <p className="text-xs text-slate-600 mt-0.5">
+            <p className="text-xs text-[#A1A1AA] mt-0.5">
               Model-generated intervention scenarios based on real-time soil moisture, reservoir storage, and satellite spectral anomalies
             </p>
           </div>
           <Link
             href="/dashboard/interventions"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#635BFF] hover:bg-[#5249e6] text-xs font-semibold text-white shrink-0 transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#A855F7] hover:bg-[#9333EA] text-xs font-semibold text-[#FAFAFA] shrink-0 transition-colors shadow-sm"
           >
             Open Intervention Planner <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -686,11 +679,11 @@ export default function DashboardPage() {
             return (
               <div
                 key={item.code}
-                className="rounded-xl bg-[#F8FAFC] border border-slate-200 p-4 flex flex-col justify-between gap-3 hover:border-[#635BFF]/40 transition-colors"
+                className="rounded-xl bg-[#27272A] border border-[#3F3F46] p-4 flex flex-col justify-between gap-3 hover:border-[#A855F7]/50 transition-colors"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <span className="text-[10px] font-mono font-bold text-slate-500">
+                    <span className="text-[10px] font-mono font-bold text-[#A1A1AA]">
                       Model Reference ID: {item.code} • {item.domain}
                     </span>
                     <span
@@ -701,32 +694,32 @@ export default function DashboardPage() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#EFF6FF] border border-blue-200 flex items-center justify-center shrink-0 mt-0.5">
-                      <Icon className="w-4 h-4 text-[#635BFF]" />
+                    <div className="w-9 h-9 rounded-lg bg-[#18181B] border border-[#3F3F46] flex items-center justify-center shrink-0 mt-0.5">
+                      <Icon className="w-4 h-4 text-[#A855F7]" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-[#0A2540] leading-snug">
+                      <h3 className="text-sm font-bold text-[#FAFAFA] leading-snug">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-[#0D9488] font-mono font-semibold mt-0.5">
+                      <p className="text-xs text-[#6366F1] font-mono font-semibold mt-0.5">
                         Candidate Scope: {item.target}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed pt-1">
+                  <p className="text-xs text-[#A1A1AA] leading-relaxed pt-1">
                     {item.actionText}
                   </p>
                 </div>
 
-                <div className="pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#0D9488] font-semibold">
+                <div className="pt-2.5 border-t border-[#3F3F46] flex items-center justify-between text-xs">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400 font-semibold">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     Model Scenario Ready
                   </span>
                   <Link
                     href={item.href}
-                    className="text-xs font-semibold text-[#635BFF] hover:underline inline-flex items-center gap-1"
+                    className="text-xs font-semibold text-[#A855F7] hover:underline inline-flex items-center gap-1"
                   >
                     Explore Scenario <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
@@ -738,34 +731,34 @@ export default function DashboardPage() {
       </div>
 
       {/* Data Ingestion Status */}
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div className="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between">
+      <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden shadow-lg">
+        <div className="px-5 py-3.5 border-b border-[#3F3F46] flex items-center justify-between">
           <div>
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#0A2540]">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#FAFAFA]">
               Active Satellite &amp; Meteorological Ingestion Pipelines
             </h2>
-            <p className="text-xs text-slate-600 mt-0.5">
+            <p className="text-xs text-[#A1A1AA] mt-0.5">
               Real-time meteorological/soil telemetry + public remote sensing &amp; hydrographic baselines
             </p>
           </div>
-          <span className="text-[11px] font-mono text-[#0D9488] font-bold">
+          <span className="text-[11px] font-mono text-emerald-400 font-bold">
             ALL PIPELINES NOMINAL
           </span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#3F3F46]">
           {ingestionLog.map((log, i) => (
             <div key={i} className="px-5 py-3.5 flex items-center gap-3">
               <div className="min-w-0 flex-1">
-                <p className="text-xs sm:text-sm text-[#0A2540] font-semibold truncate">
+                <p className="text-xs sm:text-sm text-[#FAFAFA] font-semibold truncate">
                   {log.dataset}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5">{log.region}</p>
+                <p className="text-xs text-[#A1A1AA] mt-0.5">{log.region}</p>
               </div>
               <div className="text-right shrink-0">
-                <p className="text-[11px] text-slate-500 font-mono">
+                <p className="text-[11px] text-[#A1A1AA] font-mono">
                   {log.timestamp}
                 </p>
-                <p className="text-xs font-mono font-bold mt-0.5 flex items-center justify-end text-[#0D9488]">
+                <p className="text-xs font-mono font-bold mt-0.5 flex items-center justify-end text-emerald-400">
                   <StatusDot status={log.status} />
                   {log.status}
                 </p>

@@ -4,58 +4,46 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 6% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 6% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 271 91% 65%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 239 84% 67%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5% 26%;
+    --input: 240 5% 26%;
+    --ring: 271 91% 65%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+  html[data-theme="light"] {
+    --background: 210 40% 98%;
+    --foreground: 210 73% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 73% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 73% 15%;
+    --primary: 243 100% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 100% 97%;
+    --secondary-foreground: 210 73% 15%;
+    --muted: 214 100% 97%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 45 52% 54%;
+    --accent-foreground: 210 73% 15%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 243 100% 68%;
   }
 }
 
@@ -64,8 +52,85 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-200;
   }
+}
+
+/* ============================================================================
+   DUAL-PALETTE THEME ENGINE:
+   - Default / Dark (data-theme="dark"): Palette 3 — AI / Innovation Purple Dark
+     (#09090B canvas, #18181B cards, #27272A tertiary, #FAFAFA text, #A855F7 purple)
+   - Light Mode (data-theme="light"): Palette 4 — Fintech / High-Trust Light
+     (#F8FAFC canvas, #FFFFFF cards, #EFF6FF panels, #0A2540 text, #635BFF interactive)
+   ============================================================================ */
+
+html[data-theme="light"] .bg-\[\#09090B\] {
+  background-color: #F8FAFC !important;
+}
+html[data-theme="light"] .bg-\[\#09090B\]\/90,
+html[data-theme="light"] .bg-\[\#09090B\]\/95,
+html[data-theme="light"] .bg-\[\#09090B\]\/80 {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+html[data-theme="light"] .bg-\[\#18181B\] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 1px 3px rgba(10, 37, 64, 0.05);
+}
+html[data-theme="light"] .bg-\[\#18181B\]\/95,
+html[data-theme="light"] .bg-\[\#18181B\]\/98,
+html[data-theme="light"] .bg-\[\#18181B\]\/90,
+html[data-theme="light"] .bg-\[\#18181B\]\/80 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+}
+html[data-theme="light"] .bg-\[\#27272A\],
+html[data-theme="light"] .bg-\[\#27272A\]\/60,
+html[data-theme="light"] .bg-\[\#27272A\]\/50,
+html[data-theme="light"] .bg-\[\#27272A\]\/40,
+html[data-theme="light"] .bg-\[\#27272A\]\/80 {
+  background-color: #EFF6FF !important;
+}
+html[data-theme="light"] .hover\:bg-\[\#27272A\]:hover,
+html[data-theme="light"] .hover\:bg-\[\#18181B\]:hover {
+  background-color: #EFF6FF !important;
+}
+html[data-theme="light"] .text-\[\#FAFAFA\],
+html[data-theme="light"] .hover\:text-\[\#FAFAFA\]:hover {
+  color: #0A2540 !important;
+}
+/* Keep button text white on solid purple/indigo/crimson buttons in Light Mode */
+html[data-theme="light"] .bg-\[\#A855F7\] .text-\[\#FAFAFA\],
+html[data-theme="light"] .bg-\[\#A855F7\].text-\[\#FAFAFA\],
+html[data-theme="light"] .bg-\[\#6366F1\] .text-\[\#FAFAFA\],
+html[data-theme="light"] .bg-\[\#6366F1\].text-\[\#FAFAFA\] {
+  color: #FFFFFF !important;
+}
+html[data-theme="light"] .text-\[\#A1A1AA\] {
+  color: #475569 !important;
+}
+html[data-theme="light"] .border-\[\#3F3F46\],
+html[data-theme="light"] .border-\[\#3F3F46\]\/70,
+html[data-theme="light"] .border-\[\#3F3F46\]\/60,
+html[data-theme="light"] .border-\[\#3F3F46\]\/50,
+html[data-theme="light"] .divide-\[\#3F3F46\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #E2E8F0 !important;
+}
+html[data-theme="light"] .bg-\[\#A855F7\] {
+  background-color: #635BFF !important;
+}
+html[data-theme="light"] .hover\:bg-\[\#9333EA\]:hover {
+  background-color: #5249E6 !important;
+}
+html[data-theme="light"] .text-\[\#A855F7\] {
+  color: #635BFF !important;
+}
+html[data-theme="light"] .border-\[\#A855F7\],
+html[data-theme="light"] .border-t-\[\#A855F7\] {
+  border-color: #635BFF !important;
+}
+html[data-theme="light"] .bg-\[\#A855F7\]\/20,
+html[data-theme="light"] .bg-\[\#A855F7\]\/15,
+html[data-theme="light"] .bg-\[\#A855F7\]\/10 {
+  background-color: rgba(99, 91, 255, 0.12) !important;
 }
 
 /* Custom scrollbar */
@@ -77,57 +142,12 @@
   @apply bg-transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-slate-600;
+  @apply rounded-full bg-zinc-700;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-500;
+  @apply bg-zinc-600;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
-}
-
-/* Satellite map hero gradient animation */
-@keyframes satellite-drift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero-satellite {
-  background: linear-gradient(
-    135deg,
-    #0f172a 0%,
-    #0c2340 10%,
-    #0d3026 20%,
-    #0f172a 30%,
-    #1a2e0f 40%,
-    #0f172a 50%,
-    #1c1a0f 60%,
-    #0f172a 70%,
-    #0c1f2e 80%,
-    #0f172a 100%
-  );
-  background-size: 400% 400%;
-  animation: satellite-drift 20s ease infinite;
-}
-
-/* Glow effects */
-.glow-blue {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
-}
-
-.glow-green {
-  box-shadow: 0 0 40px rgba(34, 197, 94, 0.1);
-}
-
-/* Drought severity badge animations */
-.severity-pulse-red {
-  animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse-red {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.6; }
 }
