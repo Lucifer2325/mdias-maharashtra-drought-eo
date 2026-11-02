@@ -12,24 +12,34 @@
 
 ---
 
-## 📸 Official Command Portal UI Showcase (Verified Telemetry & EO Views)
+## 📸 Official Command Portal UI Showcase (Verified Live Telemetry & EO Captures)
 
-### 1. Executive Situation Room Overview (`/dashboard`)
-Real-time ECMWF ERA5-Land volumetric soil moisture (`0–28 cm`), 60-day precipitation vs. FAO `ET0` water-balance deficit, 5-division scarcity breakdown, active Mantralaya/SEOC field directives, and the 35-District Survey of India GeoJSON & 11-Riverbed risk map.
+### 1. State Situation Room — Executive Command (`/dashboard`)
+Live authenticated session displaying real-time ECMWF ERA5-Land volumetric soil moisture (`0–28 cm`), 60-day precipitation vs. FAO `ET0` water-balance deficit, the **Revenue Division Situational Summary (Divisional Commissionerate Matrix)** across all 5 regional clusters, and the **MRSAC / Survey of India 35-District & 11-Riverbed Live Composite Risk Map**.
 
-![Executive Situation Room Overview](./docs/screenshots/01-executive-situation-room.png)
+![Live Executive Situation Room Command](./docs/screenshots/live-01-executive-command.png)
 
 ### 2. Multi-Sensor Optical Satellite & Riverbed EO Map (`/dashboard/map`)
-Interactive MapLibre GL Earth Observation workbench with 5 switchable satellite sensors (**Maxar/Esri 0.5m Optical**, **Copernicus Sentinel-2 L2A 10m**, **NASA VIIRS SWIR**, **Dark Topo**, **35-District GeoJSON**), live **NASA GIBS MODIS NDVI & Thermal LST** rasters, **11 Maharashtra Riverbeds** with `% Dry Bed` & sand-mining alerts, a **1-Click Ground Zoom Bar** (`14x–15x` auto-fading choropleth), and live **Element84 AWS Earth Search STAC v1** Sentinel-2 pass thumbnails & GeoTIFF links.
+Live MapLibre GL Earth Observation workbench displaying real **Maxar / Esri World Imagery optical satellite tiles**, all **35 Maharashtra districts**, **11 drought-critical riverbeds**, **ESZ threat rings**, the **1-Click Ground Zoom Bar**, and the **Live ERA5-Land District Dossier** (`Buldhana — Vidarbha Division`) with 12-month NDVI anomaly trend and direct `12.5x` satellite camera zoom.
 
-![Multi-Sensor Optical Satellite & Riverbed EO Map](./docs/screenshots/02-satellite-riverbed-eo-map.png)
+![Live Multi-Sensor Optical Satellite & Riverbed EO Map](./docs/screenshots/live-02-satellite-riverbed-eo-map.png)
 
-### 3. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife`)
+### 3. State Emergency Operations Center (SEOC) & Collectorate Early Warning Directives (`/dashboard/alerts`)
+Automated statutory triggers connecting Copernicus/ISRO Earth Observation thresholds (`SPI`, `NDVI`, `Live Storage`, `GRACE-FO`, and `Sentinel-1 SAR`) to District Collectors, SDM Flying Squads, and Forest Divisions—including **NDRF/SDRF Triggers**, **Tanker Requisition Protocols**, **NGT Section 19 Illegal Excavation Alerts**, and **Forest Fire & Waterhole Emergencies**.
+
+![Live SEOC & Collectorate Early Warning Directives](./docs/screenshots/live-03-seoc-early-warning-alerts.png)
+
+### 4. Ground-Zoom Riverbed Inspection & Copernicus Sentinel-2 STAC Feed (`/dashboard/map`)
+Zoomed view (`14.2x`) over the **Manjara Dry Riverbed** with the **AWS STAC v1 • Sentinel-2 L2A** pass inspector card (showing 10m RGB thumbnail, cloud cover `%`, and GeoTIFF links) alongside the 3-tab `Sensors / Telemetry / Overlays` EO control dock.
+
+![Sentinel-2 STAC & Riverbed Dossier View](./docs/screenshots/02-satellite-riverbed-eo-map.png)
+
+### 5. Protected Forest, Wildlife & Eco-Sensitive Threat Zones (`/dashboard/wildlife`)
 Surveillance across **12 Protected Areas & Eco-Sensitive Zones (ESZs)** tracking **199 illegal riverbed sand-dredging & basalt/laterite hill-excavation hotspots**, dry forest waterholes, solar borewell pumps, and NGT enforcement directives.
 
 ![Protected Forest, Wildlife & Eco-Sensitive Threat Zones](./docs/screenshots/03-forest-wildlife-esz-threats.png)
 
-### 4. Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Engineering Command (`/dashboard/interventions`)
+### 6. Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Engineering Command (`/dashboard/interventions`)
 SRTM 30m D8 flow-accumulation and Strahler stream-order siting for check dams, percolation tanks, farm ponds, and recharge shafts, complete with *Paisewari (Annewari)* sub-basin metrics and Government Resolution (`GR`) sanction codes.
 
 ![Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Engineering Command](./docs/screenshots/04-jalyukt-shivar-analytics.png)

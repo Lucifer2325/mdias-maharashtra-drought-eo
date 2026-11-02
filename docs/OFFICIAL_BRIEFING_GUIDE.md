@@ -6,7 +6,7 @@ This guide outlines a structured **5-minute live demonstration** of the **Mahara
 
 ## Step 1: State Situation Room Overview (`/dashboard`)
 
-![State Situation Room Overview](./screenshots/01-executive-situation-room.png)
+![State Situation Room Overview](./screenshots/live-01-executive-command.png)
 
 1. Point out the **Institutional Authority Bar** at the top (`Relief & Rehabilitation Dept. • Water Resources Dept. (WRD) • Revenue & Forest Dept.`) and the live ticking **IST Command Clock**.
 2. Highlight the **Executive Divisional Breakdown Strip**, which aggregates live ECMWF ERA5-Land telemetry across **Marathwada**, **Vidarbha**, **Pune & Western Rain-Shadow**, **Nashik**, and **Konkan**.
@@ -16,7 +16,9 @@ This guide outlines a structured **5-minute live demonstration** of the **Mahara
 
 ## Step 2: Multi-Sensor Satellite & Riverbed Inspection (`/dashboard/map`)
 
-![Multi-Sensor Satellite & Riverbed EO Map](./screenshots/02-satellite-riverbed-eo-map.png)
+![Live Satellite & Riverbed EO Map](./screenshots/live-02-satellite-riverbed-eo-map.png)
+
+![Sentinel-2 STAC & Riverbed Dossier View](./screenshots/02-satellite-riverbed-eo-map.png)
 
 1. **Statewide Choropleth & Riverbed View (`Zoom 6.2x`)**:
    - Show the 35-district risk choropleth overlaid with **11 major Maharashtra riverbeds** (dashed red for dry beds like **Manjara** and **Sina**; amber for critically depleted reaches like **Bhima** and **Godavari**) and **red dashed ESZ threat rings**.
@@ -41,6 +43,8 @@ This guide outlines a structured **5-minute live demonstration** of the **Mahara
 ---
 
 ## Step 4: Jalyukt Shivar 2.0, SEOC Alerts & Collectorate Briefings
+
+![Live SEOC & Collectorate Early Warning Directives](./screenshots/live-03-seoc-early-warning-alerts.png)
 
 ![Jalyukt Shivar Abhiyan 2.0 & Sub-Basin Analytics](./screenshots/04-jalyukt-shivar-analytics.png)
 
