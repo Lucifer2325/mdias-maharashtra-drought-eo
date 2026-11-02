@@ -90,31 +90,37 @@ const DIVISION_DEFINITIONS = [
   {
     key: "Marathwada",
     label: "Marathwada Region",
-    subregion: "Chh. Sambhajinagar Cluster",
+    subregion: "Chh. Sambhajinagar Div.",
     match: (div: string) => div.includes("Marathwada"),
   },
   {
-    key: "Vidarbha",
-    label: "Vidarbha (Amravati & Nagpur)",
-    subregion: "Nagpur & Amravati Cluster",
-    match: (div: string) => div.includes("Vidarbha"),
+    key: "VidarbhaAmravati",
+    label: "Vidarbha — Amravati",
+    subregion: "West Vidarbha Div.",
+    match: (div: string) => div.includes("Amravati"),
+  },
+  {
+    key: "VidarbhaNagpur",
+    label: "Vidarbha — Nagpur",
+    subregion: "East Vidarbha Div.",
+    match: (div: string) => div.includes("Nagpur"),
   },
   {
     key: "Pune",
-    label: "Pune & Western Rain-Shadow",
-    subregion: "Bhima & Krishna Basin Cluster",
+    label: "Pune / Desh Region",
+    subregion: "Western MH & Rain-Shadow",
     match: (div: string) => div.includes("Pune"),
   },
   {
     key: "Nashik",
-    label: "Nashik & North Maharashtra",
-    subregion: "Upper Godavari & Tapi Cluster",
+    label: "Nashik / Khandesh",
+    subregion: "North Maharashtra Div.",
     match: (div: string) => div.includes("Nashik"),
   },
   {
     key: "Konkan",
-    label: "Konkan Coastal Zone",
-    subregion: "Western Ghats Coastal Belt",
+    label: "Konkan & Ghats",
+    subregion: "Coastal & Sahyadri Div.",
     match: (div: string) => div.includes("Konkan"),
   },
 ];
@@ -123,6 +129,7 @@ export default function DashboardPage() {
   const [districts, setDistricts] = useState<LiveDistrictTelemetry[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchedAt, setFetchedAt] = useState<string>("");
+  const [selectedRegion, setSelectedRegion] = useState<string>("ALL");
 
   const loadLive = async () => {
     setLoading(true);
@@ -158,6 +165,13 @@ export default function DashboardPage() {
     () => [...districts].sort((a, b) => b.riskScore - a.riskScore),
     [districts]
   );
+
+  const watchlistDistricts = useMemo(() => {
+    if (selectedRegion === "ALL") return sortedByRisk;
+    const def = DIVISION_DEFINITIONS.find((d) => d.key === selectedRegion);
+    if (!def) return sortedByRisk;
+    return sortedByRisk.filter((d) => def.match(d.division));
+  }, [sortedByRisk, selectedRegion]);
 
   const affectedCount = districts.filter((d) => d.riskScore >= 40).length;
   const avgSoilMoisture = districts.length
@@ -226,52 +240,76 @@ export default function DashboardPage() {
 
   const mitigationProtocols = [
     {
-      code: "SIM-WAT-104",
-      domain: "Rural Water Supply & Tanker Logistics Model",
+      code: "SIM-MAR-104",
+      domain: "Marathwada Region (Chh. Sambhajinagar Div.)",
       title: "GPS-Optimized Tanker Allocation & Fodder Readiness Simulation",
-      target: topRiskNames || "Latur, Dharashiv, Solapur, Beed",
-      priority: "HIGH PRIORITY • 24H LEAD",
+      target: "Dharashiv, Latur, Beed, Jalna, Parbhani, Nanded, Hingoli",
+      priority: "HIGH PRIORITY • MARATHWADA",
       priorityColor: "bg-red-500/15 text-red-400 border-red-500/30",
       icon: Truck,
       actionText:
-        "Identifies Watch/Warning talukas where soil moisture deficit and groundwater drawdown indicate immediate need for supplementary water tanker routing within a 3 km radius.",
+        "Identifies Watch/Warning talukas across the Manjara and Godavari sub-basins where soil moisture deficit indicates need for supplemental tanker routing.",
       href: "/dashboard/interventions",
     },
     {
-      code: "SIM-EO-219",
-      domain: "Riverbed Optical Anomaly & Ecological Monitoring",
-      title: "Exposed Riverbed Bare-Sand Spectral Detection",
-      target: "Manjara, Sina, Bhima, Godavari & Penganga Reaches",
-      priority: "SATELLITE ANOMALY WATCH",
+      code: "SIM-PUN-219",
+      domain: "Pune / Desh Region (Western Rain-Shadow)",
+      title: "Bhima–Sina–Nira Rain-Shadow Percolation & Riverbed Watch",
+      target: "Solapur (Sangola/Barshi), Pune (Baramati/Indapur), Satara (Man), Sangli (Jath)",
+      priority: "RAIN-SHADOW WATCH • PUNE DIV",
       priorityColor: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
       icon: Scale,
       actionText:
-        "Flags dry riverbed stretches with high bare-sand reflectance in Sentinel-2 L2A imagery to assist environmental researchers and local teams in monitoring riverbed disturbance.",
+        "Monitors Ujjani tailwater depletion, Sina-Man-Nira dry riverbeds, and check-dam recharge potential across the eastern rain-shadow talukas of Western Maharashtra.",
       href: "/dashboard/wildlife",
     },
     {
-      code: "SIM-HYD-088",
-      domain: "Surface Reservoir & Basin Storage Analytics",
-      title: "Reservoir Dead-Storage Buffer & Demand Forecasting",
-      target: "Jayakwadi, Ujani, Manjara & Upper Wardha Basins",
-      priority: "STORAGE THRESHOLD",
+      code: "SIM-AMV-088",
+      domain: "Vidarbha — Amravati Region (West Vidarbha)",
+      title: "Penganga & Purna Saline-Tract Soil Moisture & Cotton Stress Model",
+      target: "Yavatmal, Amravati, Akola, Washim, Buldhana",
+      priority: "CROP & STORAGE • AMRAVATI DIV",
       priorityColor: "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
       icon: Waves,
       actionText:
-        "Models remaining live storage against 60-day Penman-Monteith evapotranspiration (ET0) rates to estimate domestic water supply buffer duration.",
+        "Evaluates root-zone soil moisture (0–28 cm) and Purna alluvial salinity stress for non-irrigated cotton/soybean belts and Melghat foothill streams.",
       href: "/dashboard/analytics",
     },
     {
-      code: "SIM-ECO-312",
-      domain: "Forest Canopy & Wildlife Habitat Hydration",
-      title: "Solar Waterhole & Fire-Line Vulnerability Assessment",
-      target: "Tadoba-Andhari, Melghat, Great Indian Bustard & Navegaon",
-      priority: "HABITAT RESILIENCE",
+      code: "SIM-NGP-312",
+      domain: "Vidarbha — Nagpur Region (East Vidarbha)",
+      title: "Wainganga–Wardha Malguzari Tank & Tiger Corridor Hydration",
+      target: "Nagpur, Wardha, Chandrapur, Gadchiroli, Bhandara, Gondia",
+      priority: "ECO & BASIN • NAGPUR DIV",
       priorityColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
       icon: Sun,
       actionText:
-        "Combines FSI canopy cover baselines with surface temperature anomalies to prioritize artificial waterhole replenishment in wildlife buffer corridors.",
+        "Tracks traditional Malguzari irrigation tank storage in Bhandara-Gondia and artificial solar waterhole status across Tadoba-Andhari, Pench, and Navegaon-Nagzira.",
       href: "/dashboard/wildlife",
+    },
+    {
+      code: "SIM-NSK-405",
+      domain: "Nashik / Khandesh Region (North Maharashtra)",
+      title: "Tapi–Girna–Panzara Alluvial Recharge & Upper Godavari Balance",
+      target: "Ahilyanagar, Nashik (Malegaon/Yeola), Jalgaon, Dhule, Nandurbar",
+      priority: "AQUIFER MODEL • NASHIK DIV",
+      priorityColor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+      icon: Droplets,
+      actionText:
+        "Simulates Hatnur/Girna reservoir releases, Satpura foothill recharge shafts in Jalgaon-Dhule-Nandurbar, and rain-shadow scarcity in eastern Nashik & Ahilyanagar.",
+      href: "/dashboard/interventions",
+    },
+    {
+      code: "SIM-KNK-518",
+      domain: "Konkan & Western Ghats Region (Coastal Belt)",
+      title: "Lateritic Plateau Spring-Shed & Post-Monsoon Runoff Retention",
+      target: "Palghar (Jawhar/Mokhada), Thane (Shahapur), Raigad, Ratnagiri, Sindhudurg",
+      priority: "SPRING-SHED • KONKAN DIV",
+      priorityColor: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
+      icon: Compass,
+      actionText:
+        "Addresses summer drinking-water scarcity on steep lateritic plateaus (Jawhar, Mokhada, Poladpur, Western Ghats) via Vasant Bandharas and spring-shed Arrest structures.",
+      href: "/dashboard/interventions",
     },
   ];
 
@@ -392,37 +430,56 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Regional Summary Matrix Strip */}
+      {/* Regional Summary Matrix Strip — All 6 Maharashtra Regions */}
       <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-4 shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-[#3F3F46]">
           <div>
             <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-[#A855F7]">
-              REGIONAL SUMMARY MATRIX • 5 HYDRO-CLIMATIC CLUSTERS
+              MAHARASHTRA 6-REGION SUMMARY MATRIX • ALL REVENUE DIVISIONS
             </h2>
             <p className="text-xs text-[#A1A1AA] mt-0.5">
-              Aggregated live soil moisture, 60-day cumulative rainfall, and composite drought index across Maharashtra regions
+              Click any region card to filter the District Watchlist across Marathwada, Amravati, Nagpur, Pune/Desh, Nashik/Khandesh, and Konkan
             </p>
           </div>
-          <span className="text-[11px] font-mono text-[#A1A1AA]">
-            5 Regional Clusters • 35 Districts
-          </span>
+          <div className="flex items-center gap-2">
+            {selectedRegion !== "ALL" && (
+              <button
+                onClick={() => setSelectedRegion("ALL")}
+                className="px-2.5 py-1 rounded-md bg-[#A855F7]/20 border border-[#A855F7]/50 text-[10px] font-mono font-bold text-[#FAFAFA] hover:bg-[#A855F7]/30 transition-colors"
+              >
+                Show All 6 Regions
+              </button>
+            )}
+            <span className="text-[11px] font-mono text-[#A1A1AA]">
+              6 Official Regions • 35 GeoJSON Districts
+            </span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
           {divisionBreakdown.map((div) => {
             const isElevated = div.avgRisk >= 45;
+            const isSelected = selectedRegion === div.key;
             return (
-              <div
+              <button
                 key={div.key}
-                className="rounded-lg bg-[#27272A] border border-[#3F3F46] p-3.5 flex flex-col justify-between hover:border-[#A855F7]/50 transition-colors"
+                type="button"
+                onClick={() =>
+                  setSelectedRegion((prev) => (prev === div.key ? "ALL" : div.key))
+                }
+                className={`text-left rounded-lg bg-[#27272A] border p-3.5 flex flex-col justify-between transition-all ${
+                  isSelected
+                    ? "border-[#A855F7] ring-1 ring-[#A855F7]"
+                    : "border-[#3F3F46] hover:border-[#A855F7]/60"
+                }`}
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center justify-between gap-1.5">
                     <span className="text-xs font-bold text-[#FAFAFA] truncate">
                       {div.label}
                     </span>
                     <span
-                      className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
+                      className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold shrink-0 ${
                         isElevated
                           ? "bg-red-500/15 text-red-400 border border-red-500/30"
                           : "bg-[#A855F7]/15 text-[#A855F7] border border-[#A855F7]/40"
@@ -431,26 +488,26 @@ export default function DashboardPage() {
                       Risk {div.avgRisk}
                     </span>
                   </div>
-                  <p className="text-[10px] font-mono text-[#A1A1AA] mt-0.5">
-                    {div.subregion} • {div.count || "—"} Districts
+                  <p className="text-[10px] font-mono text-[#A1A1AA] mt-0.5 truncate">
+                    {div.subregion} • {div.count || "—"} Dist.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-[#3F3F46] text-center">
+                <div className="grid grid-cols-3 gap-1.5 mt-3 pt-2.5 border-t border-[#3F3F46] text-center">
                   <div>
-                    <p className="text-[10px] text-[#A1A1AA] font-mono">SOIL</p>
+                    <p className="text-[9px] text-[#A1A1AA] font-mono">SOIL</p>
                     <p className="text-xs font-mono font-bold text-[#6366F1]">
                       {div.avgSoil}%
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#A1A1AA] font-mono">60D RAIN</p>
+                    <p className="text-[9px] text-[#A1A1AA] font-mono">60D RAIN</p>
                     <p className="text-xs font-mono font-bold text-[#FAFAFA]">
                       {div.avgRain60d}mm
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#A1A1AA] font-mono">WARNING+</p>
+                    <p className="text-[9px] text-[#A1A1AA] font-mono">WARNING+</p>
                     <p
                       className={`text-xs font-mono font-bold ${
                         div.criticalCount > 0 ? "text-amber-400" : "text-emerald-400"
@@ -460,7 +517,7 @@ export default function DashboardPage() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -567,20 +624,47 @@ export default function DashboardPage() {
         {/* Priority District Watchlist — 1/3 width */}
         <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl overflow-hidden flex flex-col justify-between shadow-lg">
           <div>
-            <div className="px-5 py-4 border-b border-[#3F3F46] flex items-center justify-between">
-              <div>
-                <h2 className="text-sm font-bold text-[#FAFAFA]">
-                  Priority District Watchlist (Live)
-                </h2>
-                <p className="text-xs text-[#A1A1AA] mt-0.5">
-                  Ranked by ERA5 soil moisture deficit &amp; 60-day P–ET0 balance
-                </p>
+            <div className="px-5 py-3.5 border-b border-[#3F3F46] space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-sm font-bold text-[#FAFAFA]">
+                    Live District Watchlist ({watchlistDistricts.length} Dist.)
+                  </h2>
+                  <p className="text-xs text-[#A1A1AA] mt-0.5">
+                    Filter by any of the 6 Maharashtra regions below
+                  </p>
+                </div>
+                <ShieldAlert className="w-4 h-4 text-[#A855F7] shrink-0" />
               </div>
-              <ShieldAlert className="w-4 h-4 text-[#A855F7] shrink-0" />
+
+              <div className="flex flex-wrap gap-1">
+                {[
+                  { key: "ALL", short: "All (35)" },
+                  { key: "Marathwada", short: "Marathwada (8)" },
+                  { key: "VidarbhaAmravati", short: "Amravati (5)" },
+                  { key: "VidarbhaNagpur", short: "Nagpur (6)" },
+                  { key: "Pune", short: "Pune/Desh (5)" },
+                  { key: "Nashik", short: "Nashik (5)" },
+                  { key: "Konkan", short: "Konkan (6)" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    onClick={() => setSelectedRegion(tab.key)}
+                    className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold transition-colors ${
+                      selectedRegion === tab.key
+                        ? "bg-[#A855F7] text-[#FAFAFA]"
+                        : "bg-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] border border-[#3F3F46]"
+                    }`}
+                  >
+                    {tab.short}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto max-h-[340px] overflow-y-auto">
               <table className="w-full text-sm">
-                <thead>
+                <thead className="sticky top-0 z-10">
                   <tr className="border-b border-[#3F3F46] bg-[#09090B]">
                     <th className="text-left px-4 py-2.5 text-[10px] font-mono font-bold text-[#A1A1AA] uppercase tracking-wider">
                       District
@@ -600,7 +684,7 @@ export default function DashboardPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedByRisk.slice(0, 8).map((d) => (
+                  {watchlistDistricts.map((d) => (
                     <tr
                       key={d.id}
                       className="border-b border-[#3F3F46]/60 last:border-0 hover:bg-[#27272A] transition-colors"
@@ -637,7 +721,7 @@ export default function DashboardPage() {
 
           <div className="px-4 py-3 border-t border-[#3F3F46] bg-[#09090B] flex items-center justify-between text-xs">
             <span className="text-[#A1A1AA] font-mono text-[11px]">
-              Showing Top 8 of 35 Districts
+              Showing {watchlistDistricts.length} Districts ({selectedRegion === "ALL" ? "All 6 Regions" : selectedRegion})
             </span>
             <Link
               href="/dashboard/alerts"

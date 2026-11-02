@@ -18,27 +18,63 @@ import { useUser, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
 const REGIONS = {
-  Marathwada: {
-    Latur: ["Latur", "Ausa", "Udgir", "Nilanga"],
-    "Dharashiv (Osmanabad)": ["Osmanabad", "Tuljapur", "Kalamb", "Paranda"],
-    Beed: ["Beed", "Ashti", "Georai", "Parli"],
-    "Chh. Sambhajinagar": ["Aurangabad", "Paithan", "Kannad", "Sillod"],
-    Jalna: ["Jalna", "Ambad", "Bhokardan", "Partur"],
-    Nanded: ["Nanded", "Deglur", "Kinwat", "Mukhed"],
+  "All Maharashtra (6 Regions)": {
+    "All 36 Districts": [
+      "Marathwada (8 Dist.)",
+      "Vidarbha — Amravati (5 Dist.)",
+      "Vidarbha — Nagpur (6 Dist.)",
+      "Pune / Desh (5 Dist.)",
+      "Nashik / Khandesh (5 Dist.)",
+      "Konkan & Western Ghats (7 Dist.)",
+    ],
   },
-  Vidarbha: {
-    Yavatmal: ["Yavatmal", "Pusad", "Wani", "Ralegaon"],
-    Amravati: ["Amravati", "Achalpur", "Morshi", "Warud"],
-    Akola: ["Akola", "Akot", "Balapur", "Murtizapur"],
-    Buldhana: ["Buldhana", "Khamgaon", "Malkapur", "Shegaon"],
-    Nagpur: ["Nagpur", "Kamptee", "Katol", "Umred"],
+  "Marathwada (Chh. Sambhajinagar)": {
+    Latur: ["Latur", "Ausa", "Udgir", "Nilanga", "Ahmadpur", "Chakur", "Renapur", "Deoni"],
+    "Dharashiv (Osmanabad)": ["Dharashiv", "Tuljapur", "Kalamb", "Paranda", "Bhoom", "Washi", "Umarga", "Lohara"],
+    Beed: ["Beed", "Ashti", "Georai", "Parli", "Majalgaon", "Ambajogai", "Kaij", "Patoda", "Wadwani"],
+    "Chh. Sambhajinagar": ["Chh. Sambhajinagar", "Paithan", "Kannad", "Sillod", "Vaijapur", "Gangapur", "Khuldabad", "Phulambri"],
+    Jalna: ["Jalna", "Ambad", "Bhokardan", "Partur", "Badnapur", "Ghansawangi", "Mantha", "Jafrabad"],
+    Parbhani: ["Parbhani", "Jintur", "Gangakhed", "Sailu", "Pathri", "Manwath", "Purna", "Sonpeth"],
+    Hingoli: ["Hingoli", "Kalamnuri", "Basmath", "Sengaon", "Aundha Nagnath"],
+    Nanded: ["Nanded", "Deglur", "Kinwat", "Mukhed", "Kandhar", "Loha", "Hadgaon", "Bhokar", "Biloli"],
   },
-  "Western Rain-Shadow": {
-    Solapur: ["Solapur", "Sangola", "Pandharpur", "Barshi"],
-    Ahilyanagar: ["Ahmednagar", "Sangamner", "Shrigonda", "Parner"],
-    Nashik: ["Nashik", "Nandgaon", "Yeola", "Sinnar"],
-    Pune: ["Pune", "Baramati", "Indapur", "Shirur"],
-    Sangli: ["Sangli", "Jath", "Atpadi", "Kavathe Mahankal"],
+  "Vidarbha — Amravati (West)": {
+    Yavatmal: ["Yavatmal", "Pusad", "Wani", "Ralegaon", "Darwha", "Umarkhed", "Digras", "Pandharkawada"],
+    Amravati: ["Amravati", "Achalpur", "Morshi", "Warud", "Daryapur", "Dharni (Melghat)", "Chikhaldara", "Anjangaon"],
+    Akola: ["Akola", "Akot", "Balapur", "Murtizapur", "Patur", "Telhara", "Barshitakli"],
+    Buldhana: ["Buldhana", "Khamgaon", "Malkapur", "Shegaon", "Chikhli", "Mehkar", "Lonar", "Sindkhed Raja"],
+    Washim: ["Washim", "Karanja", "Risod", "Mangrulpir", "Malegaon", "Manora"],
+  },
+  "Vidarbha — Nagpur (East)": {
+    Nagpur: ["Nagpur", "Kamptee", "Katol", "Umred", "Ramtek", "Savner", "Hingna", "Narkhed"],
+    Wardha: ["Wardha", "Hinganghat", "Arvi", "Deoli", "Seloo", "Samudrapur", "Ashti", "Karanja"],
+    Chandrapur: ["Chandrapur", "Bhadravati", "Warora", "Chimur", "Bramhapuri", "Mul", "Rajura", "Ballarpur"],
+    Gadchiroli: ["Gadchiroli", "Aheri", "Sironcha", "Etapalli", "Chamorshi", "Armori", "Wadsa", "Bhamragad"],
+    Bhandara: ["Bhandara", "Tumsar", "Pauni", "Sakoli", "Mohadi", "Lakhani", "Lakhandur"],
+    Gondia: ["Gondia", "Tirora", "Arjuni Morgaon", "Amgaon", "Deori", "Sadak Arjuni", "Salekasa"],
+  },
+  "Pune / Desh (Western MH)": {
+    Solapur: ["Solapur", "Sangola", "Pandharpur", "Barshi", "Madha", "Karmala", "Malshiras", "Mangalvedha", "Akkalkot"],
+    Pune: ["Pune", "Baramati", "Indapur", "Shirur", "Daund", "Purandar", "Junnar", "Ambegaon", "Maval"],
+    Satara: ["Satara", "Man (Dahiwadi)", "Khatav (Vaduj)", "Phaltan", "Khandala", "Karad", "Wai", "Patan"],
+    Sangli: ["Sangli (Miraj)", "Jath", "Atpadi", "Kavathe Mahankal", "Tasgaon", "Khanapur (Vita)", "Islampur"],
+    Kolhapur: ["Kolhapur (Karvir)", "Hatkanangale", "Shirol", "Kagal", "Panhala", "Gadhinglaj", "Chandgad", "Radhanagari"],
+  },
+  "Nashik / Khandesh (North MH)": {
+    "Ahilyanagar (Ahmednagar)": ["Ahilyanagar", "Sangamner", "Shrigonda", "Parner", "Karjat", "Jamkhed", "Pathardi", "Kopargaon"],
+    Nashik: ["Nashik", "Malegaon", "Nandgaon", "Yeola", "Sinnar", "Chandwad", "Baglan (Satana)", "Niphad", "Igatpuri"],
+    Jalgaon: ["Jalgaon", "Bhusawal", "Chalisgaon", "Jamner", "Pachora", "Amalner", "Chopda", "Raver", "Muktainagar"],
+    Dhule: ["Dhule", "Shirpur", "Sakri", "Sindkheda"],
+    Nandurbar: ["Nandurbar", "Shahada", "Taloda", "Navapur", "Akkalkuwa", "Dhadgaon"],
+  },
+  "Konkan (Coastal & Ghats)": {
+    Palghar: ["Palghar", "Jawhar", "Mokhada", "Dahanu", "Talasari", "Vikramgad", "Wada", "Vasai"],
+    Thane: ["Thane", "Shahapur", "Murbad", "Kalyan", "Bhiwandi", "Ambarnath", "Ulhasnagar"],
+    Raigad: ["Alibag", "Mahad", "Poladpur", "Panvel", "Roha", "Pen", "Karjat", "Mangaon"],
+    Ratnagiri: ["Ratnagiri", "Chiplun", "Khed", "Dapoli", "Sangameshwar", "Rajapur", "Guhagar"],
+    Sindhudurg: ["Kudal", "Sawantwadi", "Kankavli", "Malvan", "Vengurla", "Devgad", "Dodamarg"],
+    "Mumbai Suburban": ["Andheri", "Borivali", "Kurla"],
+    "Mumbai City": ["Island City South", "Byculla", "Dadar", "Worli"],
   },
 } as const;
 
@@ -105,8 +141,8 @@ export function Header() {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
 
-  const [selectedState, setSelectedState] = useState<string>("Marathwada");
-  const [selectedDistrict, setSelectedDistrict] = useState<string>("Latur");
+  const [selectedState, setSelectedState] = useState<string>("All Maharashtra (6 Regions)");
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("All 36 Districts");
   const [selectedTaluka, setSelectedTaluka] = useState<string>("All Talukas");
   const [dateRange, setDateRange] = useState<string>("30d");
   const [istClock, setIstClock] = useState<string>("IST LIVE");

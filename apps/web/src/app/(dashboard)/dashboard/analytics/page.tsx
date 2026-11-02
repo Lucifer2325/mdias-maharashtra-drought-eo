@@ -205,8 +205,8 @@ function StatCard({
 
 const BASIN_FORECASTS = [
   {
-    basin: "Manjara Sub-Basin",
-    districts: "Dharashiv, Latur, Beed",
+    basin: "Manjara & Lower Godavari (Marathwada)",
+    districts: "Dharashiv, Latur, Beed, Nanded, Jalna, Parbhani, Hingoli",
     liveStoragePct: "19.4%",
     spi3m: "-1.88",
     gwDepletionM: "-3.65 m",
@@ -214,45 +214,97 @@ const BASIN_FORECASTS = [
     badgeCls: "bg-red-500/15 text-red-300 border-red-500/30",
   },
   {
-    basin: "Sina & Bhima Rain-Shadow",
-    districts: "Solapur, Ahilyanagar, Paranda",
+    basin: "Sina, Nira & Bhima Rain-Shadow (Pune / Desh)",
+    districts: "Solapur, Pune (Baramati), Satara (Man), Sangli (Jath), Kolhapur",
     liveStoragePct: "24.8%",
     spi3m: "-1.62",
     gwDepletionM: "-3.10 m",
-    scarcityOutlook: "SEVERE • Soil Moisture Deficit",
+    scarcityOutlook: "SEVERE • Rain-Shadow Deficit",
     badgeCls: "bg-amber-500/15 text-amber-300 border-amber-500/30",
   },
   {
-    basin: "Upper & Middle Godavari",
-    districts: "Chh. Sambhajinagar, Jalna, Parbhani",
-    liveStoragePct: "38.2%",
-    spi3m: "-1.24",
-    gwDepletionM: "-2.15 m",
-    scarcityOutlook: "WARNING • Storage Drawdown Watch",
+    basin: "Penganga & Purna Saline Tract (Vidarbha — Amravati)",
+    districts: "Yavatmal, Amravati, Akola, Washim, Buldhana",
+    liveStoragePct: "36.5%",
+    spi3m: "-1.34",
+    gwDepletionM: "-2.25 m",
+    scarcityOutlook: "WARNING • Cotton/Soybean Stress",
     badgeCls: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
   },
   {
-    basin: "Wardha–Wainganga (Penganga)",
-    districts: "Yavatmal, Washim, Akola, Nanded",
-    liveStoragePct: "46.5%",
-    spi3m: "-0.95",
-    gwDepletionM: "-1.40 m",
-    scarcityOutlook: "WATCH • Dry-Spell Crop Stress",
+    basin: "Wardha–Wainganga–Pranhita (Vidarbha — Nagpur)",
+    districts: "Nagpur, Wardha, Chandrapur, Gadchiroli, Bhandara, Gondia",
+    liveStoragePct: "51.2%",
+    spi3m: "-0.82",
+    gwDepletionM: "-1.30 m",
+    scarcityOutlook: "WATCH • Malguzari Tank & ESZ Watch",
     badgeCls: "bg-[#6366F1]/15 text-[#6366F1] border-[#6366F1]/40",
+  },
+  {
+    basin: "Tapi–Girna & Upper Godavari (Nashik / Khandesh)",
+    districts: "Ahilyanagar, Nashik, Jalgaon, Dhule, Nandurbar",
+    liveStoragePct: "34.1%",
+    spi3m: "-1.28",
+    gwDepletionM: "-2.45 m",
+    scarcityOutlook: "WARNING • Alluvial Drawdown",
+    badgeCls: "bg-[#A855F7]/15 text-[#A855F7] border-[#A855F7]/40",
+  },
+  {
+    basin: "Konkan West-Flowing & Sahyadri Laterite (Konkan)",
+    districts: "Palghar (Jawhar), Thane, Raigad, Ratnagiri, Sindhudurg, Mumbai",
+    liveStoragePct: "58.4%",
+    spi3m: "-0.45",
+    gwDepletionM: "-1.15 m",
+    scarcityOutlook: "WATCH • Lateritic Plateau Runoff Loss",
+    badgeCls: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
   },
 ];
 
-// ─── District Table ───────────────────────────────────────────────────────────
+// ─── Statewide 36-District Table Across All 6 Regions ─────────────────────────
 
 const DISTRICT_TABLE = [
-  { name: "Dharashiv (Osmanabad)", basin: "Manjara / Sina", ndviAnomaly: -0.22, spi3m: -1.9, reservoir: 18, yieldIndex: 39, risk: 82, class: "ALERT" },
-  { name: "Latur",                 basin: "Manjara / Terna", ndviAnomaly: -0.19, spi3m: -1.7, reservoir: 22, yieldIndex: 42, risk: 78, class: "ALERT" },
-  { name: "Beed",                  basin: "Godavari / Sindphana", ndviAnomaly: -0.16, spi3m: -1.5, reservoir: 28, yieldIndex: 45, risk: 74, class: "WARNING" },
-  { name: "Nanded",                basin: "Godavari / Penganga", ndviAnomaly: -0.14, spi3m: -1.3, reservoir: 34, yieldIndex: 48, risk: 71, class: "WARNING" },
-  { name: "Jalna",                 basin: "Godavari / Dudhna", ndviAnomaly: -0.11, spi3m: -1.1, reservoir: 41, yieldIndex: 51, risk: 68, class: "WARNING" },
-  { name: "Chh. Sambhajinagar",    basin: "Upper Godavari", ndviAnomaly: -0.09, spi3m: -0.9, reservoir: 47, yieldIndex: 54, risk: 64, class: "WATCH" },
-  { name: "Parbhani",              basin: "Godavari / Purna", ndviAnomaly: -0.07, spi3m: -0.7, reservoir: 52, yieldIndex: 56, risk: 61, class: "WATCH" },
-  { name: "Hingoli",               basin: "Kayadhu / Purna", ndviAnomaly: -0.04, spi3m: -0.5, reservoir: 59, yieldIndex: 61, risk: 57, class: "WATCH" },
+  // 1. Marathwada (8 Districts)
+  { name: "Dharashiv (Osmanabad)", regionId: "marathwada", division: "Marathwada", basin: "Manjara / Sina", ndviAnomaly: -0.22, spi3m: -1.9, reservoir: 18, yieldIndex: 39, risk: 82, class: "ALERT" },
+  { name: "Latur",                 regionId: "marathwada", division: "Marathwada", basin: "Manjara / Terna", ndviAnomaly: -0.19, spi3m: -1.7, reservoir: 22, yieldIndex: 42, risk: 78, class: "ALERT" },
+  { name: "Beed",                  regionId: "marathwada", division: "Marathwada", basin: "Godavari / Sindphana", ndviAnomaly: -0.16, spi3m: -1.5, reservoir: 28, yieldIndex: 45, risk: 74, class: "WARNING" },
+  { name: "Nanded",                regionId: "marathwada", division: "Marathwada", basin: "Godavari / Penganga", ndviAnomaly: -0.14, spi3m: -1.3, reservoir: 34, yieldIndex: 48, risk: 71, class: "WARNING" },
+  { name: "Jalna",                 regionId: "marathwada", division: "Marathwada", basin: "Godavari / Dudhna", ndviAnomaly: -0.11, spi3m: -1.1, reservoir: 41, yieldIndex: 51, risk: 68, class: "WARNING" },
+  { name: "Chh. Sambhajinagar",    regionId: "marathwada", division: "Marathwada", basin: "Upper Godavari", ndviAnomaly: -0.09, spi3m: -0.9, reservoir: 47, yieldIndex: 54, risk: 64, class: "WATCH" },
+  { name: "Parbhani",              regionId: "marathwada", division: "Marathwada", basin: "Godavari / Purna", ndviAnomaly: -0.07, spi3m: -0.7, reservoir: 52, yieldIndex: 56, risk: 61, class: "WATCH" },
+  { name: "Hingoli",               regionId: "marathwada", division: "Marathwada", basin: "Kayadhu / Purna", ndviAnomaly: -0.04, spi3m: -0.5, reservoir: 59, yieldIndex: 61, risk: 57, class: "WATCH" },
+  // 2. Vidarbha — Amravati (5 Districts)
+  { name: "Yavatmal",              regionId: "vidarbha-amravati", division: "Vidarbha (Amravati)", basin: "Penganga / Wardha", ndviAnomaly: -0.15, spi3m: -1.4, reservoir: 31, yieldIndex: 46, risk: 72, class: "WARNING" },
+  { name: "Amravati",              regionId: "vidarbha-amravati", division: "Vidarbha (Amravati)", basin: "Upper Wardha / Purna", ndviAnomaly: -0.10, spi3m: -1.1, reservoir: 44, yieldIndex: 52, risk: 60, class: "WARNING" },
+  { name: "Akola",                 regionId: "vidarbha-amravati", division: "Vidarbha (Amravati)", basin: "Purna / Morna", ndviAnomaly: -0.08, spi3m: -1.0, reservoir: 46, yieldIndex: 54, risk: 56, class: "WATCH" },
+  { name: "Buldhana",              regionId: "vidarbha-amravati", division: "Vidarbha (Amravati)", basin: "Purna / Khadakpurna", ndviAnomaly: -0.07, spi3m: -0.9, reservoir: 49, yieldIndex: 55, risk: 53, class: "WATCH" },
+  { name: "Washim",                regionId: "vidarbha-amravati", division: "Vidarbha (Amravati)", basin: "Penganga / Katepurna", ndviAnomaly: -0.06, spi3m: -0.8, reservoir: 51, yieldIndex: 57, risk: 51, class: "WATCH" },
+  // 3. Vidarbha — Nagpur (6 Districts)
+  { name: "Wardha",                regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Wardha / Bor", ndviAnomaly: -0.11, spi3m: -1.2, reservoir: 42, yieldIndex: 50, risk: 63, class: "WARNING" },
+  { name: "Chandrapur",            regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Wardha / Erai / Wainganga", ndviAnomaly: -0.07, spi3m: -0.9, reservoir: 48, yieldIndex: 56, risk: 54, class: "WATCH" },
+  { name: "Nagpur",                regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Kanhan / Pench", ndviAnomaly: -0.05, spi3m: -0.7, reservoir: 55, yieldIndex: 60, risk: 46, class: "WATCH" },
+  { name: "Bhandara",              regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Wainganga (Gosekhurd)", ndviAnomaly: -0.03, spi3m: -0.5, reservoir: 62, yieldIndex: 64, risk: 39, class: "WATCH" },
+  { name: "Gondia",                regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Bagh / Wainganga", ndviAnomaly: -0.02, spi3m: -0.4, reservoir: 64, yieldIndex: 66, risk: 37, class: "WATCH" },
+  { name: "Gadchiroli",            regionId: "vidarbha-nagpur", division: "Vidarbha (Nagpur)", basin: "Pranhita / Indravati", ndviAnomaly: 0.02, spi3m: -0.2, reservoir: 71, yieldIndex: 72, risk: 29, class: "NONE" },
+  // 4. Pune / Desh — Western Maharashtra (5 Districts)
+  { name: "Solapur",               regionId: "pune-desh", division: "Pune (Desh)", basin: "Bhima / Sina / Man", ndviAnomaly: -0.18, spi3m: -1.6, reservoir: 26, yieldIndex: 43, risk: 76, class: "ALERT" },
+  { name: "Sangli",                regionId: "pune-desh", division: "Pune (Desh)", basin: "Krishna / Agrani (Jath)", ndviAnomaly: -0.12, spi3m: -1.2, reservoir: 39, yieldIndex: 49, risk: 62, class: "WARNING" },
+  { name: "Satara",                regionId: "pune-desh", division: "Pune (Desh)", basin: "Krishna / Koyna / Man", ndviAnomaly: -0.08, spi3m: -0.9, reservoir: 54, yieldIndex: 56, risk: 52, class: "WATCH" },
+  { name: "Pune",                  regionId: "pune-desh", division: "Pune (Desh)", basin: "Bhima / Nira / Mutha", ndviAnomaly: -0.07, spi3m: -0.8, reservoir: 56, yieldIndex: 58, risk: 49, class: "WATCH" },
+  { name: "Kolhapur",              regionId: "pune-desh", division: "Pune (Desh)", basin: "Panchganga / Dudhganga", ndviAnomaly: 0.04, spi3m: 0.1, reservoir: 74, yieldIndex: 76, risk: 26, class: "NONE" },
+  // 5. Nashik / Khandesh — North Maharashtra (5 Districts)
+  { name: "Ahilyanagar (Ahmednagar)", regionId: "nashik-khandesh", division: "Nashik (Khandesh)", basin: "Pravara / Mula / Sina", ndviAnomaly: -0.15, spi3m: -1.4, reservoir: 33, yieldIndex: 46, risk: 70, class: "WARNING" },
+  { name: "Dhule",                 regionId: "nashik-khandesh", division: "Nashik (Khandesh)", basin: "Tapi / Panzara", ndviAnomaly: -0.12, spi3m: -1.2, reservoir: 38, yieldIndex: 50, risk: 63, class: "WARNING" },
+  { name: "Jalgaon",               regionId: "nashik-khandesh", division: "Nashik (Khandesh)", basin: "Tapi / Girna / Waghur", ndviAnomaly: -0.09, spi3m: -1.0, reservoir: 45, yieldIndex: 53, risk: 58, class: "WATCH" },
+  { name: "Nashik",                regionId: "nashik-khandesh", division: "Nashik (Khandesh)", basin: "Upper Godavari / Girna", ndviAnomaly: -0.07, spi3m: -0.8, reservoir: 51, yieldIndex: 57, risk: 52, class: "WATCH" },
+  { name: "Nandurbar",             regionId: "nashik-khandesh", division: "Nashik (Khandesh)", basin: "Tapi / Gomai", ndviAnomaly: -0.06, spi3m: -0.7, reservoir: 53, yieldIndex: 59, risk: 48, class: "WATCH" },
+  // 6. Konkan & Western Ghats (7 Districts)
+  { name: "Palghar",               regionId: "konkan", division: "Konkan", basin: "Vaitarna / Surya (Jawhar)", ndviAnomaly: -0.05, spi3m: -0.6, reservoir: 58, yieldIndex: 62, risk: 44, class: "WATCH" },
+  { name: "Raigad",                regionId: "konkan", division: "Konkan", basin: "Savitri / Kundalika / Patalganga", ndviAnomaly: -0.02, spi3m: -0.3, reservoir: 66, yieldIndex: 68, risk: 34, class: "WATCH" },
+  { name: "Thane",                 regionId: "konkan", division: "Konkan", basin: "Ulhas / Bhatsa / Barvi", ndviAnomaly: -0.01, spi3m: -0.2, reservoir: 69, yieldIndex: 70, risk: 31, class: "NONE" },
+  { name: "Ratnagiri",             regionId: "konkan", division: "Konkan", basin: "Vashishti / Shastri", ndviAnomaly: 0.03, spi3m: 0.1, reservoir: 72, yieldIndex: 74, risk: 25, class: "NONE" },
+  { name: "Sindhudurg",            regionId: "konkan", division: "Konkan", basin: "Karli / Tillari", ndviAnomaly: 0.05, spi3m: 0.2, reservoir: 78, yieldIndex: 78, risk: 21, class: "NONE" },
+  { name: "Mumbai Suburban",       regionId: "konkan", division: "Konkan", basin: "Mithi / Tulsi / Vihar", ndviAnomaly: 0.01, spi3m: 0.0, reservoir: 75, yieldIndex: 75, risk: 24, class: "NONE" },
+  { name: "Mumbai City",           regionId: "konkan", division: "Konkan", basin: "Coastal Urban Supply", ndviAnomaly: 0.01, spi3m: 0.0, reservoir: 76, yieldIndex: 75, risk: 22, class: "NONE" },
 ];
 
 const CLASS_BADGE: Record<string, string> = {
@@ -264,15 +316,22 @@ const CLASS_BADGE: Record<string, string> = {
 };
 
 const REGIONS = [
-  { id: "marathwada", name: "Marathwada Study Region (8 Districts)" },
-  { id: "vidarbha",   name: "Vidarbha Study Region" },
-  { id: "osmanabad",  name: "Dharashiv (Osmanabad) District" },
-  { id: "latur",      name: "Latur District" },
-  { id: "beed",       name: "Beed District" },
+  { id: "all",               name: "All Maharashtra (6 Regions • 36 Districts)" },
+  { id: "marathwada",        name: "Marathwada Region (Chh. Sambhajinagar Div. • 8 Dist.)" },
+  { id: "vidarbha-amravati", name: "Vidarbha — Amravati Region (West Vidarbha • 5 Dist.)" },
+  { id: "vidarbha-nagpur",   name: "Vidarbha — Nagpur Region (East Vidarbha • 6 Dist.)" },
+  { id: "pune-desh",         name: "Pune / Desh Region (Western MH & Rain-Shadow • 5 Dist.)" },
+  { id: "nashik-khandesh",   name: "Nashik / Khandesh Region (North Maharashtra • 5 Dist.)" },
+  { id: "konkan",            name: "Konkan & Western Ghats Region (Coastal • 7 Dist.)" },
 ];
 
 export default function AnalyticsPage() {
   const [region, setRegion] = useState(REGIONS[0].id);
+
+  const filteredDistricts =
+    region === "all"
+      ? DISTRICT_TABLE
+      : DISTRICT_TABLE.filter((d) => d.regionId === region);
 
   return (
     <div className="min-h-screen bg-[#09090B] text-[#FAFAFA]">
@@ -335,7 +394,7 @@ export default function AnalyticsPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {BASIN_FORECASTS.map((b) => (
               <div
                 key={b.basin}
@@ -541,15 +600,29 @@ export default function AnalyticsPage() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h2 className="text-lg font-bold text-[#FAFAFA]">
-                Regional Composite Vulnerability Ledger — Marathwada Study Region
+                Regional Composite Vulnerability Ledger —{" "}
+                {REGIONS.find((r) => r.id === region)?.name ?? "All 6 Regions"}
               </h2>
               <p className="text-xs text-[#A1A1AA]">
-                Multi-indicator matrix integrating satellite NDVI, SPI-3M, Surface Reservoir Storage, and modeled crop yield index.
+                Multi-indicator matrix integrating satellite NDVI, SPI-3M, Surface Reservoir Storage, and modeled crop yield index across all 6 Maharashtra regions.
               </p>
             </div>
-            <span className="text-xs font-mono text-[#A855F7] font-semibold">
-              Benchmark: Crop Yield Index &lt; 0.50 indicates severe agricultural stress
-            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {REGIONS.map((r) => (
+                <button
+                  key={r.id}
+                  type="button"
+                  onClick={() => setRegion(r.id)}
+                  className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold transition-colors ${
+                    region === r.id
+                      ? "bg-[#A855F7] text-[#FAFAFA]"
+                      : "bg-[#18181B] text-[#A1A1AA] hover:text-[#FAFAFA] border border-[#3F3F46]"
+                  }`}
+                >
+                  {r.id === "all" ? "All 6 Regions (36)" : r.name.split(" (")[0]}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="overflow-x-auto rounded-xl border border-[#3F3F46] bg-[#18181B] shadow-lg">
             <table className="w-full text-sm">
@@ -557,6 +630,7 @@ export default function AnalyticsPage() {
                 <tr>
                   {[
                     "District",
+                    "Region / Division",
                     "Primary River Sub-Basin",
                     "NDVI Anomaly",
                     "SPI-3M",
@@ -575,13 +649,16 @@ export default function AnalyticsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#3F3F46]/60 bg-[#18181B]">
-                {DISTRICT_TABLE.map((row) => (
+                {filteredDistricts.map((row) => (
                   <tr
                     key={row.name}
                     className="transition-colors hover:bg-[#27272A]/60"
                   >
                     <td className="px-4 py-3.5 font-semibold text-[#FAFAFA]">
                       {row.name}
+                    </td>
+                    <td className="px-4 py-3.5 text-xs font-mono text-[#A855F7] font-semibold">
+                      {row.division}
                     </td>
                     <td className="px-4 py-3.5 text-xs font-mono text-[#6366F1] font-medium">
                       {row.basin}
@@ -655,14 +732,16 @@ export default function AnalyticsPage() {
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-[#FAFAFA]">
-              Composite Drought Vulnerability Index — Inter-District Comparison
+              Composite Drought Vulnerability Index — Inter-District Comparison ({filteredDistricts.length} Districts)
             </h2>
             <span className="text-xs font-mono text-[#A1A1AA]">
               Weighted Model: 30% SPI + 25% NDVI + 25% Surface Storage + 20% Aquifer Anomaly
             </span>
           </div>
           <div className="rounded-xl border border-[#3F3F46] bg-[#18181B] p-5 shadow-md">
-            <DistrictComparisonChart />
+            <DistrictComparisonChart
+              data={filteredDistricts.map((d) => ({ district: d.name, score: d.risk }))}
+            />
           </div>
         </section>
       </div>

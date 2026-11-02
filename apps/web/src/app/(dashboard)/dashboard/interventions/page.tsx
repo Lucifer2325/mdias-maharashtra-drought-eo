@@ -23,7 +23,13 @@ interface MockIntervention {
   modelRunId: string;
   programCategory: "Watershed Recharge Modeling" | "Rural NRM Siting" | "Aquifer Sustainability" | "Micro-Catchment Storage";
   region: string;
-  division: "Marathwada Region" | "Vidarbha Region" | "Western Rain-Shadow Region";
+  division:
+    | "Marathwada Region"
+    | "Vidarbha — Amravati Region"
+    | "Vidarbha — Nagpur Region"
+    | "Pune / Desh Region"
+    | "Nashik / Khandesh Region"
+    | "Konkan & Ghats Region";
   taluka: string;
   village: string;
   watershedCode: string;
@@ -132,17 +138,17 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
   },
   {
     id: "SITE-YVT-005",
-    modelRunId: "SIM-WCD-2026-V052",
+    modelRunId: "SIM-WCD-2026-VA052",
     programCategory: "Micro-Catchment Storage",
     region: "Yavatmal",
-    division: "Vidarbha Region",
+    division: "Vidarbha — Amravati Region",
     taluka: "Ralegaon",
     village: "Pimpalgaon",
     watershedCode: "WG-07-WARDHA-14",
     aquiferType: "Fractured Deccan Trap / Gondwana Contact",
     type: "GROUNDWATER_RECHARGE",
     status: "IMPLEMENTED",
-    priorityScore: 82.1,
+    priorityScore: 86.4,
     catchmentAreaHa: 180.5,
     estStorageM3: 34000,
     benefitedHouseholds: 175,
@@ -150,40 +156,218 @@ const MOCK_INTERVENTIONS: MockIntervention[] = [
     slopePct: 2.8,
     strahlerOrder: 3,
     coords: [20.4285, 78.5112],
-    hydrologyNote: "Direct recharge shaft siting along lineament intersection zone",
+    hydrologyNote: "Direct recharge shaft siting along Penganga–Wardha lineament intersection",
   },
   {
-    id: "SITE-SOL-006",
-    modelRunId: "SIM-WCD-2026-W311",
+    id: "SITE-BUL-006",
+    modelRunId: "SIM-WCD-2026-VA091",
+    programCategory: "Watershed Recharge Modeling",
+    region: "Buldhana",
+    division: "Vidarbha — Amravati Region",
+    taluka: "Khamgaon",
+    village: "Pimpalgaon Raja",
+    watershedCode: "TP-11-PURNA-04",
+    aquiferType: "Purna Valley Alluvial-Basalt Margin",
+    type: "CHECK_DAM",
+    status: "VERIFIED",
+    priorityScore: 83.2,
+    catchmentAreaHa: 154.0,
+    estStorageM3: 29800,
+    benefitedHouseholds: 132,
+    estimatedCostLakhs: 41.0,
+    slopePct: 2.5,
+    strahlerOrder: 3,
+    coords: [20.7124, 76.5681],
+    hydrologyNote: "Freshwater recharge structure upstream of Purna inland salinity belt",
+  },
+  {
+    id: "SITE-CHN-007",
+    modelRunId: "SIM-WCD-2026-VN142",
+    programCategory: "Rural NRM Siting",
+    region: "Chandrapur",
+    division: "Vidarbha — Nagpur Region",
+    taluka: "Mul",
+    village: "Chichpalli",
+    watershedCode: "WG-19-WAINGANGA-08",
+    aquiferType: "Gondwana Sandstone & Weathered Schist",
+    type: "PERCOLATION_TANK",
+    status: "APPROVED",
+    priorityScore: 85.1,
+    catchmentAreaHa: 230.0,
+    estStorageM3: 44500,
+    benefitedHouseholds: 210,
+    estimatedCostLakhs: 58.0,
+    slopePct: 1.9,
+    strahlerOrder: 2,
+    coords: [20.0715, 79.6742],
+    hydrologyNote: "Traditional Malguzari tank desilting and percolation buffer near Tadoba corridor",
+  },
+  {
+    id: "SITE-WRD-008",
+    modelRunId: "SIM-WCD-2026-VN188",
+    programCategory: "Aquifer Sustainability",
+    region: "Wardha",
+    division: "Vidarbha — Nagpur Region",
+    taluka: "Arvi",
+    village: "Rohna",
+    watershedCode: "WG-03-UPPER-WARDHA-12",
+    aquiferType: "Columnar & Vesicular Deccan Basalt",
+    type: "NALA_BUND",
+    status: "VERIFIED",
+    priorityScore: 80.5,
+    catchmentAreaHa: 126.0,
+    estStorageM3: 23500,
+    benefitedHouseholds: 112,
+    estimatedCostLakhs: 33.5,
+    slopePct: 3.1,
+    strahlerOrder: 2,
+    coords: [20.9854, 78.2341],
+    hydrologyNote: "Cement nala bund series arresting rapid runoff in cotton-soybean watershed",
+  },
+  {
+    id: "SITE-SOL-009",
+    modelRunId: "SIM-WCD-2026-PD311",
     programCategory: "Watershed Recharge Modeling",
     region: "Solapur",
-    division: "Western Rain-Shadow Region",
+    division: "Pune / Desh Region",
     taluka: "Sangola",
     village: "Watambare",
     watershedCode: "BM-22-MAN-08",
     aquiferType: "Hard Rock Basalt — Scarcity Zone",
     type: "CONTOUR_BUND",
-    status: "CANDIDATE",
-    priorityScore: 79.4,
-    catchmentAreaHa: 92.0,
-    estStorageM3: 16800,
-    benefitedHouseholds: 82,
-    estimatedCostLakhs: 24.0,
+    status: "APPROVED",
+    priorityScore: 90.4,
+    catchmentAreaHa: 192.0,
+    estStorageM3: 36800,
+    benefitedHouseholds: 164,
+    estimatedCostLakhs: 46.0,
     slopePct: 5.6,
-    strahlerOrder: 1,
+    strahlerOrder: 2,
     coords: [17.4321, 75.1983],
-    hydrologyNote: "Hill-slope contour trenching to arrest sheet erosion and boost soil moisture",
+    hydrologyNote: "Man River rain-shadow contour trenching and gabion check-dam cascade",
+  },
+  {
+    id: "SITE-SAT-010",
+    modelRunId: "SIM-WCD-2026-PD349",
+    programCategory: "Micro-Catchment Storage",
+    region: "Satara",
+    division: "Pune / Desh Region",
+    taluka: "Man (Dahiwadi)",
+    village: "Mhaswad",
+    watershedCode: "KR-12-MAN-NIRA-05",
+    aquiferType: "Fractured Deccan Basalt Plateau",
+    type: "CHECK_DAM",
+    status: "VERIFIED",
+    priorityScore: 87.3,
+    catchmentAreaHa: 168.0,
+    estStorageM3: 31200,
+    benefitedHouseholds: 148,
+    estimatedCostLakhs: 44.0,
+    slopePct: 3.0,
+    strahlerOrder: 3,
+    coords: [17.6382, 74.7891],
+    hydrologyNote: "Recharges chronically drought-prone eastern Satara (Man-Khatav) rain-shadow belt",
+  },
+  {
+    id: "SITE-AHL-011",
+    modelRunId: "SIM-WCD-2026-NK412",
+    programCategory: "Aquifer Sustainability",
+    region: "Ahilyanagar (Ahmednagar)",
+    division: "Nashik / Khandesh Region",
+    taluka: "Parner",
+    village: "Takli Dhokeshwar",
+    watershedCode: "GV-15-MULA-KUKADI-09",
+    aquiferType: "Weathered Amygdaloidal Basalt",
+    type: "PERCOLATION_TANK",
+    status: "APPROVED",
+    priorityScore: 89.1,
+    catchmentAreaHa: 215.0,
+    estStorageM3: 41000,
+    benefitedHouseholds: 190,
+    estimatedCostLakhs: 54.5,
+    slopePct: 2.4,
+    strahlerOrder: 2,
+    coords: [19.1423, 74.4512],
+    hydrologyNote: "Plateau percolation tank supporting drinking-water dugwells across Parner-Sangamner",
+  },
+  {
+    id: "SITE-DHL-012",
+    modelRunId: "SIM-WCD-2026-NK458",
+    programCategory: "Watershed Recharge Modeling",
+    region: "Dhule",
+    division: "Nashik / Khandesh Region",
+    taluka: "Sakri",
+    village: "Pimpalner",
+    watershedCode: "TP-06-PANZARA-14",
+    aquiferType: "Tapi–Panzara Alluvial & Basalt Contact",
+    type: "GROUNDWATER_RECHARGE",
+    status: "VERIFIED",
+    priorityScore: 84.0,
+    catchmentAreaHa: 148.0,
+    estStorageM3: 27600,
+    benefitedHouseholds: 128,
+    estimatedCostLakhs: 38.0,
+    slopePct: 2.9,
+    strahlerOrder: 3,
+    coords: [20.9612, 74.1284],
+    hydrologyNote: "Sub-surface dyke and recharge shaft system in Panzara–Tapi sub-basin",
+  },
+  {
+    id: "SITE-PLG-013",
+    modelRunId: "SIM-WCD-2026-KK503",
+    programCategory: "Rural NRM Siting",
+    region: "Palghar",
+    division: "Konkan & Ghats Region",
+    taluka: "Jawhar",
+    village: "Dabheri",
+    watershedCode: "KN-02-SURYA-VAITARNA-07",
+    aquiferType: "Steep Sahyadri Lateritic Cap over Basalt",
+    type: "CHECK_DAM",
+    status: "APPROVED",
+    priorityScore: 86.8,
+    catchmentAreaHa: 134.0,
+    estStorageM3: 26400,
+    benefitedHouseholds: 156,
+    estimatedCostLakhs: 39.0,
+    slopePct: 6.2,
+    strahlerOrder: 3,
+    coords: [19.9124, 73.2315],
+    hydrologyNote: "Konkan Vasant Bandhara & spring-shed retention to prevent post-monsoon dry-out in tribal ghats",
+  },
+  {
+    id: "SITE-RGD-014",
+    modelRunId: "SIM-WCD-2026-KK541",
+    programCategory: "Micro-Catchment Storage",
+    region: "Raigad",
+    division: "Konkan & Ghats Region",
+    taluka: "Poladpur",
+    village: "Kudpan",
+    watershedCode: "KN-08-SAVITRI-11",
+    aquiferType: "Lateritic Escarpment & Foothill Colluvium",
+    type: "CONTOUR_BUND",
+    status: "CANDIDATE",
+    priorityScore: 78.9,
+    catchmentAreaHa: 98.0,
+    estStorageM3: 18500,
+    benefitedHouseholds: 92,
+    estimatedCostLakhs: 26.5,
+    slopePct: 6.8,
+    strahlerOrder: 1,
+    coords: [17.9832, 73.4651],
+    hydrologyNote: "Spring-shed contour trenching along upper Savitri escarpment to sustain summer drinking water",
   },
 ];
 
 export default function InterventionsPage() {
   const [filterType, setFilterType] = useState<string>("ALL");
+  const [filterDivision, setFilterDivision] = useState<string>("ALL");
   const [selectedSite, setSelectedSite] = useState<MockIntervention>(MOCK_INTERVENTIONS[0]);
 
-  const filtered =
-    filterType === "ALL"
-      ? MOCK_INTERVENTIONS
-      : MOCK_INTERVENTIONS.filter((item) => item.type === filterType);
+  const filtered = MOCK_INTERVENTIONS.filter((item) => {
+    const matchesType = filterType === "ALL" || item.type === filterType;
+    const matchesDiv = filterDivision === "ALL" || item.division === filterDivision;
+    return matchesType && matchesDiv;
+  });
 
   const totalStorageM3 = MOCK_INTERVENTIONS.reduce((acc, s) => acc + s.estStorageM3, 0);
   const totalTCM = (totalStorageM3 / 1000).toFixed(1);
@@ -267,7 +451,7 @@ export default function InterventionsPage() {
               {MOCK_INTERVENTIONS.length} Structures
             </div>
             <span className="text-xs text-[#A855F7] font-medium mt-1 inline-block">
-              3 Regions • 6 Priority Districts
+              All 6 Maharashtra Regions • 14 Priority Districts
             </span>
           </div>
           <div className="p-2.5 rounded-lg bg-[#A855F7]/15 border border-[#A855F7]/40 text-[#A855F7]">
@@ -330,34 +514,63 @@ export default function InterventionsPage() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-b border-[#3F3F46] pb-3">
-        <div className="flex flex-wrap gap-2">
+      {/* Region Filter + Structure Type Filter Tabs */}
+      <div className="space-y-3 pt-1 border-b border-[#3F3F46] pb-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-[#A1A1AA] mr-1">
+            Maharashtra Region:
+          </span>
           {[
-            "ALL",
-            "CHECK_DAM",
-            "PERCOLATION_TANK",
-            "FARM_POND",
-            "NALA_BUND",
-            "GROUNDWATER_RECHARGE",
-            "CONTOUR_BUND",
-          ].map((t) => (
+            { key: "ALL", label: "All 6 Regions (14)" },
+            { key: "Marathwada Region", label: "Marathwada (4)" },
+            { key: "Vidarbha — Amravati Region", label: "Vidarbha — Amravati (2)" },
+            { key: "Vidarbha — Nagpur Region", label: "Vidarbha — Nagpur (2)" },
+            { key: "Pune / Desh Region", label: "Pune / Desh (2)" },
+            { key: "Nashik / Khandesh Region", label: "Nashik / Khandesh (2)" },
+            { key: "Konkan & Ghats Region", label: "Konkan & Ghats (2)" },
+          ].map((div) => (
             <button
-              key={t}
-              onClick={() => setFilterType(t)}
+              key={div.key}
+              onClick={() => setFilterDivision(div.key)}
               className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition-colors ${
-                filterType === t
-                  ? "bg-[#A855F7] text-[#FAFAFA] shadow-sm"
+                filterDivision === div.key
+                  ? "bg-[#6366F1] text-[#FAFAFA] shadow-sm"
                   : "bg-[#18181B] text-[#A1A1AA] hover:bg-[#27272A] hover:text-[#FAFAFA] border border-[#3F3F46]"
               }`}
             >
-              {t.replace(/_/g, " ")}
+              {div.label}
             </button>
           ))}
         </div>
-        <span className="text-xs font-mono text-[#A1A1AA]">
-          Showing {filtered.length} of {MOCK_INTERVENTIONS.length} modeled candidate sites
-        </span>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
+            {[
+              "ALL",
+              "CHECK_DAM",
+              "PERCOLATION_TANK",
+              "FARM_POND",
+              "NALA_BUND",
+              "GROUNDWATER_RECHARGE",
+              "CONTOUR_BUND",
+            ].map((t) => (
+              <button
+                key={t}
+                onClick={() => setFilterType(t)}
+                className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition-colors ${
+                  filterType === t
+                    ? "bg-[#A855F7] text-[#FAFAFA] shadow-sm"
+                    : "bg-[#18181B] text-[#A1A1AA] hover:bg-[#27272A] hover:text-[#FAFAFA] border border-[#3F3F46]"
+                }`}
+              >
+                {t.replace(/_/g, " ")}
+              </button>
+            ))}
+          </div>
+          <span className="text-xs font-mono text-[#A1A1AA]">
+            Showing {filtered.length} of {MOCK_INTERVENTIONS.length} modeled candidate sites
+          </span>
+        </div>
       </div>
 
       {/* Main Table + Detail Drawer */}
