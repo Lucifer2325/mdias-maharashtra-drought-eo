@@ -10,11 +10,31 @@ import {
   Copy,
   Check,
   Cpu,
+  Bell,
+  Mail,
+  Phone,
+  Globe,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState<"general" | "billing" | "apikeys" | "team">("general");
+  const [activeTab, setActiveTab] = useState<
+    "notifications" | "general" | "billing" | "apikeys" | "team"
+  >("notifications");
   const [copiedKey, setCopiedKey] = useState(false);
+  const [testSent, setTestSent] = useState(false);
+  const [channelPrefs, setChannelPrefs] = useState({
+    emailDigest: true,
+    smsGateway: true,
+    webhookSync: true,
+    marathiSms: true,
+    criticalSoilAlert: true,
+    riverbedSarAlert: true,
+  });
+
+  const togglePref = (key: keyof typeof channelPrefs) => {
+    setChannelPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const mockApiKey = "mdias_proto_89f0293d84b2c0194832049e91240182";
 
@@ -45,6 +65,7 @@ export default function SettingsPage() {
       {/* Tabs */}
       <div className="flex flex-wrap border-b border-[#3F3F46] gap-6 text-sm font-medium bg-[#18181B] px-6 pt-3 rounded-t-xl border-x border-t shadow-md">
         {[
+          { id: "notifications", label: "Notifications & Alert Channels", icon: Bell },
           { id: "general", label: "Workspace Profile", icon: Building2 },
           { id: "billing", label: "Compute & Quota Tier", icon: CreditCard },
           { id: "apikeys", label: "Developer & STAC API Keys", icon: Key },
@@ -54,7 +75,16 @@ export default function SettingsPage() {
           return (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as "general" | "billing" | "apikeys" | "team")}
+              onClick={() =>
+                setActiveTab(
+                  tab.id as
+                    | "notifications"
+                    | "general"
+                    | "billing"
+                    | "apikeys"
+                    | "team"
+                )
+              }
               className={`flex items-center gap-2 pb-3.5 border-b-2 transition-colors ${
                 activeTab === tab.id
                   ? "border-[#A855F7] text-[#A855F7] font-semibold"
@@ -67,6 +97,134 @@ export default function SettingsPage() {
           );
         })}
       </div>
+
+      {/* Notifications & Alert Channels Tab */}
+      {activeTab === "notifications" && (
+        <div className="space-y-6">
+          <div className="bg-[#18181B] border border-[#3F3F46] rounded-xl p-6 space-y-5 shadow-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#3F3F46] pb-4">
+              <div>
+                <h3 className="text-base font-bold text-[#FAFAFA] flex items-center gap-2">
+                  <Bell className="w-4 h-4 text-[#A855F7]" />
+                  Multi-Region Notification &amp; Early-Warning Delivery Channels
+                </h3>
+                <p className="text-xs text-[#A1A1AA] mt-1">
+                  Configure how threshold alerts across all 6 Maharashtra regions (Marathwada, Amravati, Nagpur, Pune/Desh, Nashik/Khandesh, Konkan) are dispatched.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setTestSent(true);
+                  setTimeout(() => setTestSent(false), 3000);
+                }}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#A855F7] hover:bg-[#9333EA] text-xs font-semibold text-[#FAFAFA] transition-colors shrink-0"
+              >
+                {testSent ? (
+                  <>
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Test Alert Dispatched!
+                  </>
+                ) : (
+                  <>
+                    <Bell className="w-3.5 h-3.5" />
+                    Send Test Notification
+                  </>
+                )}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                {
+                  key: "emailDigest" as const,
+                  title: "Daily ERA5-Land & SPI-3M Email Digest",
+                  desc: "Sends morning summary of soil moisture (0–28 cm) and 60-day rainfall deficit across all 36 districts.",
+                  icon: Mail,
+                  badge: "SMTP • ACTIVE",
+                },
+                {
+                  key: "smsGateway" as const,
+                  title: "Field SMS & WhatsApp Advisory Gateway",
+                  desc: "Dispatches instant E.164 SMS advisories when district composite drought risk crosses 70/100.",
+                  icon: Phone,
+                  badge: "SMS • ACTIVE",
+                },
+                {
+                  key: "webhookSync" as const,
+                  title: "JSON Webhook & GeoJSON Trigger Stream",
+                  desc: "POSTs structured GeoJSON payloads to external GIS dashboards when reservoir live storage drops below 20%.",
+                  icon: Globe,
+                  badge: "WEBHOOK • REST",
+                },
+                {
+                  key: "marathiSms" as const,
+                  title: "Bilingual Marathi (मराठी) + English Alert Payloads",
+                  desc: "Includes Marathi (मराठी) district, taluka, and river sub-basin translations in all outgoing notifications.",
+                  icon: Bell,
+                  badge: "मराठी + EN",
+                },
+                {
+                  key: "criticalSoilAlert" as const,
+                  title: "Critical Root-Zone Soil Moisture Watch (<22%)",
+                  desc: "Immediate notification for non-irrigated Kharif/Rabi blocks in Marathwada, Vidarbha, and Rain-Shadow Desh.",
+                  icon: CheckCircle2,
+                  badge: "ERA5-LAND",
+                },
+                {
+                  key: "riverbedSarAlert" as const,
+                  title: "Sentinel-1/2 Riverbed & ESZ Excavation Watch",
+                  desc: "Flags bare-sand exposure and quarry anomalies along Manjara, Bhima, Sina, Godavari, and Wainganga.",
+                  icon: Cpu,
+                  badge: "SENTINEL-2",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+                const enabled = channelPrefs[item.key];
+                return (
+                  <div
+                    key={item.key}
+                    onClick={() => togglePref(item.key)}
+                    className={`rounded-xl border p-4 cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                      enabled
+                        ? "bg-[#27272A] border-[#A855F7]/60"
+                        : "bg-[#09090B] border-[#3F3F46] opacity-75"
+                    }`}
+                  >
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <Icon className="w-4 h-4 text-[#A855F7] shrink-0" />
+                        <span className="text-xs font-bold text-[#FAFAFA]">
+                          {item.title}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-[#A1A1AA] leading-relaxed">
+                        {item.desc}
+                      </p>
+                      <span className="inline-block mt-1 px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-[#18181B] text-[#6366F1] border border-[#3F3F46]">
+                        {item.badge}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      aria-label={item.title}
+                      className={`w-10 h-5 rounded-full transition-colors p-0.5 shrink-0 mt-1 ${
+                        enabled ? "bg-[#A855F7]" : "bg-[#3F3F46]"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full bg-[#FAFAFA] transition-transform ${
+                          enabled ? "translate-x-5" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tab Contents */}
       {activeTab === "general" && (

@@ -44,19 +44,51 @@ function DialogFooter({
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const MAHARASHTRA_DISTRICTS = [
-  // Marathwada
-  "Osmanabad", "Latur", "Beed", "Nanded", "Jalna",
-  "Aurangabad", "Parbhani", "Hingoli",
-  // Vidarbha
-  "Yavatmal", "Wardha", "Amravati", "Akola", "Washim",
-  "Buldhana", "Nagpur", "Chandrapur", "Gadchiroli",
-  "Gondia", "Bhandara",
-  // Other
-  "Pune", "Nashik", "Kolhapur", "Satara", "Sangli",
-  "Solapur", "Ahmednagar", "Dhule", "Nandurbar", "Jalgaon",
-  "Raigad", "Ratnagiri", "Sindhudurg", "Thane", "Palghar",
-  "Mumbai City", "Mumbai Suburban",
-].sort();
+  // 6 Regions (Division-level)
+  "Marathwada Region (All 8 Districts)",
+  "Vidarbha — Amravati Region (All 5 Districts)",
+  "Vidarbha — Nagpur Region (All 6 Districts)",
+  "Pune / Desh Region (All 5 Districts)",
+  "Nashik / Khandesh Region (All 5 Districts)",
+  "Konkan & Western Ghats Region (All 7 Districts)",
+  // 36 Individual Districts
+  "Ahilyanagar (Ahmednagar) • Nashik Div.",
+  "Akola • Amravati Div.",
+  "Amravati • Amravati Div.",
+  "Beed • Marathwada",
+  "Bhandara • Nagpur Div.",
+  "Buldhana • Amravati Div.",
+  "Chandrapur • Nagpur Div.",
+  "Chh. Sambhajinagar • Marathwada",
+  "Dharashiv (Osmanabad) • Marathwada",
+  "Dhule • Nashik Div.",
+  "Gadchiroli • Nagpur Div.",
+  "Gondia • Nagpur Div.",
+  "Hingoli • Marathwada",
+  "Jalgaon • Nashik Div.",
+  "Jalna • Marathwada",
+  "Kolhapur • Pune Div.",
+  "Latur • Marathwada",
+  "Mumbai City • Konkan",
+  "Mumbai Suburban • Konkan",
+  "Nagpur • Nagpur Div.",
+  "Nanded • Marathwada",
+  "Nandurbar • Nashik Div.",
+  "Nashik • Nashik Div.",
+  "Palghar • Konkan",
+  "Parbhani • Marathwada",
+  "Pune • Pune Div.",
+  "Raigad • Konkan",
+  "Ratnagiri • Konkan",
+  "Sangli • Pune Div.",
+  "Satara • Pune Div.",
+  "Sindhudurg • Konkan",
+  "Solapur • Pune Div.",
+  "Thane • Konkan",
+  "Wardha • Nagpur Div.",
+  "Washim • Amravati Div.",
+  "Yavatmal • Amravati Div.",
+];
 
 const METRICS = [
   { value: "NDVI_ANOMALY",      label: "NDVI Anomaly" },
@@ -86,7 +118,7 @@ const DESTINATION_LABEL: Record<string, string> = {
 };
 
 const DESTINATION_PLACEHOLDER: Record<string, string> = {
-  EMAIL:   "team@district.gov.in",
+  EMAIL:   "hydrology-cell@mdias-prototype.org",
   SMS:     "+919876543210",
   WEBHOOK: "https://hooks.example.com/drought-alert",
 };
@@ -103,11 +135,11 @@ function SelectItem({
   return (
     <Select.Item
       value={value}
-      className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-200 outline-none data-[highlighted]:bg-slate-700"
+      className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-[#FAFAFA] outline-none data-[highlighted]:bg-[#27272A]"
     >
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator className="ml-auto">
-        <Check className="h-3.5 w-3.5 text-emerald-400" />
+        <Check className="h-3.5 w-3.5 text-[#A855F7]" />
       </Select.ItemIndicator>
     </Select.Item>
   );
@@ -126,14 +158,14 @@ function StyledSelect({
 }) {
   return (
     <Select.Root value={value} onValueChange={onValueChange}>
-      <Select.Trigger className="flex w-full items-center justify-between rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 data-[placeholder]:text-slate-500">
+      <Select.Trigger className="flex w-full items-center justify-between rounded-lg border border-[#3F3F46] bg-[#27272A] px-3 py-2 text-sm text-[#FAFAFA] focus:outline-none focus:ring-2 focus:ring-[#A855F7] data-[placeholder]:text-[#A1A1AA]">
         <Select.Value placeholder={placeholder} />
         <Select.Icon>
-          <ChevronDown className="h-4 w-4 text-slate-400" />
+          <ChevronDown className="h-4 w-4 text-[#A1A1AA]" />
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="z-50 max-h-64 overflow-y-auto rounded-lg border border-slate-700 bg-slate-900 p-1 shadow-2xl">
+        <Select.Content className="z-50 max-h-64 overflow-y-auto rounded-lg border border-[#3F3F46] bg-[#18181B] p-1 shadow-2xl">
           <Select.Viewport>{children}</Select.Viewport>
         </Select.Content>
       </Select.Portal>
@@ -247,13 +279,13 @@ export function CreateAlertDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-2xl focus:outline-none">
+      <DialogContent className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[#3F3F46] border-t-2 border-t-[#A855F7] bg-[#18181B] p-6 shadow-2xl focus:outline-none">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold text-white">
-            Create Alert Rule
+          <DialogTitle className="text-lg font-bold text-[#FAFAFA]">
+            Create Early-Warning Notification Rule
           </DialogTitle>
-          <DialogDescription className="text-sm text-slate-400">
-            Receive notifications when a drought indicator crosses a threshold.
+          <DialogDescription className="text-sm text-[#A1A1AA]">
+            Receive automated notifications when a satellite or hydrological indicator crosses a threshold in any of the 6 Maharashtra regions.
           </DialogDescription>
         </DialogHeader>
 
@@ -261,13 +293,13 @@ export function CreateAlertDialog({
 
           {/* Region */}
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-slate-300">
-              Region
+            <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
+              Maharashtra Region / District
             </label>
             <StyledSelect
               value={form.regionName}
               onValueChange={(v) => set("regionName", v)}
-              placeholder="Select district…"
+              placeholder="Select region or district…"
             >
               {MAHARASHTRA_DISTRICTS.map((d) => (
                 <SelectItem key={d} value={d}>{d}</SelectItem>
@@ -280,8 +312,8 @@ export function CreateAlertDialog({
 
           {/* Metric */}
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-slate-300">
-              Metric
+            <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
+              Earth Observation / Hydrology Metric
             </label>
             <StyledSelect
               value={form.metric}
@@ -300,7 +332,7 @@ export function CreateAlertDialog({
           {/* Operator + Threshold */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1.5 block text-xs font-medium text-slate-300">
+              <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
                 Operator
               </label>
               <StyledSelect
@@ -318,7 +350,7 @@ export function CreateAlertDialog({
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-medium text-slate-300">
+              <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
                 Threshold
               </label>
               <input
@@ -327,7 +359,7 @@ export function CreateAlertDialog({
                 value={form.threshold}
                 onChange={(e) => set("threshold", e.target.value)}
                 placeholder="-1.5"
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[#3F3F46] bg-[#27272A] px-3 py-2 text-sm text-[#FAFAFA] placeholder-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#A855F7]"
               />
               {errors.threshold && (
                 <p className="mt-1 text-xs text-red-400">{errors.threshold}</p>
@@ -337,7 +369,7 @@ export function CreateAlertDialog({
 
           {/* Channel */}
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-slate-300">
+            <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
               Notification Channel
             </label>
             <StyledSelect
@@ -353,7 +385,7 @@ export function CreateAlertDialog({
 
           {/* Destination */}
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-slate-300">
+            <label className="mb-1.5 block text-xs font-medium text-[#FAFAFA]">
               {destLabel}
             </label>
             <input
@@ -361,7 +393,7 @@ export function CreateAlertDialog({
               value={form.destination}
               onChange={(e) => set("destination", e.target.value)}
               placeholder={destPlaceholder}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full rounded-lg border border-[#3F3F46] bg-[#27272A] px-3 py-2 text-sm text-[#FAFAFA] placeholder-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#A855F7]"
             />
             {errors.destination && (
               <p className="mt-1 text-xs text-red-400">{errors.destination}</p>
@@ -372,17 +404,17 @@ export function CreateAlertDialog({
             <button
               type="button"
               onClick={handleClose}
-              className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800"
+              className="rounded-lg border border-[#3F3F46] bg-[#27272A] px-4 py-2 text-sm text-[#FAFAFA] hover:bg-[#3F3F46]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500 disabled:opacity-60"
+              className="flex items-center gap-2 rounded-lg bg-[#A855F7] px-4 py-2 text-sm font-semibold text-[#FAFAFA] hover:bg-[#9333EA] disabled:opacity-60"
             >
               {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-              Create Alert
+              Create Notification Rule
             </button>
           </DialogFooter>
         </form>

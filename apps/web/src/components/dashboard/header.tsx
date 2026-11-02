@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
   ChevronRight,
   ChevronDown,
   Bell,
   Check,
+  CheckCheck,
   Sparkles,
   Satellite,
   Clock,
@@ -14,6 +16,9 @@ import {
   Sun,
   Moon,
   Languages,
+  X,
+  ArrowUpRight,
+  RotateCcw,
 } from "lucide-react";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
@@ -89,27 +94,77 @@ const DATE_RANGES = [
   { label: "Custom", value: "custom" },
 ];
 
-const MOCK_NOTIFICATIONS = [
+interface NotificationItem {
+  id: number;
+  regionTag: string;
+  title: string;
+  detail: string;
+  time: string;
+  read: boolean;
+  severity: "emergency" | "alert" | "info";
+  href: string;
+}
+
+const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   {
     id: 1,
-    title: "Latur & Dharashiv flagged for Severe Soil Moisture Deficit",
+    regionTag: "Marathwada • Manjara Basin",
+    title: "Dharashiv, Latur & Beed flagged for Severe Soil Moisture Deficit (17–19%)",
+    detail: "SPI-3M dropped to -2.14; 42 rural habitations queued in Tanker Simulation.",
     time: "5m ago • ERA5-Land Anomaly Engine",
     read: false,
     severity: "emergency",
+    href: "/dashboard/alerts",
   },
   {
     id: 2,
-    title: "Sentinel-2 L2A & ERA5-Land Soil Telemetry Synced",
-    time: "18m ago • AWS Earth Search STAC v1",
+    regionTag: "Pune / Desh • Bhima–Sina",
+    title: "Solapur (Sangola) & Satara (Man) Riverbed Desiccation Alert",
+    detail: "Sina & Man riverbed dry-bed exposure reached 86%; check-dam siting ready.",
+    time: "14m ago • Sentinel-2 L2A NDWI",
     read: false,
-    severity: "info",
+    severity: "emergency",
+    href: "/dashboard/map",
   },
   {
     id: 3,
-    title: "Jayakwadi & Ujjani Storage Below Seasonal Threshold",
-    time: "2h ago • Basin Hydrology Monitor",
-    read: true,
+    regionTag: "Vidarbha — Amravati",
+    title: "Yavatmal & Buldhana Cotton Belt Root-Zone Moisture Watch",
+    detail: "0–28 cm soil moisture at 27%; recharge shaft candidates verified in Ralegaon.",
+    time: "28m ago • Agro-Climatic Model",
+    read: false,
     severity: "alert",
+    href: "/dashboard/interventions",
+  },
+  {
+    id: 4,
+    regionTag: "Nashik / Khandesh",
+    title: "Dhule & Ahilyanagar Tapi–Girna Aquifer Drawdown Threshold",
+    detail: "Static piezometer level -2.45m below seasonal baseline; percolation tanks queued.",
+    time: "45m ago • GRACE-FO & GSDA Feed",
+    read: false,
+    severity: "alert",
+    href: "/dashboard/analytics",
+  },
+  {
+    id: 5,
+    regionTag: "Vidarbha — Nagpur",
+    title: "Tadoba–Andhari & Wainganga Buffer ESZ Thermal Stress Watch",
+    detail: "27 riverbed sand-dredging & quarry signatures flagged for solar waterhole review.",
+    time: "1h ago • ESZ & Forest Monitor",
+    read: true,
+    severity: "info",
+    href: "/dashboard/wildlife",
+  },
+  {
+    id: 6,
+    regionTag: "Konkan & Sahyadri Ghats",
+    title: "Palghar (Jawhar/Mokhada) Lateritic Spring-Shed Baseflow Advisory",
+    detail: "Post-monsoon slope runoff recession detected; Vasant Bandhara siting active.",
+    time: "2h ago • Western Ghats Hydrology",
+    read: true,
+    severity: "info",
+    href: "/dashboard/reports",
   },
 ];
 
@@ -141,6 +196,8 @@ function getBreadcrumbs(pathname: string) {
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
+  const headerRef = useRef<HTMLElement>(null);
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
 
@@ -152,12 +209,32 @@ export function Header() {
   const [themeMode, setThemeMode] = useState<"dark" | "light">("dark");
   const { lang, toggleLang } = useAppLang();
 
+  const [notifications, setNotifications] =
+    useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
+  const [notifFilter, setNotifFilter] = useState<"all" | "unread" | "critical">("all");
+
   const [stateOpen, setStateOpen] = useState(false);
   const [districtOpen, setDistrictOpen] = useState(false);
   const [talukaOpen, setTalukaOpen] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+
+  // Close open dropdowns when clicking outside the header
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setStateOpen(false);
+        setDistrictOpen(false);
+        setTalukaOpen(false);
+        setDateOpen(false);
+        setNotifOpen(false);
+        setUserOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   useEffect(() => {
     const saved =
@@ -192,7 +269,36 @@ export function Header() {
   }, []);
 
   const breadcrumbs = getBreadcrumbs(pathname);
-  const unreadCount = MOCK_NOTIFICATIONS.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
+  const criticalCount = notifications.filter(
+    (n) => n.severity === "emergency"
+  ).length;
+
+  const filteredNotifications = notifications.filter((n) => {
+    if (notifFilter === "unread") return !n.read;
+    if (notifFilter === "critical") return n.severity === "emergency";
+    return true;
+  });
+
+  const markAllAsRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  };
+
+  const markAsRead = (id: number) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+    );
+  };
+
+  const dismissNotification = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
+
+  const restoreNotifications = () => {
+    setNotifications(INITIAL_NOTIFICATIONS);
+    setNotifFilter("all");
+  };
 
   const districts = Object.keys(
     REGIONS[selectedState as keyof typeof REGIONS] ?? {}
@@ -205,7 +311,10 @@ export function Header() {
     )?.[selectedDistrict] ?? [];
 
   return (
-    <header className="bg-[#09090B] border-b border-[#3F3F46] shrink-0 relative z-20">
+    <header
+      ref={headerRef}
+      className="bg-[#09090B] border-b border-[#3F3F46] shrink-0 relative z-20"
+    >
       {/* Top Data Provenance & Prototype Strip */}
       <div className="px-6 py-1.5 bg-[#18181B] border-b border-[#3F3F46] flex flex-wrap items-center justify-between gap-2 text-[11px]">
         <div className="flex items-center gap-2 min-w-0">
@@ -470,7 +579,7 @@ export function Header() {
         </button>
         <MarathiDomTranslator />
 
-        {/* Notification bell */}
+        {/* Interactive Notification Center Drawer */}
         <div className="relative shrink-0">
           <button
             onClick={() => {
@@ -481,53 +590,203 @@ export function Header() {
               setDateOpen(false);
               setUserOpen(false);
             }}
-            className="relative w-8 h-8 flex items-center justify-center rounded-lg bg-[#18181B] border border-[#3F3F46] hover:border-[#A855F7] transition-colors"
-            title="Telemetry Alerts & Anomaly Notifications"
+            className={cn(
+              "relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#18181B] border text-xs font-semibold text-[#FAFAFA] transition-colors",
+              unreadCount > 0
+                ? "border-[#A855F7]/60 hover:border-[#A855F7]"
+                : "border-[#3F3F46] hover:border-[#A855F7]"
+            )}
+            title="Telemetry Alerts & Regional Early-Warning Notifications"
           >
-            <Bell className="w-4 h-4 text-[#FAFAFA]" />
+            <Bell
+              className={cn(
+                "w-3.5 h-3.5",
+                unreadCount > 0 ? "text-[#A855F7]" : "text-[#FAFAFA]"
+              )}
+            />
+            <span className="hidden 2xl:inline font-mono text-[11px]">
+              {unreadCount > 0 ? `${unreadCount} Alerts` : "Alerts"}
+            </span>
             {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#A855F7] text-[10px] font-mono font-bold text-[#FAFAFA] flex items-center justify-center shadow">
+              <span className="w-4 h-4 rounded-full bg-[#A855F7] text-[10px] font-mono font-bold text-[#FAFAFA] flex items-center justify-center shadow">
                 {unreadCount}
               </span>
             )}
           </button>
           {notifOpen && (
-            <div className="absolute top-full mt-1 right-0 bg-[#18181B] border border-[#3F3F46] rounded-xl shadow-2xl z-50 w-80 py-2">
-              <div className="px-4 py-1.5 border-b border-[#3F3F46] flex items-center justify-between">
-                <p className="text-[10px] font-mono font-bold text-[#A855F7] uppercase tracking-wider">
-                  Telemetry Anomaly Alerts
-                </p>
-                <span className="text-[10px] font-mono text-[#A1A1AA]">
-                  {unreadCount} Unread
-                </span>
-              </div>
-              {MOCK_NOTIFICATIONS.map((n) => (
-                <div
-                  key={n.id}
-                  className={cn(
-                    "px-4 py-2.5 hover:bg-[#27272A] transition-colors border-l-2",
-                    n.read
-                      ? "border-transparent"
-                      : n.severity === "emergency"
-                        ? "border-red-500"
-                        : n.severity === "alert"
-                          ? "border-amber-500"
-                          : "border-[#A855F7]"
-                  )}
-                >
-                  <p
-                    className={cn(
-                      "text-xs",
-                      n.read ? "text-[#A1A1AA]" : "text-[#FAFAFA] font-semibold"
+            <div className="absolute top-full mt-1.5 right-0 bg-[#18181B] border border-[#3F3F46] rounded-xl shadow-2xl z-50 w-[360px] sm:w-[400px] overflow-hidden">
+              {/* Popover Header */}
+              <div className="px-4 py-3 bg-[#09090B] border-b border-[#3F3F46] space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Bell className="w-3.5 h-3.5 text-[#A855F7]" />
+                    <p className="text-xs font-mono font-bold text-[#FAFAFA] uppercase tracking-wider">
+                      Regional EO &amp; Hydrology Alerts
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {unreadCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={markAllAsRead}
+                        className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold text-[#A855F7] hover:underline"
+                      >
+                        <CheckCheck className="w-3 h-3" />
+                        Mark all read
+                      </button>
                     )}
-                  >
-                    {n.title}
-                  </p>
-                  <p className="text-[10px] font-mono text-[#A1A1AA] mt-0.5">
-                    {n.time}
-                  </p>
+                    <button
+                      type="button"
+                      onClick={restoreNotifications}
+                      className="inline-flex items-center gap-1 text-[10px] font-mono text-[#A1A1AA] hover:text-[#FAFAFA]"
+                      title="Restore all 6 regional sample notifications"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      Reset
+                    </button>
+                  </div>
                 </div>
-              ))}
+
+                {/* Filter Pills */}
+                <div className="flex items-center gap-1.5">
+                  {[
+                    { id: "all", label: `All (${notifications.length})` },
+                    { id: "unread", label: `Unread (${unreadCount})` },
+                    { id: "critical", label: `Critical (${criticalCount})` },
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() =>
+                        setNotifFilter(tab.id as "all" | "unread" | "critical")
+                      }
+                      className={cn(
+                        "px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold transition-colors",
+                        notifFilter === tab.id
+                          ? "bg-[#A855F7] text-[#FAFAFA]"
+                          : "bg-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] border border-[#3F3F46]"
+                      )}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Notification List */}
+              <div className="max-h-[340px] overflow-y-auto divide-y divide-[#3F3F46]/60">
+                {filteredNotifications.length === 0 ? (
+                  <div className="px-4 py-8 text-center space-y-2">
+                    <p className="text-xs font-semibold text-[#FAFAFA]">
+                      No notifications in this filter
+                    </p>
+                    <p className="text-[11px] text-[#A1A1AA]">
+                      All regional telemetry thresholds are nominal or marked read.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={restoreNotifications}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] border border-[#3F3F46] text-[11px] font-mono font-semibold text-[#A855F7]"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      Restore 6 Regional Alerts
+                    </button>
+                  </div>
+                ) : (
+                  filteredNotifications.map((n) => (
+                    <div
+                      key={n.id}
+                      onClick={() => {
+                        markAsRead(n.id);
+                        setNotifOpen(false);
+                        router.push(n.href);
+                      }}
+                      className={cn(
+                        "px-4 py-3 hover:bg-[#27272A] transition-colors border-l-2 cursor-pointer group",
+                        n.read
+                          ? "border-transparent bg-[#18181B]"
+                          : n.severity === "emergency"
+                            ? "border-red-500 bg-[#27272A]/40"
+                            : n.severity === "alert"
+                              ? "border-amber-500 bg-[#27272A]/30"
+                              : "border-[#A855F7] bg-[#27272A]/20"
+                      )}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span
+                            className={cn(
+                              "px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase",
+                              n.severity === "emergency"
+                                ? "bg-red-500/15 text-red-400 border border-red-500/30"
+                                : n.severity === "alert"
+                                  ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
+                                  : "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/40"
+                            )}
+                          >
+                            {n.severity === "emergency"
+                              ? "CRITICAL"
+                              : n.severity === "alert"
+                                ? "WARNING"
+                                : "TELEMETRY"}
+                          </span>
+                          <span className="text-[10px] font-mono font-semibold text-[#A855F7]">
+                            {n.regionTag}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={(e) => dismissNotification(n.id, e)}
+                          className="p-0.5 rounded text-[#A1A1AA] hover:text-[#FAFAFA] hover:bg-[#3F3F46] transition-colors shrink-0"
+                          title="Dismiss notification"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <p
+                        className={cn(
+                          "text-xs mt-1 leading-snug",
+                          n.read
+                            ? "text-[#A1A1AA]"
+                            : "text-[#FAFAFA] font-semibold"
+                        )}
+                      >
+                        {n.title}
+                      </p>
+                      <p className="text-[11px] text-[#A1A1AA] mt-0.5 leading-snug">
+                        {n.detail}
+                      </p>
+                      <div className="flex items-center justify-between mt-1.5 pt-1 border-t border-[#3F3F46]/40">
+                        <span className="text-[10px] font-mono text-[#A1A1AA]">
+                          {n.time}
+                        </span>
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-mono font-semibold text-[#A855F7] group-hover:underline">
+                          Inspect <ArrowUpRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Popover Footer */}
+              <div className="px-4 py-2.5 bg-[#09090B] border-t border-[#3F3F46] flex items-center justify-between text-xs">
+                <Link
+                  href="/dashboard/alerts"
+                  onClick={() => setNotifOpen(false)}
+                  className="text-[11px] font-mono font-semibold text-[#A855F7] hover:underline inline-flex items-center gap-1"
+                >
+                  Manage Early Warning Rules <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/dashboard/settings"
+                  onClick={() => setNotifOpen(false)}
+                  className="text-[11px] font-mono text-[#A1A1AA] hover:text-[#FAFAFA]"
+                >
+                  Channel Settings
+                </Link>
+              </div>
             </div>
           )}
         </div>
